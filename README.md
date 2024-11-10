@@ -10,7 +10,7 @@
 <img src="https://img.shields.io/badge/license-MIT-orange.svg">
 </p>
 
-Este es un proyecto para un bootcamp, en el cual se iran incrementando las diferentes herramientas para el desarrollo web. 
+Este es un proyecto para un bootcamp, en el cual se iran añadiendo las diferentes herramientas para el desarrollo web. 
 
 ## Requirimientos
 
