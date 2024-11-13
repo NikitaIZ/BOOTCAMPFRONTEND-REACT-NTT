@@ -57,6 +57,7 @@ header nav a {
     height: 100%;
     font-weight: 400;
     font-size: 18px;
+    /* los colores, tamaños o valores fijos pueden estar declarados como varaibles en el root para poder reutilizarlos */
     color: white;
     text-decoration: none;
 }
@@ -98,6 +99,7 @@ button {
 }
 
 #button-red>button {
+    /* los colores, tamaños o valores fijos pueden estar declarados como varaibles en el root para poder reutilizarlos */
     background:rgb(225 45 45 / 82%);
     transition: all .18s ease-in-out;
 }
@@ -110,6 +112,7 @@ button {
 
 #button-green>button {
     color: white;
+    /* los colores, tamaños o valores fijos pueden estar declarados como varaibles en el root para poder reutilizarlos */
     background:rgba(28, 196, 56, 0.82);
     transition: all .18s ease-in-out;
 }
@@ -122,6 +125,7 @@ button {
     "footer footer footer";
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: auto 1fr auto;
+    /* no dejemos código no que usamos */
     /* height: 100vh; */
 }
 
