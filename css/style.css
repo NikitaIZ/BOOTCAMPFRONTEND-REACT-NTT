@@ -235,6 +235,20 @@ button {
     text-align: justify;
     line-height: 1.4em;
 }
+
+.card-info-line {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    margin-top: 8px; 
+}
+
+.card-info-line h3, 
+.card-info-line p {
+    margin: 0; 
+    font-size: 1.2rem; 
+}
+
   
 .button {
     position: relative;

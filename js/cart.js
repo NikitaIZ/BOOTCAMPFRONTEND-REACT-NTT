@@ -13,11 +13,3 @@ document.addEventListener('click', (event) => {
         }
     }
 });
-
-// Al hacer click al carrito se resetea el counter
-cartButton.addEventListener('click', () => {
-    cartCount = 0;
-    cartCounter.textContent = cartCount;
-    cartCounter.classList.remove('show'); 
-});
-

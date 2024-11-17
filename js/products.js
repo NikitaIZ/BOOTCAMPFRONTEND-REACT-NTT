@@ -137,8 +137,8 @@ const getButtonState = (product, userAdded) => {
 
 // Función para manejar la dinámica del botón del producto con el carrito del usuario
 const handleButtonClick = (product, button) => {
-    const stockLeft    = productStock.get(product.id); 
-    let userAddedNow   = userCart.get(product.id) || 0; 
+    const stockLeft = productStock.get(product.id); 
+    let userAddedNow = userCart.get(product.id) || 0; 
 
     // Verificar si el producto ya está agotado
     if (stockLeft <= 0 || userAddedNow >= product.stock) {
@@ -151,10 +151,15 @@ const handleButtonClick = (product, button) => {
     userCart.set(product.id, userAddedNow); 
 
     cartCounter.textContent = parseInt(cartCounter.textContent) + 1;
-
     saveCartToStorage();
-    
 
+    // Actualizar el stock en la interfaz
+    const stockElement = document.getElementById(`stock-${product.id}`);
+    if (stockElement) {
+        stockElement.textContent = `Stock: ${productStock.get(product.id)}`;
+    }
+
+    // Cambiar el estado del botón según el nuevo stock
     if (userAddedNow >= product.stock) {
         button.textContent = 'Max Stock';
         button.id = 'button-red';
@@ -165,6 +170,7 @@ const handleButtonClick = (product, button) => {
         button.disabled = false;
     }
 };
+
 
 // Función para crear el botón de las cartas
 const createAddToCartButton = (product, userAdded) => {
@@ -197,6 +203,7 @@ const renderCardProducts = (products) => {
         const card = createCardElement('div', { className: 'card' });
         const cardBody = createCardElement('div', { className: 'card-body' });
         const cardInfo = createCardElement('div', { className: 'card-info' });
+        const infoLine = createCardElement('div', { className: 'card-info-line' });
         const cardFooter = createCardElement('div', { className: 'card-footer' });
 
         // Imagen del producto
@@ -207,13 +214,18 @@ const renderCardProducts = (products) => {
         // Información del producto
         const title = createCardElement('h2', { textContent: product.title });
         const description = createCardElement('p', { textContent: product.description });
-        const price = createCardElement('h3', { textContent: `Price: $ ${new Intl.NumberFormat('en-US').format(product.price.toFixed(2))}` });
 
+        const price = createCardElement('h3', { textContent: `Price: $ ${new Intl.NumberFormat('en-US').format(product.price.toFixed(2))}` });
+        const stock = createCardElement('p', { id: `stock-${product.id}`, textContent: `Stock: ${productStock.get(product.id) || product.stock}` });
+
+        infoLine.appendChild(price);
+        infoLine.appendChild(stock);
+        
         // Crear y agregar el botón de añadir al carrito
         const buttonContainer = createAddToCartButton(product, userAdded);
         cardFooter.appendChild(buttonContainer);
 
-        cardInfo.append(title, description, price);
+        cardInfo.append(title, description, infoLine); // Agregar stock al contenido
         cardBody.append(imageContainer, cardInfo);
         card.append(cardBody, cardFooter);
         fragment.appendChild(card);
@@ -221,6 +233,7 @@ const renderCardProducts = (products) => {
 
     productList.appendChild(fragment);
 };
+
 
 // Función para obtener productos desde la API con paginación
 const getProducts = async (search = '', page = 1) => {
@@ -237,6 +250,13 @@ const getProducts = async (search = '', page = 1) => {
 
         const data = await response.json();
         const products = mapperListProduct(data.products);
+
+        // Inicializar productStock para todos los productos
+        products.forEach(product => {
+            if (!productStock.has(product.id)) {
+                productStock.set(product.id, product.stock || 0);
+            }
+        });
 
         // Filtrar los productos por el título (si hay búsqueda)
         const filteredProducts = search 
@@ -258,6 +278,7 @@ const getProducts = async (search = '', page = 1) => {
         console.error("Error al obtener los productos:", error);
     }
 };
+
 
 // Función para manejar la búsqueda
 const setupSearch = () => {
