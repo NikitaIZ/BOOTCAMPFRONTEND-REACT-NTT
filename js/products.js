@@ -3,6 +3,9 @@ const apiUrl = "https://dummyjson.com/products";
 const productList = document.getElementById("product-list");
 const searchInput = document.getElementById('search-input');
 
+const productStock = new Map();
+const userCart = new Map();
+
 // Mapeador para un producto y filtrar solo lo que se necesita de la api
 const mapperGetProduct = (data) => {
     return {
@@ -43,13 +46,104 @@ const clearProductList = () => {
     productList.textContent = '';
 };
 
-// Función para renderizar las cartas de productos
+// Función para guardar temporalmente informacion en el carrito con localStorage, almacena el id del producto y la cantidad
+const saveCartToStorage = () => {
+    const cartArray = Array.from(userCart.entries()); 
+    localStorage.setItem('userCart', JSON.stringify(cartArray)); 
+};
+
+// Función para cargar la informacion del carrito desde localStorage
+const loadCartFromStorage = () => {
+    const savedCart = localStorage.getItem('userCart');
+    if (savedCart) {
+        const cartArray = JSON.parse(savedCart);
+        return new Map(cartArray); 
+    }
+    return new Map(); 
+};
+
+// Función para determinar el estado del botón
+const getButtonState = (product, userAdded) => {
+    if (product.stock <= 0) {
+        return {
+            class: 'button-gray',
+            text: 'Sold Out',
+            disabled: true
+        };
+    } else if (userAdded >= product.stock) {
+        return {
+            class: 'button-red',
+            text: 'Max Stock',
+            disabled: true
+        };
+    } else {
+        return {
+            class: 'button-green',
+            text: 'Add',
+            disabled: false
+        };
+    }
+};
+
+// Función para manejar la dinámica del botón del producto con el carrito del usuario
+const handleButtonClick = (product, button) => {
+    const stockLeft    = productStock.get(product.id); 
+    let userAddedNow   = userCart.get(product.id) || 0; 
+
+    // Verificar si el producto ya está agotado
+    if (stockLeft <= 0 || userAddedNow >= product.stock) {
+        return;
+    }
+
+    // Restamos del stock y sumamos al carrito del usuario
+    productStock.set(product.id, stockLeft - 1);
+    userAddedNow += 1;
+    userCart.set(product.id, userAddedNow); 
+
+    cartCounter.textContent = parseInt(cartCounter.textContent) + 1;
+
+    saveCartToStorage();
+    
+
+    if (userAddedNow >= product.stock) {
+        button.textContent = 'Max Stock';
+        button.id = 'button-red';
+        button.disabled = true;
+    } else {
+        button.textContent = 'Add';
+        button.id = 'button-green';
+        button.disabled = false;
+    }
+};
+
+// Función para crear el botón de las cartas
+const createAddToCartButton = (product, userAdded) => {
+    const buttonContainer = createCardElement('div', { className: 'button' });
+
+    const { class: buttonClass, text: buttonText, disabled } = getButtonState(product, userAdded);
+
+    const button = createCardElement('button', {
+        id: buttonClass,
+        textContent: buttonText,
+        disabled: disabled
+    });
+
+    button.addEventListener('click', () => {
+        handleButtonClick(product, button);
+    });
+
+    buttonContainer.appendChild(button);
+    return buttonContainer;
+};
+
+// Función para renderizar los productos en el contenedor
 const renderCardProducts = (products) => {
-
     clearProductList();
+    Object.assign(userCart, loadCartFromStorage());
 
+    const fragment = document.createDocumentFragment();
     products.forEach(product => {
-        // Crear tarjeta
+        const userAdded = userCart.get(product.id) || 0;
         const card = createCardElement('div', { className: 'card' });
         const cardBody = createCardElement('div', { className: 'card-body' });
         const cardInfo = createCardElement('div', { className: 'card-info' });
@@ -65,42 +159,28 @@ const renderCardProducts = (products) => {
         const description = createCardElement('p', { textContent: product.description });
         const price = createCardElement('h3', { textContent: `Price: $ ${new Intl.NumberFormat('en-US').format(product.price.toFixed(2))}` });
 
-        // Etiquetas
-        const tagsContainer = createCardElement('div', { className: 'tags-container' });
-        product.tags?.forEach(tag => {
-            const tagDiv = createCardElement('div', { className: 'tag', textContent: `#${tag}` });
-            tagsContainer.appendChild(tagDiv);
-        });
-
-        cardInfo.append(title, description, tagsContainer, price);
-        cardBody.append(imageContainer, cardInfo);
-
-        // Botón de añadir o agotado (Ejemplo en la categoria vehicle)
-        const buttonContainer = createCardElement('div', { className: 'button' });
-        const button = createCardElement('button', {
-            id: product.stock > 0 ? 'button-green' : 'button-gray',
-            textContent: product.stock > 0 ? 'Add' : 'Sold Out'
-        });
-
-        buttonContainer.appendChild(button);
+        // Crear y agregar el botón de añadir al carrito
+        const buttonContainer = createAddToCartButton(product, userAdded);
         cardFooter.appendChild(buttonContainer);
 
+        cardInfo.append(title, description, price);
+        cardBody.append(imageContainer, cardInfo);
         card.append(cardBody, cardFooter);
-        productList.appendChild(card);
+        fragment.appendChild(card);
     });
+
+    productList.appendChild(fragment);
 };
 
-// Función para obtener productos desde la API, donde es opcional dos elementos para el buscador o las categorias
+// Función para obtener productos desde la API con paginación
 const getProducts = async (search = '') => {
     try {
         const category = window.location.hash.substring(1); // Extraer categoría de la URL
-
         const url = category 
             ? apiUrl + `/category/${category}`  // Si hay categoría, obtener productos de esa categoría
             : apiUrl;                           // Si no hay categoría, obtener todos los productos del inicio
 
         const response = await fetch(url);
-
         if (!response.ok) {
             throw new Error('No se pudo obtener la lista de los productos');
         }
@@ -119,11 +199,11 @@ const getProducts = async (search = '') => {
     }
 };
 
-// Función para la busqueda
+// Función para manejar la búsqueda
 const setupSearch = () => {
     searchInput.addEventListener('input', (event) => {
         const query = event.target.value.trim();
-        getProducts(query);
+        getProducts(query, currentPage);
     });
 };
 
