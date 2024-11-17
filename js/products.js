@@ -22,8 +22,7 @@ const mapperGetProduct = (data) => {
         discountPercentage: data.discountPercentage || 0,
         images: data.images,
         stock: data.stock || 0,   
-        tags: data.tags || [], 
-        availabilityStatus: data.availabilityStatus || 'Unknown' 
+        tags: data.tags || []
     };
 };
 
@@ -211,21 +210,46 @@ const renderCardProducts = (products) => {
         const image = createCardElement('img', { className: 'card-image', src: product.images[0] || 'default.jpg', alt: product.title || 'default' });
         imageContainer.appendChild(image);
 
+        // Tags del producto
+        const tagsContainer = createCardElement('div', { className: 'tags-container' });
+        product.tags?.forEach(tag => {
+            const tagDiv = createCardElement('div', { className: 'tag', textContent: `#${tag}` });
+            tagsContainer.appendChild(tagDiv);
+        });
+
         // Información del producto
         const title = createCardElement('h2', { textContent: product.title });
         const description = createCardElement('p', { textContent: product.description });
 
+        // Precio y descuento
+        const priceContainer = createCardElement('div', { className: 'price-container' });
         const price = createCardElement('h3', { textContent: `Price: $ ${new Intl.NumberFormat('en-US').format(product.price.toFixed(2))}` });
-        const stock = createCardElement('p', { id: `stock-${product.id}`, textContent: `Stock: ${productStock.get(product.id) || product.stock}` });
 
-        infoLine.appendChild(price);
+        priceContainer.appendChild(price);
+
+        if (product.discountPercentage > 0) {
+            const discountBadge = createCardElement('div', { 
+                className: 'discount-badge', 
+                textContent: `-${product.discountPercentage}%` 
+            });
+            priceContainer.appendChild(discountBadge);
+        }
+
+        // Stock
+        const stock = createCardElement('p', { 
+            id: `stock-${product.id}`, 
+            textContent: `Stock: ${productStock.get(product.id) || product.stock}` 
+        });
+
+        // Agregar elementos al contenedor de la línea de información
+        infoLine.appendChild(priceContainer);
         infoLine.appendChild(stock);
-        
+
         // Crear y agregar el botón de añadir al carrito
         const buttonContainer = createAddToCartButton(product, userAdded);
         cardFooter.appendChild(buttonContainer);
 
-        cardInfo.append(title, description, infoLine); // Agregar stock al contenido
+        cardInfo.append(title,description, tagsContainer, infoLine); // Agregar info line al contenido
         cardBody.append(imageContainer, cardInfo);
         card.append(cardBody, cardFooter);
         fragment.appendChild(card);

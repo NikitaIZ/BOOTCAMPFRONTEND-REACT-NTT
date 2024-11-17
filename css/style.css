@@ -445,6 +445,22 @@ button {
     display: block;
 }
 
+.price-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Cuadro de descuento */
+.discount-badge {
+    background-color: yellow;
+    color: black;
+    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.875rem;
+}
+
 /* Responsive */
 
 @media screen and (max-width: 1080px) {
