@@ -97,6 +97,55 @@ button {
     border-radius: 10px;
 }
 
+#pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    padding: 10px;
+}
+
+#pagination-container button {
+    width: auto;
+    height: 40px;
+    padding: 0 15px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    background-color: #f3f3f3;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#pagination-container button.active {
+    background-color: rgba(28, 196, 56, 0.82);
+    color: white;
+}
+
+#pagination-container button:hover {
+    background-color: rgba(28, 196, 56, 0.2);
+    color: #333;
+}
+
+#pagination-container button[disabled] {
+    background-color: #ddd;
+    cursor: not-allowed;
+}
+
+#pagination-container button:first-child {
+    border-radius: 5px 0 0 5px;
+}
+
+#pagination-container button:last-child {
+    border-radius: 0 5px 5px 0;
+}
+
+#pagination-container button:not([disabled]) {
+    margin: 0 5px;
+}
+
 #button-red {
     background:rgb(225 45 45 / 82%);
     transition: all .18s ease-in-out;
@@ -114,11 +163,16 @@ button {
     transition: all .18s ease-in-out;
 }
 
+.pagination {
+    grid-area: pagination;
+}
+
 .grip-container {
     display: grid;
     grid-template-areas: 
     "header header header"
     "main main main"
+    "pagination pagination pagination"
     "footer footer footer";
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: auto 1fr auto;

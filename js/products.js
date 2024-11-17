@@ -6,6 +6,11 @@ const searchInput = document.getElementById('search-input');
 const productStock = new Map();
 const userCart = new Map();
 
+let currentPage = 1;
+const productsPerPage = 9; 
+let totalProducts = 0; 
+let totalPages = 0; 
+
 // Mapeador para un producto y filtrar solo lo que se necesita de la api
 const mapperGetProduct = (data) => {
     return {
@@ -44,6 +49,51 @@ const createCardElement = (type, { className = '', id = '', textContent = '', sr
 // Función para limpiar la lista de productos del contenedor
 const clearProductList = () => {
     productList.textContent = '';
+};
+
+// Función para renderizar la paginación
+const renderPagination = () => {
+    const paginationContainer = document.getElementById('pagination-container');
+    paginationContainer.textContent = '';
+
+    // Botón "Anterior"
+    const prevButton = createCardElement('button', {
+        textContent: 'Anterior',
+        disabled: currentPage === 1
+    });
+    prevButton.addEventListener('click', () => {
+        if (currentPage > 1) {
+            currentPage--;
+            getProducts(searchInput.value.trim(), currentPage);
+        }
+    });
+    paginationContainer.appendChild(prevButton);
+
+    // Páginas numeradas
+    for (let i = 1; i <= totalPages; i++) {
+        const pageButton = createCardElement('button', {
+            textContent: i,
+            className: i === currentPage ? 'active' : ''
+        });
+        pageButton.addEventListener('click', () => {
+            currentPage = i;
+            getProducts(searchInput.value.trim(), currentPage);
+        });
+        paginationContainer.appendChild(pageButton);
+    }
+
+    // Botón "Siguiente"
+    const nextButton = createCardElement('button', {
+        textContent: 'Siguiente',
+        disabled: currentPage === totalPages
+    });
+    nextButton.addEventListener('click', () => {
+        if (currentPage < totalPages) {
+            currentPage++;
+            getProducts(searchInput.value.trim(), currentPage);
+        }
+    });
+    paginationContainer.appendChild(nextButton);
 };
 
 // Función para guardar temporalmente informacion en el carrito con localStorage, almacena el id del producto y la cantidad
@@ -173,7 +223,7 @@ const renderCardProducts = (products) => {
 };
 
 // Función para obtener productos desde la API con paginación
-const getProducts = async (search = '') => {
+const getProducts = async (search = '', page = 1) => {
     try {
         const category = window.location.hash.substring(1); // Extraer categoría de la URL
         const url = category 
@@ -193,7 +243,17 @@ const getProducts = async (search = '') => {
             ? products.filter(product => product.title.toLowerCase().includes(search.toLowerCase())) 
             : products;
 
-        renderCardProducts(filteredProducts);
+        // Actualizar el total de productos y páginas
+        totalProducts = filteredProducts.length;
+        totalPages = Math.ceil(totalProducts / productsPerPage);
+
+        // Obtener solo los productos de la página actual
+        const startIndex = (page - 1) * productsPerPage;
+        const endIndex = startIndex + productsPerPage;
+        const productsToDisplay = filteredProducts.slice(startIndex, endIndex);
+
+        renderCardProducts(productsToDisplay);
+        renderPagination(); 
     } catch (error) {
         console.error("Error al obtener los productos:", error);
     }
