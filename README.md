@@ -6,7 +6,7 @@
 </h1>
 
 <p align="center">
-<img src="https://img.shields.io/badge/stable-0.1.0-blue.svg">
+<img src="https://img.shields.io/badge/stable-0.2.0-blue.svg">
 <img src="https://img.shields.io/badge/license-MIT-orange.svg">
 </p>
 
@@ -14,7 +14,13 @@ Este es un proyecto para un bootcamp, en el cual se iran añadiendo las diferent
 
 ## Requirimientos
 
-    Node.js
+  Node.js 
+
+## Instalación
+
+    cd BOOTCAMPFRONTEND-REACT-NTT
+    npm install
+    npm run dev
 
 ## Documentación
 
