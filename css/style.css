@@ -1,3 +1,41 @@
+* {
+    -webkit-font-smoothing: antialiased;
+    --cart-z-index: 2;
+    --main-spacing: 40px;
+
+    --color-white: #ffffff;
+
+    --color-header: #00223e;
+    --color-header-secundary: #23bb1a;
+
+    --color-cart-counter: #ff0000;
+    --color-cart-hover: #0ff10b;
+    
+    --color-border: #dddddd;
+
+    --color-text-info: #6b6c73;
+    --color-text-dark-gray: #333333;
+    
+    --color-background: #f1f1f1;
+    --color-background-footer: #000000;
+    --color-backgroun-discount: #ffff00;
+
+    --color-warning: #e6ff14;
+    --color-disabled: #444444bd;
+    --color-danger: #e12d2dd1;
+    --color-success: #1cc438d1;
+
+    --color-button-login: #11722f;
+
+    --color-shadow-1: rgba(0, 0, 0, 0.1);
+    --color-shadow-3: rgba(0, 0, 0, 0.3);
+
+    --color-pagination-hover: rgba(28, 196, 56, 0.2);
+    --color-pagination-active: rgba(28, 196, 56, 0.82);
+
+    --color-card: rgba(33, 31, 43, 0.14);
+}
+
 html,
 body{
     height: 100%;
@@ -10,10 +48,10 @@ header {
     --header-gap: 32px;
     display: flex;
     justify-content: center;
-    background-color: #00223e;
+    background-color: var(--color-header);
     -webkit-backdrop-filter: blur(7px);
     backdrop-filter: blur(7px);
-    z-index: 2;
+    z-index: calc(var(--cart-z-index) + 1);
     position: sticky;
     top: 0;
     left: 0;
@@ -57,12 +95,8 @@ header nav a {
     height: 100%;
     font-weight: 400;
     font-size: 18px;
-    color: white;
+    color: var(--color-white);
     text-decoration: none;
-}
-
-header nav a :hover {
-    color: #23bb1a;
 }
 
 main {
@@ -71,15 +105,26 @@ main {
     justify-content:center; 
     flex-wrap: wrap; 
     gap: 30px; 
-    padding: 40px;
+    padding: var(--main-spacing);
 }
 
 footer {
-    grid-area: footer;
-    background: black;
-    color: white;
-    width: 100%;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
+    text-align: center;
+    gap: 20px;
+    padding: 40px var(--main-spacing);
+    box-sizing: border-box;
+    grid-area: footer;
+    background: var(--color-background-footer);
+    color: var(--color-white);
+    width: 100%;
+}
+
+footer h3,
+footer p {
+    margin: 0;
 }
 
 button {
@@ -87,7 +132,6 @@ button {
     height: 44px;
     position: relative;
     text-transform: uppercase;
-    color: black;
     font-weight: 700;
     letter-spacing: 1px;
     border: none;
@@ -101,36 +145,36 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
-    padding: 10px;
+    margin-bottom: var(--main-spacing);
+    gap: 10px;
 }
 
 #pagination-container button {
     width: auto;
     height: 40px;
     padding: 0 15px;
-    font-size: 14px;
-    font-weight: 600;
+    font-size: 18px;
+    font-weight: 500;
     border-radius: 5px;
-    border: 1px solid #ddd;
-    background-color: #f3f3f3;
-    color: #333;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-background);
+    color: var(--color-text-dark-gray);
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
 }
 
 #pagination-container button.active {
-    background-color: rgba(28, 196, 56, 0.82);
-    color: white;
+    background-color: var(--color-pagination-active);
+    color: var(--color-white);
 }
 
-#pagination-container button:hover {
-    background-color: rgba(28, 196, 56, 0.2);
-    color: #333;
+#pagination-container button:not([disabled]):hover {
+    background-color: var(--color-pagination-hover);
+    color: var(--color-text-dark-gray);
 }
 
 #pagination-container button[disabled] {
-    background-color: #ddd;
+    opacity: 0.5;
     cursor: not-allowed;
 }
 
@@ -142,24 +186,21 @@ button {
     border-radius: 0 5px 5px 0;
 }
 
-#pagination-container button:not([disabled]) {
-    margin: 0 5px;
-}
-
-#button-red {
-    background:rgb(225 45 45 / 82%);
+.button-red {
+    color: var(--color-white);
+    background: var(--color-danger);
     transition: all .18s ease-in-out;
 }
 
-#button-gray {
-    color: white;
-    background:rgb(68 68 68 / 74%);
+.button-gray {
+    color: var(--color-white);
+    background: var(--color-disabled);
     transition: all .18s ease-in-out;
 }
 
-#button-green {
-    color: white;
-    background:rgba(28, 196, 56, 0.82);
+.button-green {
+    color: var(--color-white);
+    background: var(--color-success);
     transition: all .18s ease-in-out;
 }
 
@@ -184,8 +225,8 @@ button {
     flex-direction: column;
     justify-content: space-between;
     width: 450px;
-    box-shadow: 0px 2px 8px 4px #211f2b24;
-    background-color: white;
+    box-shadow: 0px 2px 8px 4px var(--color-card);
+    background-color: var(--color-white);
     border-radius: 10px;
     overflow: hidden;
 }
@@ -210,37 +251,39 @@ button {
 }
 
 .card-footer { 
-    border-radius:0 0 15px 15px;
-    padding: 10px;
-    text-align:center;
+    border-radius: 0 0 15px 15px;
+    text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 18px 0px;
 }
    
 .card-info {
-    padding: 0 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 18px;
 }
 
 .card-info > h2 {
-    text-align: center
+    text-align: center;
+    margin: 0;
 }
 
 .card-info > h3 {
-    color: #6b6c73;
+    color: var(--color-text-info);
 }
 
 .card-info > p {
     text-align: justify;
     line-height: 1.4em;
+    margin: 0;
 }
 
 .card-info-line {
     display: flex;
     justify-content: space-between; 
-    align-items: center; 
-    margin-top: 8px; 
+    align-items: center;
 }
 
 .card-info-line h3, 
@@ -249,6 +292,18 @@ button {
     font-size: 1.2rem; 
 }
 
+.stock {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.stock span:last-of-type {
+    padding: 4px 8px;
+    background: var(--color-background);
+    border-radius: 8px;
+    text-align: center;
+}
   
 .button {
     position: relative;
@@ -274,7 +329,7 @@ button {
     min-width: 90px;
     max-width: 110px;
     height: 40px;
-    color: #fff;
+    color: var(--color-white);
     padding: 5px 10px;
     font-weight: bold;
     cursor: pointer;
@@ -284,24 +339,25 @@ button {
     outline: none;
     border-radius: 5px;
     border: none;
-    background: #23bb1a;
-    box-shadow: 0 5px #11722f;
+    background: var(--color-header-secundary);
+    box-shadow: 0 5px var(--color-button-login);
 }
 
 .login-button:hover {
-    box-shadow: 0 3px #11722f;
+    box-shadow: 0 3px var(--color-button-login);
     top: 1px;
 }
 
 .login-button:active {
-    box-shadow: 0 0 #11722f;
+    box-shadow: 0 0 var(--color-button-login);
     top: 5px;
 }
 
-.footer-content {
+.footer-content,
+.footer-bottom {
     display: flex;
     justify-content: center;
-    padding: 20px;
+    text-align: center;
 }
 
 .footer-social {
@@ -311,53 +367,53 @@ button {
     gap: 10px;
 }
 
-.footer-bottom {
-    text-align: center;
-}
-
 .social-icons {
     display: flex;
     gap: 10px;
 }
 
 .cart-counter {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: red;
-    color: white;
-    font-size: 14px;
-    font-weight: bold;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    background-color: var(--color-cart-counter);
+    color: var(--color-white);
+    font-size: 14px;
+    font-weight: normal;
+    width: 24px;
+    height: 24px;
+    border-radius: 100%;
+    box-shadow: 0px 4px 10px var(--color-shadow-3);
     visibility: hidden;
 }
 
 .cart-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: fixed;
     bottom: 40px;
     right: 40px;
     font-size: 16px;
     text-transform: uppercase;
     font-weight: bold;
-    color: #ffffff;
-    border-radius: 50%;
+    color: var(--color-white);
+    border-radius: 100%;
     letter-spacing: 2px;
-    background-color: #e6ff14;
-    padding: 18px 30px;
+    background-color: var(--color-warning);
     transition: all 300ms ease 0ms;
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-    z-index: 99;
+    box-shadow: 0px 8px 15px var(--color-shadow-1);
+    z-index: var(--cart-z-index);
+    width: 64px;
+    height: 64px;
 }
 
 .cart-button:hover {
-	background-color: #0ff10b; 
-	box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.3);
+	background-color: var(--color-cart-hover); 
+	box-shadow: 0px 15px 20px var(--color-shadow-3);
 	transform: translateY(-7px);
 }
 
@@ -369,15 +425,14 @@ button {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    margin-top: 8px;
 }
 
 .tag {
-    background-color: #f0f0f0;
-    color: #333;
-    padding: 4px 8px;
+    background-color: var(--color-background);
+    color: var(--color-text-dark-gray);
+    padding: 5px 10px;
     border-radius: 12px;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: bold;
 }
 
@@ -390,7 +445,7 @@ button {
 .search-container input {
     width: 300px;
     height: 40px;
-    border: 2px solid #ddd;
+    border: 2px solid var(--color-border);
     border-radius: 5px;
     padding: 0 10px;
     font-size: 16px;
@@ -398,7 +453,7 @@ button {
 }
 
 .search-container input:focus {
-    border-color: #23bb1a;
+    border-color: var(--color-header-secundary);
     outline: none;
 }
 
@@ -407,7 +462,7 @@ button {
 }
 
 .dropdown-toggle {
-    color: white;
+    color: var(--color-white);
     text-decoration: none;
     font-size: 18px;
     font-weight: 400;
@@ -415,30 +470,32 @@ button {
 }
 
 .dropdown-menu {
+    --border-radius: 8px;
     display: none;
     position: absolute;
     top: 100%;
     left: 0;
-    background-color: #ffffff;
-    border: 1px solid #ddd;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    padding: 10px 0;
-    z-index: 10;
+    background-color: var(--color-white);
+    border: 1px solid var(--color-border);
+    box-shadow: 0 4px 8px var(--color-shadow-1);
+    border-radius: var(--border-radius);
+    padding: 6px;
+    z-index: calc(var(--cart-z-index) + 2);
     min-width: 200px;
 }
 
 .dropdown-menu a {
     display: block;
     padding: 8px 15px;
-    color: #333;
+    color: var(--color-text-dark-gray);
     text-decoration: none;
     font-size: 16px;
+    border-radius: var(--border-radius);
+    transition: background-color 200ms;
 }
 
 .dropdown-menu a:hover {
-    background-color: #f0f0f0;
-    color: #23bb1a;
+    background-color: var(--color-background);
 }
 
 .dropdown:hover .dropdown-menu {
@@ -453,11 +510,10 @@ button {
 
 /* Cuadro de descuento */
 .discount-badge {
-    background-color: yellow;
-    color: black;
+    background-color: var(--color-backgroun-discount);
     font-weight: bold;
     padding: 4px 8px;
-    border-radius: 4px;
+    border-radius: 8px;
     font-size: 0.875rem;
 }
 
@@ -486,9 +542,19 @@ button {
 
 @media only screen and (max-width: 600px) {
  	.cart-button {
-		font-size: 14px;
-		padding: 12px 20px;
 		bottom: 20px;
 		right: 20px;
 	}
+}
+
+@media only screen and (max-width: 500px) {
+    * {
+        --main-spacing: 30px;
+    }
+
+    .card-info-line {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
 }

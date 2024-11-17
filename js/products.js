@@ -32,7 +32,7 @@ const mapperListProduct = (data) => {
 };
 
 // Función para modularizar los elementos
-const createCardElement = (type, { className = '', id = '', textContent = '', src = '', alt = '', disabled = false } = {}) => {
+const createCardElement = (type, { className = '', id = '', textContent = '', src = '', alt = '', disabled = false, span = '' } = {}) => {
     const element = document.createElement(type);
 
     if (className) element.className = className;
@@ -41,7 +41,7 @@ const createCardElement = (type, { className = '', id = '', textContent = '', sr
     if (src) element.src = src;
     if (alt) element.alt = alt;
     if (disabled) element.disabled = disabled;
-
+    if (span) element.span = span;
     return element;
 };
 
@@ -55,9 +55,8 @@ const renderPagination = () => {
     const paginationContainer = document.getElementById('pagination-container');
     paginationContainer.textContent = '';
 
-    // Botón "Anterior"
     const prevButton = createCardElement('button', {
-        textContent: 'Anterior',
+        textContent: ' < ',
         disabled: currentPage === 1
     });
     prevButton.addEventListener('click', () => {
@@ -68,7 +67,6 @@ const renderPagination = () => {
     });
     paginationContainer.appendChild(prevButton);
 
-    // Páginas numeradas
     for (let i = 1; i <= totalPages; i++) {
         const pageButton = createCardElement('button', {
             textContent: i,
@@ -81,9 +79,8 @@ const renderPagination = () => {
         paginationContainer.appendChild(pageButton);
     }
 
-    // Botón "Siguiente"
     const nextButton = createCardElement('button', {
-        textContent: 'Siguiente',
+        textContent: ' > ',
         disabled: currentPage === totalPages
     });
     nextButton.addEventListener('click', () => {
@@ -137,38 +134,31 @@ const getButtonState = (product, userAdded) => {
 // Función para manejar la dinámica del botón del producto con el carrito del usuario
 const handleButtonClick = (product, button) => {
     const stockLeft = productStock.get(product.id); 
-    let userAddedNow = userCart.get(product.id) || 0; 
+    let userAddedNow = userCart.get(product.id) || 0;
 
-    // Verificar si el producto ya está agotado
-    if (stockLeft <= 0 || userAddedNow >= product.stock) {
-        return;
-    }
+    // Verificar si hay stock suficiente
+    if (stockLeft > 0 && userAddedNow < product.stock) {
+        // Restar del stock disponible y sumar al carrito del usuario
+        productStock.set(product.id, stockLeft - 1);
+        userAddedNow += 1;
+        userCart.set(product.id, userAddedNow); 
 
-    // Restamos del stock y sumamos al carrito del usuario
-    productStock.set(product.id, stockLeft - 1);
-    userAddedNow += 1;
-    userCart.set(product.id, userAddedNow); 
+        saveCartToStorage();
 
-    cartCounter.textContent = parseInt(cartCounter.textContent) + 1;
-    saveCartToStorage();
+        // Actualizar el stock en la interfaz
+        const stockElement = document.getElementById(`stock-${product.id}`);
+        if (stockElement) {
+            stockElement.textContent = productStock.get(product.id);
+        }
 
-    // Actualizar el stock en la interfaz
-    const stockElement = document.getElementById(`stock-${product.id}`);
-    if (stockElement) {
-        stockElement.textContent = `Stock: ${productStock.get(product.id)}`;
-    }
-
-    // Cambiar el estado del botón según el nuevo stock
-    if (userAddedNow >= product.stock) {
-        button.textContent = 'Max Stock';
-        button.id = 'button-red';
-        button.disabled = true;
-    } else {
-        button.textContent = 'Add';
-        button.id = 'button-green';
-        button.disabled = false;
+        // Cambiar el estado del botón según el nuevo stock
+        const { class: buttonClass, text: buttonText, disabled } = getButtonState(product, userAddedNow);
+        button.textContent = buttonText;
+        button.className = buttonClass;
+        button.disabled = disabled;
     }
 };
+
 
 
 // Función para crear el botón de las cartas
@@ -178,7 +168,7 @@ const createAddToCartButton = (product, userAdded) => {
     const { class: buttonClass, text: buttonText, disabled } = getButtonState(product, userAdded);
 
     const button = createCardElement('button', {
-        id: buttonClass,
+        className: buttonClass,
         textContent: buttonText,
         disabled: disabled
     });
@@ -194,11 +184,12 @@ const createAddToCartButton = (product, userAdded) => {
 // Función para renderizar los productos en el contenedor
 const renderCardProducts = (products) => {
     clearProductList();
-    Object.assign(userCart, loadCartFromStorage());
 
     const fragment = document.createDocumentFragment();
     products.forEach(product => {
-        const userAdded = userCart.get(product.id) || 0;
+        const userAdded = userCart.get(product.id) || 0; 
+        const LastStock = productStock.get(product.id) || 0; 
+
         const card = createCardElement('div', { className: 'card' });
         const cardBody = createCardElement('div', { className: 'card-body' });
         const cardInfo = createCardElement('div', { className: 'card-info' });
@@ -236,28 +227,35 @@ const renderCardProducts = (products) => {
         }
 
         // Stock
-        const stock = createCardElement('p', { 
-            id: `stock-${product.id}`, 
-            textContent: `Stock: ${productStock.get(product.id) || product.stock}` 
+        const stock = createCardElement('p', { className: 'stock' });
+
+        const stockTitle = createCardElement('span', {
+            textContent: 'Stock'
         });
 
-        // Agregar elementos al contenedor de la línea de información
-        infoLine.appendChild(priceContainer);
-        infoLine.appendChild(stock);
+        const stockNumber = createCardElement('span', {
+            id: `stock-${product.id}`, 
+            textContent: `${LastStock}`
+        });
+
+        stock.append(stockTitle, stockNumber);
 
         // Crear y agregar el botón de añadir al carrito
         const buttonContainer = createAddToCartButton(product, userAdded);
         cardFooter.appendChild(buttonContainer);
 
-        cardInfo.append(title,description, tagsContainer, infoLine); // Agregar info line al contenido
+        // Agregar elementos al contenedor de la línea de información
+        infoLine.appendChild(priceContainer);
+        infoLine.appendChild(stock);
+
+        cardInfo.append(title, tagsContainer, description, infoLine, cardFooter);
         cardBody.append(imageContainer, cardInfo);
-        card.append(cardBody, cardFooter);
+        card.append(cardBody);
         fragment.appendChild(card);
     });
 
     productList.appendChild(fragment);
 };
-
 
 // Función para obtener productos desde la API con paginación
 const getProducts = async (search = '', page = 1) => {
@@ -275,11 +273,17 @@ const getProducts = async (search = '', page = 1) => {
         const data = await response.json();
         const products = mapperListProduct(data.products);
 
-        // Inicializar productStock para todos los productos
+        // Cargar el carrito del almacenamiento local
+        Object.assign(userCart, loadCartFromStorage());
+
+        // Inicializar y ajustar el stock en función del carrito
         products.forEach(product => {
-            if (!productStock.has(product.id)) {
-                productStock.set(product.id, product.stock || 0);
-            }
+            const initialStock = product.stock || 0;
+            const userAdded = userCart.get(product.id) || 0;
+
+            // Si el producto tiene stock inicial 0, debe permanecer en 0
+            const adjustedStock = initialStock - userAdded;
+            productStock.set(product.id, Math.max(0, adjustedStock)); // Garantizar que nunca sea negativo
         });
 
         // Filtrar los productos por el título (si hay búsqueda)
@@ -302,7 +306,6 @@ const getProducts = async (search = '', page = 1) => {
         console.error("Error al obtener los productos:", error);
     }
 };
-
 
 // Función para manejar la búsqueda
 const setupSearch = () => {
