@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/jpg" href="/imgs/logotipo.jpg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Market</title>
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    <!-- Boton de carrito -->
+    <a href="#" class="cart-button">
+      <img src="/imgs/carrito.svg" alt="carrito" />
+      <span class="cart-counter">0</span>
+    </a>  
+    <div class="grip-container">
+        <!-- HEADER -->
+        <header>
+            <div>
+                <a href="#">
+                    <img src="imgs/logotipo.jpg" alt="Logo">
+                </a>
+                <div class="search-container">
+                  <input type="text" id="search-input" placeholder="Search products..." autocomplete="off">
+                </div>
+                <nav>
+                  <div class="dropdown">
+                      <a href="#" class="dropdown-toggle">Categories</a>
+                      <div id="categories-menu" class="dropdown-menu"></div>
+                  </div>
+              </nav>
+                <button class="login-button">Login</button>
+            </div>
+        </header>
+        <!-- MAIN -->
+        <main id="product-list">
+        </main>
+        <!-- FOOTER -->
+        <footer>
+            <div class="footer-content">
+                <div class="footer-social">
+                    <h3>Follow us on our social networks</h3>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com" target="_blank">
+                          <img src = "/imgs/facebook.svg" alt="carrito"/>
+                        </a>
+                        <a href="https://www.instagram.com" target="_blank">
+                          <img src = "/imgs/instagram.svg" alt="carrito"/>                   
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 My Super Market. All rights reserved.</p>
+            </div>
+        </footer>        
+    </div>
+    <script src="js/products.js"></script>
+    <script src="js/categories.js"></script>
+    <script src="js/cart.js"></script>
+  </body>
+</html>
