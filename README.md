@@ -45,7 +45,7 @@ Implentacion del javascript en el proyecto, usando vite y la api de https://dumm
 
 ### feature/typescript:
 
-Se convirtieron todos los archivos javascript de la rama anterior a typescript, ademas de usar webpack para una mejor configuracion y contruccion de los archivos typescript a javascript tiene los mismos elementos de la rama anterior
+Se convirtieron todos los archivos javascript de la rama anterior a typescript, ademas de usar webpack para una mejor configuracion y contruccion de los archivos typescript a javascript el cual cumple en hacer los mismos elementos de la rama anterior
 
 ## Licencia
 
