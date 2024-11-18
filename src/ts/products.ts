@@ -1,10 +1,11 @@
-const apiUrl: string = "https://dummyjson.com/products";
+(() => {
+const apiUrl = "https://dummyjson.com/products";
 
-const productList: HTMLElement | null = document.getElementById("product-list");
-const searchInput: HTMLInputElement | null = document.getElementById('search-input') as HTMLInputElement;
+let productList: HTMLElement | null = document.getElementById("product-list") as HTMLElement;
+let searchInput: HTMLInputElement | null = document.getElementById('search-input') as HTMLInputElement;
 
-const productStock: Map<number, number> = new Map();
-const userCart: Map<number, number> = new Map();
+let productStock: Map<number, number> = new Map();
+let userCart: Map<number, number> = new Map();
 
 let currentPage: number = 1;
 const productsPerPage: number = 9; 
@@ -302,3 +303,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+})();

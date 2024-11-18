@@ -1,3 +1,4 @@
+(() => {
 const apiCategoryUrl: string = "https://dummyjson.com/products/category-list";
 
 type Category = string;
@@ -38,3 +39,4 @@ const handleCategoryClick = (category: string): void => {
 };
 
 getCategories();
+})();

@@ -1,4 +1,4 @@
-const cartButton: Element | null = document.querySelector('.cart-button');
+(() => {
 const cartCounter: HTMLElement | null = document.querySelector('.cart-counter');
 
 let cartCount: number = 0;
@@ -22,3 +22,4 @@ document.addEventListener('click', (event: MouseEvent) => {
         }
     }
 });
+})();

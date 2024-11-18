@@ -1,22 +1,35 @@
 const path = require('path');
-const glob = require('glob');
 
 module.exports = {
   entry: {
-    index: './src/ts/index.ts'
-  },
+    cart: './src/ts/cart.ts',
+    categories: './src/ts/categories.ts',
+    products: './src/ts/products.ts'
+  },  
   mode: "production",
   output: {
-    path: path.resolve(__dirname, 'src'),
+    path: path.resolve(__dirname, 'src/dist'),
     filename: '[name].js',
     clean: true
+  },
+  resolve: {
+    extensions: ['.ts', '.js']   
   },
   module: {
     rules: [
       {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
-      },
+        test: /\.(ts)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: [ 
+              '@babel/preset-env',
+              "@babel/preset-typescript"
+            ]
+          }
+        }
+      }
     ],
   },
 };
