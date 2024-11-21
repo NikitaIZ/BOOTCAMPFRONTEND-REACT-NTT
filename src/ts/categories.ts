@@ -1,11 +1,14 @@
 (() => {
-    const apiCategoryUrl: string = "https://dummyjson.com/products/category-list";
+    // hay que separar la logica de consumo de servicios de la vista
+    const apiCategoryUrl = "https://dummyjson.com/products/category-list";
 
+    // por qu'e es negacio crear este type?
     type Category = string;
 
     const getCategories = async (): Promise<void> => {
         try {
-            const response: Response = await fetch(apiCategoryUrl);
+            // tipado implicito
+            const response = await fetch(apiCategoryUrl);
 
             if (!response.ok) {
                 throw new Error("No se pudo obtener la lista de categorías");

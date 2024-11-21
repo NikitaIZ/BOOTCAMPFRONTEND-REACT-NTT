@@ -1,5 +1,5 @@
 import { Product } from './interfaces/product'; 
-
+// hay que separar la logica de consumo de servicios de la vista
 (() => {
     const apiUrl = "https://dummyjson.com/products";
 
@@ -26,6 +26,7 @@ import { Product } from './interfaces/product';
         return data.map((item: any) => mapperGetProduct(item));
     };
 
+    // esto es un utils
     const createCardElement = (
         type: string, 
         { className = '', id = '', textContent = '', src = '', alt = '', disabled = false }: 
