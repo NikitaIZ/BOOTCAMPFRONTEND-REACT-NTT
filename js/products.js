@@ -1,3 +1,4 @@
+// buena forma de trabajo, te sugiero que lo separes en diferentes archivos porque veo mappers, builders, logica de paginaci'on, almacenamiento en storage, llamadas a apis, inicializadores en un solo archivo lo cual lo hace complicado de entender el objetivo de este archivo adem'as de pitnar los productos, y darle mantenimiento a largo plazo
 const apiUrl = "https://dummyjson.com/products";
 
 const productList = document.getElementById("product-list");

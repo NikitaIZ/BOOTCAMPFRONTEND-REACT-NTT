@@ -1,3 +1,4 @@
+// separemos la l'ogica de consumo de servicio de lo que se inserta en la vista
 const apiCategoryUrl = "https://dummyjson.com/products/category-list";
 
 // Obtener las categorías de la API
@@ -25,6 +26,7 @@ const getCategories = async () => {
 };
 
 // Función para formatear el nombre de la categoría (reemplazar guiones por espacios, capitalizar) Ejemplo: mens-shirts => Mens Shirts
+// esto se podr'ia mover a un utilitario, adem'as el regex deber'ia estar en una consta como objeto para saber que es lo que hace
 const formatCategoryName = (category) => {
     return category.replace(/-/g, " ").replace(/\b\w/g, char => char.toUpperCase());
 };
