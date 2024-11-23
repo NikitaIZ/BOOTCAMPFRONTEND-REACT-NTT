@@ -1,70 +1,44 @@
-import { createContext, useState, useContext, ReactNode, useEffect } from "react";
-
-import { Products } from "../domain/product";
-import { CartItem, CartContextType } from "../domain/cart";
+import { createContext, useReducer, useContext, useState, ReactNode, useEffect } from "react";
+import { cartReducer, initialCartState, CartState } from "../reducer/cart";
+import { CartContextType } from "../domain/cart";
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
-  const [cart, setCart] = useState<CartItem[]>([]);
+  const initializer = (): CartState => {
+    try {
+      const storedCart = localStorage.getItem("cart");
+      return storedCart
+        ? { items: JSON.parse(storedCart) }
+        : { items: [] };
+    } catch {
+      return { items: [] };
+    }
+  };
+
+  const [state, dispatch] = useReducer(cartReducer, initialCartState, initializer);
   const [showCartCounter, setShowCartCounter] = useState(false);
 
   useEffect(() => {
-    const storedCart = localStorage.getItem("cart");
-    if (storedCart) {
-      setCart(JSON.parse(storedCart));
-    }
-  }, []);
+    localStorage.setItem("cart", JSON.stringify(state.items));
+    setShowCartCounter(state.items.length > 0);
+  }, [state]);
 
-  useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart));
-    if (cart.length > 0) {
-      setShowCartCounter(true);
-    }
-  }, [cart]);
-
-  const addToCart = (product: Products) => {
-    setCart((prevCart) => {
-      const existingItem = prevCart.find((item) => item.id === product.id);
-      if (existingItem) {
-        return prevCart.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        );
-      }
-      return [...prevCart, { id: product.id, quantity: 1 }];
-    });
-  };
-
-  const removeFromCart = (productId: number) => {
-    setCart((prevCart) => {
-      const existingItem = prevCart.find((item) => item.id === productId);
-      if (existingItem && existingItem.quantity > 1) {
-        return prevCart.map((item) =>
-          item.id === productId
-            ? { ...item, quantity: item.quantity - 1 }
-            : item
-        );
-      }
-
-      return prevCart.filter((item) => item.id !== productId);
-    });
-  };
-
-  const getCartQuantity = () => cart.reduce((total, item) => total + item.quantity, 0);
+  const getCartQuantity = () =>
+    state.items.reduce((total, item) => total + item.quantity, 0);
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, getCartQuantity, showCartCounter }}>
+    <CartContext.Provider value={{ state, dispatch, getCartQuantity, showCartCounter }}>
       {children}
     </CartContext.Provider>
   );
 };
 
+
 export const useCart = () => {
   const context = useContext(CartContext);
   if (!context) {
-    throw new Error("useCart must be used within a CartProvider");
+    throw new Error("useCart debe usarse dentro de un CartProvider");
   }
   return context;
 };

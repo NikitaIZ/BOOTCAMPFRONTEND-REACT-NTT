@@ -3,7 +3,7 @@ import { mapperListProduct } from "../mappers/ListProducts";
 
 const productsApiUrl = "https://dummyjson.com/products";
 
-const productsPerPage: number = 9; // Productos por página
+const productsPerPage: number = 9; 
 
 interface PaginatedProducts {
   products: Products[];

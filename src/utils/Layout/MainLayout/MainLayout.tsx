@@ -1,8 +1,7 @@
 import { PropsWithChildren } from "react";
 import { SearchProvider } from "../../../app/context/search";
 import { PaginationProvider } from "../../../app/context/pagination";
-import { CartProvider } from "../../../app/context/cart"; // Agregar el contexto del carrito
-
+import { CartProvider } from "../../../app/context/cart";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import CartButton from "../../components/CartButton/CartButton";

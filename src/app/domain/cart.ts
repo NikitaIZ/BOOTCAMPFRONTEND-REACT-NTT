@@ -1,4 +1,5 @@
-import { Products } from "../domain/product";
+import { AppCartActions } from "./App-cart";
+import { CartState, DispatchObject } from "../reducer/cart";
 
 export interface CartItem {
   id: number;
@@ -6,9 +7,8 @@ export interface CartItem {
 }
 
 export interface CartContextType {
-  cart: CartItem[];
-  addToCart: (product: Products) => void;
+  state: CartState;
+  dispatch: React.Dispatch<DispatchObject<AppCartActions>>;
   getCartQuantity: () => number;
-  removeFromCart: (productId: number) => void; 
   showCartCounter: boolean;
 }

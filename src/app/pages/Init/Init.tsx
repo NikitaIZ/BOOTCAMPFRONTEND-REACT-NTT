@@ -12,9 +12,10 @@ import ProductCard from "../../../utils/components/ProductCard/ProductCard";
 const Init: React.FC = () => {
   const { searchTerm } = useSearch();
   const { currentPage, setCurrentPage, setTotalPages } = usePagination(); 
+
   const [products, setProducts] = useState<Products[] | null>(null);
 
-  const getProducts = async () => {
+  const updateProducts = async () => {
     try {
       const data = await productsRequest.getProducts(searchTerm, currentPage); 
       setProducts(data.products);
@@ -29,7 +30,7 @@ const Init: React.FC = () => {
   }, [searchTerm]);
 
   useEffect(() => {
-    getProducts();
+    updateProducts();
   }, [searchTerm, currentPage]);
 
   return (
@@ -37,7 +38,7 @@ const Init: React.FC = () => {
       {products?.length ? (
         products.map((product) => (
           <ProductCard
-            key={`${product.id}-${product.title}`}
+            key={product.id}
             product={product as Products}
           />
         ))

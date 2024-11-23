@@ -10,8 +10,8 @@ const App: React.FC = () => {
   return (
     <Routes>
       <Route path={ModuleRoutes.Init} element={<Init />} />
-      <Route path="*" element={<Navigate to={ModuleRoutes.Init} replace />} />
-      <Route path={`${ModuleRoutes.Category}/:categoryId`} element={<Category />}
+      <Route path={`${ModuleRoutes.Category}/:categoryId`} element={<Category />}/>
+      <Route path="*" element={<Navigate to={ModuleRoutes.Init} replace />} 
       />
     </Routes>
   );

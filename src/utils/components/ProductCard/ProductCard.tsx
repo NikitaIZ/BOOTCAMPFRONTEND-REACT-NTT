@@ -1,25 +1,36 @@
 import { Products } from "../../../app/domain/product";
-import { useCart } from "../../../app/context/cart"; // Usamos el contexto del carrito
+import { useCart } from "../../../app/context/cart";
+import { AppCartActions } from "../../../app/domain/App-cart";
 
 interface ProductCardI {
   product: Products;
 }
 
 const ProductCard: React.FC<ProductCardI> = ({ product }) => {
-  const { addToCart, removeFromCart, cart } = useCart();
+  const { state, dispatch } = useCart();
   const { id, title, description, price, discountPercentage, images, tags, stock } = product;
 
-  const cartItem = cart.find((item) => item.id === id);
+  const cartItem = state.items.find((item) => item.id === id);
   const quantityInCart = cartItem?.quantity || 0;
 
   const remainingStock = stock - quantityInCart;
 
   const handleAddToCart = () => {
     if (remainingStock > 0) {
-      addToCart(product);
+      dispatch({
+        type: AppCartActions.AddProductToCart,
+        payload: product,
+      });
     } else {
       alert("No hay más stock disponible");
     }
+  };
+
+  const handleRemoveFromCart = () => {
+    dispatch({
+      type: AppCartActions.RemoveProductFromCart,
+      payload: id,
+    });
   };
 
   const isInCart = quantityInCart > 0;
@@ -71,7 +82,7 @@ const ProductCard: React.FC<ProductCardI> = ({ product }) => {
               {isInCart && (
                 <button
                   className="button-small"
-                  onClick={() => removeFromCart(id)} 
+                  onClick={handleRemoveFromCart}
                   disabled={quantityInCart === 0}
                 >
                   -
@@ -93,4 +104,3 @@ const ProductCard: React.FC<ProductCardI> = ({ product }) => {
 };
 
 export default ProductCard;
-
