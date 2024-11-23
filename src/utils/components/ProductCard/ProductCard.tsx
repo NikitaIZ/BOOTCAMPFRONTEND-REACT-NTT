@@ -1,6 +1,6 @@
 import { Products } from "../../../app/domain/product";
 import { useCart } from "../../../app/context/cart";
-import { AppCartActions } from "../../../app/domain/App-cart";
+import { AppCartActions } from "../../../app/domain/app-cart";
 
 interface ProductCardI {
   product: Products;

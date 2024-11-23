@@ -9,6 +9,7 @@ export const mapperListProduct = (productsResponse: ProductsResponse[]): Product
     price: product.price,
     discountPercentage: product.discountPercentage,
     images: product.images,
+    thumbnail: product.thumbnail,
     stock: product.stock,
     tags: product.tags || [],
   }));

@@ -18,7 +18,6 @@ const MainLayout: React.FC<MainLayoutI> = ({ children }) => {
             <CartButton />
             <Header />
             <main>{children}</main>
-            <Pagination />
             <Footer />
           </div>
         </CartProvider>

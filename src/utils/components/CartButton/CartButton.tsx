@@ -8,7 +8,7 @@ const CartButton: React.FC = () => {
   const cartQuantity = getCartQuantity(); 
 
   return (
-    <Link to={ModuleRoutes.Init} className="cart-button">
+    <Link to={ModuleRoutes.Cart} className="cart-button">
       <img src={cartIcon} alt="cart" />
       {showCartCounter && <span className="cart-counter show">{cartQuantity}</span>} 
     </Link>

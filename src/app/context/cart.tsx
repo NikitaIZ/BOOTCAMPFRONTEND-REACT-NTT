@@ -27,8 +27,11 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   const getCartQuantity = () =>
     state.items.reduce((total, item) => total + item.quantity, 0);
 
+  const getCartPrice = () =>
+    state.items.reduce((total, item) => total + (item.quantity * item.price), 0);
+
   return (
-    <CartContext.Provider value={{ state, dispatch, getCartQuantity, showCartCounter }}>
+    <CartContext.Provider value={{ state, dispatch, getCartQuantity, getCartPrice, showCartCounter }}>
       {children}
     </CartContext.Provider>
   );

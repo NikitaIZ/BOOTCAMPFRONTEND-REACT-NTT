@@ -9,6 +9,9 @@ import { usePagination } from "../../context/pagination";
 
 import ProductCard from "../../../utils/components/ProductCard/ProductCard";
 
+import Pagination from "../../../utils/components/Pagination/Pagination";
+
+
 const Init: React.FC = () => {
   const { searchTerm } = useSearch();
   const { currentPage, setCurrentPage, setTotalPages } = usePagination(); 
@@ -34,7 +37,8 @@ const Init: React.FC = () => {
   }, [searchTerm, currentPage]);
 
   return (
-    <>
+    <div>
+      <div className="list-products">
       {products?.length ? (
         products.map((product) => (
           <ProductCard
@@ -45,7 +49,9 @@ const Init: React.FC = () => {
       ) : (
         <p>Loading Products...</p>
       )}
-    </>
+      </div>
+      <Pagination />
+    </div>
   );
 };
 
