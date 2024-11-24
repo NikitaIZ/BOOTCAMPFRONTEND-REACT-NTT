@@ -1,47 +1,52 @@
-import { createContext, useReducer, useContext, useState, ReactNode, useEffect } from "react";
-import { cartReducer, initialCartState, CartState } from "../reducer/cart";
-import { CartContextType } from "../domain/cart";
+import { createContext, FC, PropsWithChildren, useReducer, useContext, useEffect } from "react";
+import { cartAppReducer, cartInitialState, CartAppState } from "../reducer/cart";
+import { CartAppDispatch } from "../domain/app-cart";
+import { useLocalStorage } from "../hooks/useLocalStorage"; 
 
-const CartContext = createContext<CartContextType | undefined>(undefined);
+const CartAppStateContext = createContext<CartAppState | undefined>(undefined);
+const CartAppDispatchContext = createContext<CartAppDispatch | undefined>(undefined);
 
-export const CartProvider = ({ children }: { children: ReactNode }) => {
-  const initializer = (): CartState => {
-    try {
-      const storedCart = localStorage.getItem("cart");
-      return storedCart
-        ? { items: JSON.parse(storedCart) }
-        : { items: [] };
-    } catch {
-      return { items: [] };
-    }
+const GlobalCartAppProvider: FC<PropsWithChildren> = ({ children }) => {
+  const { storedValue, setStoredValue } = useLocalStorage<CartAppState>("cart", cartInitialState);
+
+  const getCartQuantity = () => state.items.reduce((total, item) => total + item.quantity, 0);
+  const getCartPrice = () => state.items.reduce((total, item) => total + item.quantity * item.price, 0);
+
+  const enhancedState: CartAppState = {
+    ...storedValue,
+    getCartQuantity,
+    getCartPrice,
   };
 
-  const [state, dispatch] = useReducer(cartReducer, initialCartState, initializer);
-  const [showCartCounter, setShowCartCounter] = useState(false);
+  const [state, dispatch] = useReducer(cartAppReducer, enhancedState);
 
   useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(state.items));
-    setShowCartCounter(state.items.length > 0);
-  }, [state]);
-
-  const getCartQuantity = () =>
-    state.items.reduce((total, item) => total + item.quantity, 0);
-
-  const getCartPrice = () =>
-    state.items.reduce((total, item) => total + (item.quantity * item.price), 0);
+    setStoredValue(state);
+  }, [state, setStoredValue]);
 
   return (
-    <CartContext.Provider value={{ state, dispatch, getCartQuantity, getCartPrice, showCartCounter }}>
-      {children}
-    </CartContext.Provider>
+    <CartAppStateContext.Provider value={enhancedState}>
+      <CartAppDispatchContext.Provider value={dispatch}>
+        {children}
+      </CartAppDispatchContext.Provider>
+    </CartAppStateContext.Provider>
   );
 };
 
-
-export const useCart = () => {
-  const context = useContext(CartContext);
+const useGlobalCartAppState = (): CartAppState => {
+  const context = useContext(CartAppStateContext);
   if (!context) {
-    throw new Error("useCart debe usarse dentro de un CartProvider");
+    throw new Error("useGlobalCartAppState debe usarse dentro de un CartAppStateContext");
   }
   return context;
 };
+
+const useGlobalCartAppDispatch = (): CartAppDispatch => {
+  const context = useContext(CartAppDispatchContext);
+  if (!context) {
+    throw new Error("useGlobalCartAppDispatch debe usarse dentro de un CartAppDispatchContext");
+  }
+  return context;
+};
+
+export { GlobalCartAppProvider, useGlobalCartAppState, useGlobalCartAppDispatch };

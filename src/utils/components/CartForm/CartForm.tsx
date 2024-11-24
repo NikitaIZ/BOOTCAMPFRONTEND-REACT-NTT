@@ -1,13 +1,16 @@
 import { ChangeEvent, FC, FormEvent, useEffect, useState } from "react";
-import { Client, ClientProduct } from "../../../app/domain/client";
-import { mapperListProductsClient } from "../../../app/mappers/ListProductsClient";
-import { CartItem } from "../../../app/domain/cart";
-import { useDistricts } from "../../../app/hooks/useDistricts";
 import { useNavigate } from "react-router-dom";
 
-import { useCart } from "../../../app/context/cart";
+import { Client } from "../../../app/domain/client";
 import { CartAppActions } from "../../../app/domain/app-cart";
 
+import { useDistricts } from "../../../app/hooks/useDistricts";
+import { useValidation } from "../../../app/hooks/useValidation";
+import { useGeneratorId } from "../../../app/hooks/useGeneratorID";
+
+import { mapperListProductsClient } from "../../../app/mappers/ListProductsClient";
+
+import { useGlobalCartAppState, useGlobalCartAppDispatch } from "../../../app/context/cart";
 
 import "./CartForm.css";
 
@@ -17,9 +20,16 @@ interface FormI {
 }
 
 const CartForm: FC<FormI> = ({ saveClient, clientSelected }) => {
-    const { districts } = useDistricts("/json/districts.json");
-    const { dispatch } = useCart();
     const navigate = useNavigate();
+
+    const { districts } = useDistricts("/json/districts.json");
+
+    const { items } = useGlobalCartAppState(); 
+    const cartAppDispatch = useGlobalCartAppDispatch(); 
+
+    const { isValidEmail, isAlphabetic, isNumeric } = useValidation();
+
+    const { generateUniqueId } = useGeneratorId();
 
     const initalClient: Client = {
         id: "",
@@ -62,28 +72,6 @@ const CartForm: FC<FormI> = ({ saveClient, clientSelected }) => {
         });
     };
 
-    const isValidEmail = (email: string): boolean => {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(email);
-    };
-
-    const isAlphabetic = (text: string): boolean => {
-        const alphabetRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
-        return alphabetRegex.test(text);
-    };
-
-    const isNumeric = (text: string): boolean => {
-        const numericRegex = /^[0-9]+$/;
-        return numericRegex.test(text);
-    };
-
-    const generateUniqueId = (): string => {
-        const timestamp = Date.now().toString(36);
-        const randomString = Math.random().toString(36).substring(2, 8);
-        return `${timestamp}-${randomString}`;
-    };
-
-
     const checkValidation = () => {
         const errors = { ...validation };
 
@@ -101,13 +89,7 @@ const CartForm: FC<FormI> = ({ saveClient, clientSelected }) => {
     const addClient = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        const storedCart = localStorage.getItem("cart");
-        let cartProducts: ClientProduct[] = [];
-
-        if (storedCart) {
-            const cart: CartItem[] = JSON.parse(storedCart);
-            cartProducts = mapperListProductsClient(cart);
-        }
+        const cartProducts = mapperListProductsClient(items);
 
         if (cartProducts.length === 0) {
             setCartError("You must have at least one product in your cart.");
@@ -119,14 +101,14 @@ const CartForm: FC<FormI> = ({ saveClient, clientSelected }) => {
         checkValidation();
 
         if (
-            validation.names == "" &&
-            validation.lastnames == "" &&
-            validation.email == "" &&
-            validation.district == "" &&
-            validation.address == "" &&
-            validation.reference == "" &&
-            validation.phone == "" &&
-            validation.password == ""
+            validation.names === "" &&
+            validation.lastnames === "" &&
+            validation.email === "" &&
+            validation.district === "" &&
+            validation.address === "" &&
+            validation.reference === "" &&
+            validation.phone === "" &&
+            validation.password === ""
         ) {
             saveClient({
                 ...client,
@@ -142,7 +124,7 @@ const CartForm: FC<FormI> = ({ saveClient, clientSelected }) => {
     };
 
     const closeModal = () => {
-        dispatch({ type: CartAppActions.CartDeleteAllProducts });
+        cartAppDispatch({ type: CartAppActions.CartDeleteAllProducts });
         setIsModalOpen(false);
         navigate("/");
     };

@@ -1,7 +1,7 @@
 import { PropsWithChildren } from "react";
 import { SearchProvider } from "../../../app/context/search";
 import { PaginationProvider } from "../../../app/context/pagination";
-import { CartProvider } from "../../../app/context/cart";
+import { GlobalCartAppProvider } from "../../../app/context/cart";
 import { GlobalClientAppProvider } from "../../../app/context/client";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
@@ -15,7 +15,7 @@ const MainLayout: React.FC<MainLayoutI> = ({ children }) => {
   return (
     <SearchProvider>
       <PaginationProvider>
-        <CartProvider>
+        <GlobalCartAppProvider>
           <GlobalClientAppProvider>
           <div className="grip-container">
             <CartButton />
@@ -24,7 +24,7 @@ const MainLayout: React.FC<MainLayoutI> = ({ children }) => {
             <Footer />
           </div>
           </GlobalClientAppProvider>
-        </CartProvider>
+        </GlobalCartAppProvider>
       </PaginationProvider>
     </SearchProvider>
   );

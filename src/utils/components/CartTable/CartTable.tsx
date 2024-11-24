@@ -1,17 +1,18 @@
 import { CartItem } from "../../../app/domain/cart";
-import { useCart } from "../../../app/context/cart";
+import { useGlobalCartAppState, useGlobalCartAppDispatch } from "../../../app/context/cart";
 import { CartAppActions } from "../../../app/domain/app-cart";
 
-import trashIcon from "../../../assets/trash.svg"
+import trashIcon from "../../../assets/trash.svg";
 
 import "./CartTable.css";
 
 const CartTable: React.FC = () => {
-    const { state, dispatch, getCartQuantity, getCartPrice } = useCart();
+    const { getCartQuantity, getCartPrice, items } = useGlobalCartAppState(); 
+    const cartAppDispatc = useGlobalCartAppDispatch(); 
 
     const handleAddToCart = (cart: CartItem) => {
         if (cart.stock > 0) {
-            dispatch({
+            cartAppDispatc({
                 type: CartAppActions.CartAddProduct,
                 payload: cart,
             });
@@ -21,14 +22,14 @@ const CartTable: React.FC = () => {
     };
 
     const handleRemoveFromCart = (id: number) => {
-        dispatch({
+        cartAppDispatc({
             type: CartAppActions.CartRemoveProduct,
             payload: id,
         });
     };
 
     const handleDeleteFromCart = (id: number) => {
-        dispatch({
+        cartAppDispatc({
             type: CartAppActions.CartDeleteProduct,
             payload: id,
         });
@@ -37,7 +38,7 @@ const CartTable: React.FC = () => {
     const calculateTotalProductPrice = (product: CartItem) => product.price * product.quantity;
 
     return (
-        state.items.length > 0 ? (
+        items.length > 0 ? (
             <div>
                 <div className="cart-table header">
                     <div>
@@ -49,10 +50,10 @@ const CartTable: React.FC = () => {
                     </div>
                 </div>
                 <div className="cart-table body">
-                    {state.items.map((product) => (
+                    {items.map((product) => (
                         <div key={product.id}>
                             <div>
-                                <img src={product.thumbnail} alt={product.title}/>
+                                <img src={product.thumbnail} alt={product.title} />
                             </div>
                             <div>{product.title}</div>
                             <div>
@@ -78,7 +79,7 @@ const CartTable: React.FC = () => {
                                     onClick={() => handleDeleteFromCart(product.id)}
                                     className="button button-red"
                                 >
-                                    <img src={trashIcon} alt="trash"/>
+                                    <img src={trashIcon} alt="trash" />
                                 </button>
                             </div>
                         </div>

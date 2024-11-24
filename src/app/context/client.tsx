@@ -1,12 +1,12 @@
 import { createContext, FC, PropsWithChildren, useContext, useReducer } from "react";
-import { clientAppReducer, ClientAppState, ClientinitialState } from "../reducer/client";
+import { clientAppReducer, ClientAppState, clientInitialState } from "../reducer/client";
 import { ClientAppDispatch } from "../domain/app-client";
 
 const ClientAppStateContext = createContext<ClientAppState | undefined>(undefined);
 const ClientAppDispatchContext = createContext<ClientAppDispatch | undefined>(undefined);
 
 const GlobalClientAppProvider: FC<PropsWithChildren> = ({ children }) => {
-  const [state, dispatch] = useReducer(clientAppReducer, ClientinitialState);
+  const [state, dispatch] = useReducer(clientAppReducer, clientInitialState);
 
   return (
     <ClientAppStateContext.Provider value={state}>

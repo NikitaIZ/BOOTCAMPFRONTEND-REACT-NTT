@@ -1,7 +1,7 @@
 import { ClientAppActions } from "../domain/app-client";
 import { Client } from "../domain/client";
 
-export interface ClientDispatchObject<A, T = any> {
+export interface ClientDispatchObject<A, T = unknown> {
   type: A;
   payload?: T;
 }
@@ -11,7 +11,7 @@ export interface ClientAppState  {
   clientSelected: Client | null;
 }
 
-export const ClientinitialState: ClientAppState = {
+export const clientInitialState: ClientAppState = {
   clients: [],
   clientSelected: null,
 };

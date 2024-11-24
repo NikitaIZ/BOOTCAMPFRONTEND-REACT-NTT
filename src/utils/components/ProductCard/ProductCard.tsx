@@ -1,18 +1,20 @@
 import { Products } from "../../../app/domain/products";
-import { useCart } from "../../../app/context/cart";
+import { useGlobalCartAppState, useGlobalCartAppDispatch } from "../../../app/context/cart";
 import { CartAppActions } from "../../../app/domain/app-cart";
 
-import './ProductCard.css'
+import './ProductCard.css';
 
 interface ProductCardI {
   product: Products;
 }
 
 const ProductCard: React.FC<ProductCardI> = ({ product }) => {
-  const { state, dispatch } = useCart();
+  const { items } = useGlobalCartAppState();
+  const dispatch = useGlobalCartAppDispatch();
+
   const { id, title, description, price, discountPercentage, images, tags, stock } = product;
 
-  const cartItem = state.items.find((item) => item.id === id);
+  const cartItem = items.find((item) => item.id === id);
   const quantityInCart = cartItem?.quantity || 0;
 
   const remainingStock = stock - quantityInCart;
@@ -57,7 +59,11 @@ const ProductCard: React.FC<ProductCardI> = ({ product }) => {
     <div className="card">
       <div className="card-body">
         <div className="card-image-container">
-          <img className="card-image" src={images[0]} alt={title} />
+          <img
+            className="card-image"
+            src={images && images.length > 0 ? images[0] : "/imgs/default.jpg"}
+            alt={title}
+          />
         </div>
         <div className="card-info">
           <h2>{title}</h2>
