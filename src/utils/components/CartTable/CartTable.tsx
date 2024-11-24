@@ -4,6 +4,8 @@ import { AppCartActions } from "../../../app/domain/app-cart";
 
 import trashIcon from "../../../assets/trash.svg"
 
+import "./CartTable.css";
+
 const CartTable: React.FC = () => {
     const { state, dispatch, getCartQuantity, getCartPrice } = useCart();
 
@@ -36,68 +38,62 @@ const CartTable: React.FC = () => {
 
     return (
         state.items.length > 0 ? (
-            <table>
-                <thead>
-                    <tr>
-                        <th>Imagen</th>
-                        <th>Título</th>
-                        <th>Cantidad</th>
-                        <th>Precio</th>
-                        <th>Eliminar</th>
-                    </tr>
-                </thead>
-                <tbody>
+            <div>
+                <div className="cart-table header">
+                    <div>
+                        <div></div>
+                        <div>Product</div>
+                        <div>Quantity</div>
+                        <div>Price</div>
+                        <div></div>
+                    </div>
+                </div>
+                <div className="cart-table body">
                     {state.items.map((product) => (
-                        <tr key={product.id}>
-                            <td>
-                                <img
-                                    src={product.thumbnail}
-                                    alt={product.title}
-                                    style={{ width: "50px", height: "50px" }}
-                                />
-                            </td>
-                            <td>{product.title}</td>
-                            <td>
+                        <div key={product.id}>
+                            <div>
+                                <img src={product.thumbnail} alt={product.title}/>
+                            </div>
+                            <div>{product.title}</div>
+                            <div>
                                 <div className="quantity-container">
                                     <button
-                                        className="button-product-table"
                                         onClick={() => handleRemoveFromCart(product.id)}
                                         disabled={product.quantity === 1}
                                     >
                                         -
                                     </button>
-                                    <span className="quantity-display">{product.quantity}</span>
+                                    <span>{product.quantity}</span>
                                     <button
-                                        className="button-product-table"
                                         onClick={() => handleAddToCart(product)}
                                         disabled={product.quantity >= product.stock}
                                     >
                                         +
                                     </button>
                                 </div>
-                            </td>
-                            <td>$ {calculateTotalProductPrice(product).toFixed(2)}</td>
-                            <td>
+                            </div>
+                            <div>$ {calculateTotalProductPrice(product).toFixed(2)}</div>
+                            <div>
                                 <button
                                     onClick={() => handleDeleteFromCart(product.id)}
                                     className="button button-red"
                                 >
-                                    <img src={trashIcon} alt="trash" />
-
+                                    <img src={trashIcon} alt="trash"/>
                                 </button>
-                            </td>
-                        </tr>
+                            </div>
+                        </div>
                     ))}
-                    <tr>
-                        <td colSpan={2}>Total</td>
-                        <td>{getCartQuantity()}</td>
-                        <td>$ {getCartPrice().toFixed(2)}</td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
+                    <div className="footer">
+                        <div></div>
+                        <div>Total</div>
+                        <div>{getCartQuantity()}</div>
+                        <div>$ {getCartPrice().toFixed(2)}</div>
+                        <div></div>
+                    </div>
+                </div>
+            </div>
         ) : (
-            <p>No hay productos en el carrito.</p>
+            <p>There are no products in your cart.</p>
         )
     );
 };

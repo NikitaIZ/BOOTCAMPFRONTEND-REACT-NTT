@@ -9,6 +9,8 @@ import { useSearch } from "../../context/search";
 import { usePagination } from "../../context/pagination";
 
 import ProductCard from "../../../utils/components/ProductCard/ProductCard";
+import Pagination from "../../../utils/components/Pagination/Pagination";
+
 
 const Category: React.FC = () => {
   const { categoryId } = useParams<{ categoryId: string }>();
@@ -36,18 +38,21 @@ const Category: React.FC = () => {
   }, [searchTerm, categoryId, currentPage]);
 
   return (
-    <>
+    <div>
+      <div className="list-products">
       {products?.length ? (
         products.map((product) => (
           <ProductCard
-            key={`${product.id}-${product.title}`}
+            key={product.id}
             product={product as Products}
           />
         ))
       ) : (
         <p>Loading Products...</p>
       )}
-    </>
+      </div>
+      <Pagination />
+    </div>
   );
 };
 

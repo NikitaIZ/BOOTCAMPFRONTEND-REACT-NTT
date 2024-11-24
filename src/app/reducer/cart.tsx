@@ -85,6 +85,13 @@ export const cartReducer = (
             };
         }
 
+        case AppCartActions.DeleteAllProductsCart: {
+            return {
+                ...state,
+                items: [],
+            };
+        }
+
         default:
             throw new Error("No se reconoce la acción despachada.");
     }

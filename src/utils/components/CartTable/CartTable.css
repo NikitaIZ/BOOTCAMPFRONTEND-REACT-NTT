@@ -1,0 +1,115 @@
+.cart-table {
+    --img-size: 90px;
+    min-width: 600px;
+}
+
+.cart-table.header > div {
+    font-weight: 500;
+}
+
+.cart-table > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 26px;
+    padding: 10px 0;
+    border-bottom: 1px #d3d3d3 solid;
+}
+
+.cart-table.body > div > div:nth-child(1) img {
+    width: var(--img-size);
+    height: var(--img-size);
+    object-fit: contain;
+}
+
+.cart-table > div > div:nth-child(1) {
+    min-width: var(--img-size);
+}
+
+.cart-table > div > div:nth-child(2) {
+    width: 100%;
+}
+
+.cart-table > div > div:nth-child(3) {
+    min-width: 110px;
+    text-align: center;
+}
+
+.cart-table > div > div:nth-child(4) {
+    min-width: 110px;
+    text-align: right;
+}
+
+.cart-table > div > div:nth-child(5) {
+    min-width: 40px;
+}
+
+.cart-table > div > div:nth-child(5) button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 11px;
+    min-width: initial;
+    width: 40px;
+    height: 40px;
+}
+
+.cart-table > div > div:nth-child(5) button img {
+    width: 16px;
+    height: 16px;
+}
+
+.cart-table .footer {
+    min-height: 40px;
+}
+
+.cart-table .footer > div:nth-child(2) {
+    text-align: right;
+}
+
+.cart-table .footer > div:nth-child(3) {
+    text-align: center;
+}
+
+.cart-table .footer > div {
+    font-weight: 500;
+}
+
+.quantity-container {
+    display: flex;
+    align-items: center;
+    gap: 2px; 
+    justify-content: space-between; 
+}
+
+.quantity-container span {
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    min-width: 40px; 
+}
+
+.quantity-container button {
+    width: 34px;
+    height: 28px;
+    font-size: 18px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+    background-color: var(--color-optional);
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.quantity-container button:hover {
+    background-color: var(--color-cart-hover); 
+    color: var(--color-white);
+}
+
+.quantity-container button:disabled {
+    background-color: var(--color-disabled);
+    cursor: not-allowed;
+}
