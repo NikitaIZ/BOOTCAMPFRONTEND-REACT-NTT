@@ -1,5 +1,5 @@
 import { CartAppActions } from "../domain/app-cart";
-import { Products } from "../domain/product";
+import { Products } from "../domain/products";
 import { CartItem } from "../domain/cart";
 
 export interface CartState {

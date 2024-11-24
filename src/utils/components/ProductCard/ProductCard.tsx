@@ -1,4 +1,4 @@
-import { Products } from "../../../app/domain/product";
+import { Products } from "../../../app/domain/products";
 import { useCart } from "../../../app/context/cart";
 import { CartAppActions } from "../../../app/domain/app-cart";
 

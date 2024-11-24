@@ -1,4 +1,4 @@
-import { Products, ProductsResponse } from "../domain/product";
+import { Products, ProductsResponse } from "../domain/products";
 
 export const mapperListProduct = (productsResponse: ProductsResponse[]): Products[] => {
   return productsResponse.map(product => ({

@@ -12,11 +12,3 @@ export interface ProductsResponse {
   stock: number;
   tags?: string[];
 }
-
-export interface ProductsClient {
-  id: number;
-  title: string;
-  quantity: number;
-  price: number;
-  total: number;
-}

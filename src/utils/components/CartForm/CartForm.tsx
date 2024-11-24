@@ -1,5 +1,5 @@
 import { ChangeEvent, FC, FormEvent, useEffect, useState } from "react";
-import { Client, ProductDetail } from "../../../app/domain/client";
+import { Client, ClientProduct } from "../../../app/domain/client";
 import { mapperListProductsClient } from "../../../app/mappers/ListProductsClient";
 import { CartItem } from "../../../app/domain/cart";
 import { useDistricts } from "../../../app/hooks/useDistricts";
@@ -102,7 +102,7 @@ const CartForm: FC<FormI> = ({ saveClient, clientSelected }) => {
         event.preventDefault();
 
         const storedCart = localStorage.getItem("cart");
-        let cartProducts: ProductDetail[] = [];
+        let cartProducts: ClientProduct[] = [];
 
         if (storedCart) {
             const cart: CartItem[] = JSON.parse(storedCart);

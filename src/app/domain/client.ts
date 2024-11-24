@@ -8,14 +8,13 @@ export interface Client {
     reference: string;
     phone: string;
     password: string;
-    products: ProductDetail[];
+    products: ClientProduct[];
 }
 
-export interface ProductDetail {
+export interface ClientProduct {
     id: number;
     title: string;
     quantity: number;
     price: number;
     total: number;
 }
-  

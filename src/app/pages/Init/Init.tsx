@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { Products } from "../../domain/product";
+import { Products } from "../../domain/products";
 
 import { productsRequest } from "../../proxy/products-request";
 

@@ -1,7 +1,7 @@
 import { CartItem } from "../domain/cart";
-import { ProductDetail } from "../domain/client";
+import { ClientProduct } from "../domain/client";
 
-export const mapperListProductsClient = (cart: CartItem[]): ProductDetail[] => {
+export const mapperListProductsClient = (cart: CartItem[]): ClientProduct[] => {
     return cart.map(item => ({
         id: item.id,
         title: item.title,
