@@ -6,7 +6,7 @@ import { useDistricts } from "../../../app/hooks/useDistricts";
 import { useNavigate } from "react-router-dom";
 
 import { useCart } from "../../../app/context/cart";
-import { AppCartActions } from "../../../app/domain/app-cart";
+import { CartAppActions } from "../../../app/domain/app-cart";
 
 
 import "./CartForm.css";
@@ -142,7 +142,7 @@ const CartForm: FC<FormI> = ({ saveClient, clientSelected }) => {
     };
 
     const closeModal = () => {
-        dispatch({ type: AppCartActions.DeleteAllProductsCart });
+        dispatch({ type: CartAppActions.CartDeleteAllProducts });
         setIsModalOpen(false);
         navigate("/");
     };

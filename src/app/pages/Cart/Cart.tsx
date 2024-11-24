@@ -19,7 +19,7 @@ const Cart: FC = () => {
     const { setStoredValue } = useLocalStorage<Client[]>("clients", []);
   
     const saveClient = (newClient: Client): void => {
-      dispatchApp({ type: ClientAppActions.SaveClient, payload: newClient });
+      dispatchApp({ type: ClientAppActions.ClientSave, payload: newClient });
     };
  
     useEffect(() => {

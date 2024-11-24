@@ -1,4 +1,4 @@
-import { AppCartActions } from "../domain/app-cart";
+import { CartAppActions } from "../domain/app-cart";
 import { Products } from "../domain/product";
 import { CartItem } from "../domain/cart";
 
@@ -10,17 +10,17 @@ export const initialCartState: CartState = {
     items: [],
 };
 
-export interface DispatchObjectCart<A, P = unknown> {
+export interface CartDispatchObject<A, P = unknown> {
     type: A;
     payload?: P;
 }
 
 export const cartReducer = (
     state: CartState,
-    { type, payload }: DispatchObjectCart<AppCartActions>
+    { type, payload }: CartDispatchObject<CartAppActions>
 ): CartState => {
     switch (type) {
-        case AppCartActions.AddProductToCart: {
+        case CartAppActions.CartAddProduct: {
             const product = payload as Products;
             const existingItem = state.items.find((item) => item.id === product.id);
 
@@ -51,7 +51,7 @@ export const cartReducer = (
             };
         }
 
-        case AppCartActions.RemoveProductFromCart: {
+        case CartAppActions.CartRemoveProduct: {
             const productId = payload as number;
             const existingItem = state.items.find((item) => item.id === productId);
 
@@ -76,7 +76,7 @@ export const cartReducer = (
             return state;
         }
 
-        case AppCartActions.DeleteProductFromCart: {
+        case CartAppActions.CartDeleteProduct: {
             const productId = payload as number;
 
             return {
@@ -85,7 +85,7 @@ export const cartReducer = (
             };
         }
 
-        case AppCartActions.DeleteAllProductsCart: {
+        case CartAppActions.CartDeleteAllProducts: {
             return {
                 ...state,
                 items: [],

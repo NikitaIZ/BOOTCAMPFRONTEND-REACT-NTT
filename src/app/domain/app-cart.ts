@@ -1,12 +1,12 @@
 import { Dispatch } from "react";
-import { DispatchObjectCart } from "../reducer/cart";
+import { CartDispatchObject } from "../reducer/cart";
 
-export type AppCartDispatch = Dispatch<DispatchObjectCart<AppCartActions>>;
+export type CartAppDispatch = Dispatch<CartDispatchObject<CartAppActions>>;
 
-export const enum AppCartActions {
-    AddProductToCart = "ADD_PRODUCT_TO_CART",
-    RemoveProductFromCart = "REMOVE_PRODUCT_FROM_CART",
-    DeleteProductFromCart = "DELETE_PRODUCT_FROM_CART",
-    DeleteAllProductsCart = "DELETE_ALL_PRODUCTS_CART"
+export const enum CartAppActions {
+    CartAddProduct = "CART_ADD_PRODUCT",
+    CartRemoveProduct = "CART_REMOVE_PRODUCT",
+    CartDeleteProduct = "CART_DELETE_PRODUCT",
+    CartDeleteAllProducts = "CART_DELETE_ALL_PRODUCTS"
 }
 

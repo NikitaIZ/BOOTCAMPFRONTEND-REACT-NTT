@@ -1,6 +1,6 @@
 import { Products } from "../../../app/domain/product";
 import { useCart } from "../../../app/context/cart";
-import { AppCartActions } from "../../../app/domain/app-cart";
+import { CartAppActions } from "../../../app/domain/app-cart";
 
 import './ProductCard.css'
 
@@ -20,7 +20,7 @@ const ProductCard: React.FC<ProductCardI> = ({ product }) => {
   const handleAddToCart = () => {
     if (remainingStock > 0) {
       dispatch({
-        type: AppCartActions.AddProductToCart,
+        type: CartAppActions.CartAddProduct,
         payload: product,
       });
     } else {
@@ -30,7 +30,7 @@ const ProductCard: React.FC<ProductCardI> = ({ product }) => {
 
   const handleRemoveFromCart = () => {
     dispatch({
-      type: AppCartActions.RemoveProductFromCart,
+      type: CartAppActions.CartRemoveProduct,
       payload: id,
     });
   };

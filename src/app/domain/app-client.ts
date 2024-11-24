@@ -1,10 +1,10 @@
 import { Dispatch } from "react";
-import { DispatchObjectClient } from "../reducer/client";
+import { ClientDispatchObject } from "../reducer/client";
 
-export type ClientAppDispatch = Dispatch<DispatchObjectClient<ClientAppActions>>;
+export type ClientAppDispatch = Dispatch<ClientDispatchObject<ClientAppActions>>;
 
 export const enum ClientAppActions {
-  SaveClient = "SAVE_CLIENT",
-  SelectClient = "SELECT_CLIENT",
-  DeleteClient = "DELETE_CLIENT",
+  ClientSave = "CLIENT_SAVE",
+  ClientSelect = "CLIENT_SELECT",
+  ClientDelete = "CLIENT_DELETE",
 }

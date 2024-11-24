@@ -1,6 +1,6 @@
 import { CartItem } from "../../../app/domain/cart";
 import { useCart } from "../../../app/context/cart";
-import { AppCartActions } from "../../../app/domain/app-cart";
+import { CartAppActions } from "../../../app/domain/app-cart";
 
 import trashIcon from "../../../assets/trash.svg"
 
@@ -12,7 +12,7 @@ const CartTable: React.FC = () => {
     const handleAddToCart = (cart: CartItem) => {
         if (cart.stock > 0) {
             dispatch({
-                type: AppCartActions.AddProductToCart,
+                type: CartAppActions.CartAddProduct,
                 payload: cart,
             });
         } else {
@@ -22,14 +22,14 @@ const CartTable: React.FC = () => {
 
     const handleRemoveFromCart = (id: number) => {
         dispatch({
-            type: AppCartActions.RemoveProductFromCart,
+            type: CartAppActions.CartRemoveProduct,
             payload: id,
         });
     };
 
     const handleDeleteFromCart = (id: number) => {
         dispatch({
-            type: AppCartActions.DeleteProductFromCart,
+            type: CartAppActions.CartDeleteProduct,
             payload: id,
         });
     };

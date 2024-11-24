@@ -1,7 +1,7 @@
 import { ClientAppActions } from "../domain/app-client";
 import { Client } from "../domain/client";
 
-export interface DispatchObjectClient<A, T = any> {
+export interface ClientDispatchObject<A, T = any> {
   type: A;
   payload?: T;
 }
@@ -18,20 +18,20 @@ export const ClientinitialState: ClientAppState = {
 
 export const clientAppReducer = (
   state: ClientAppState,
-  { type, payload }: DispatchObjectClient<ClientAppActions>
+  { type, payload }: ClientDispatchObject<ClientAppActions>
 ) => {
   switch (type) {
-    case ClientAppActions.SaveClient:
+    case ClientAppActions.ClientSave:
       return {
         ...state,
         clients: [...state.clients, payload as Client],
       };
-    case ClientAppActions.DeleteClient:
+    case ClientAppActions.ClientDelete:
       return {
         ...state,
         clients: payload as Client[],
       };
-    case ClientAppActions.SelectClient:
+    case ClientAppActions.ClientSelect:
       return {
         ...state,
         clientSelected: payload as Client,
