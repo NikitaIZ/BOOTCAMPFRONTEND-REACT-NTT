@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Products } from "../../domain/products";
 import { productsRequest } from "../../proxy/products-request";
-import { useSearch } from "../../context/search";
+import { useGlobalSearchAppState } from "../../context/search";
 import { useGlobalPaginationAppState, useGlobalPaginationAppDispatch } from "../../context/pagination";
 
 import ProductCard from "../../../utils/components/ProductCard/ProductCard";
@@ -11,7 +11,7 @@ import './Init.css';
 import { PaginationAppActions } from "../../domain/app-pagination";
 
 const Init: React.FC = () => {
-  const { searchTerm } = useSearch();
+  const { searchTerm } = useGlobalSearchAppState();
   const { currentPage } = useGlobalPaginationAppState();
   const dispatch = useGlobalPaginationAppDispatch();
 

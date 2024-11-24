@@ -7,7 +7,7 @@ import { Categories } from "../../../app/domain/categories";
 
 import { categoriesRequest } from "../../../app/proxy/categories-request";
 
-import { useSearch } from "../../../app/context/search";
+import { useGlobalSearchAppState } from "../../../app/context/search";
 
 import superLogo from "../../.././../public/imgs/logotipo.jpg";
 
@@ -29,7 +29,7 @@ const Header: React.FC = () => {
     }
   };
 
-  const { searchTerm, setSearchTerm } = useSearch(); 
+  const { searchTerm, setSearchTerm } = useGlobalSearchAppState(); 
   const [localSearchTerm, setLocalSearchTerm] = useState(searchTerm); 
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {

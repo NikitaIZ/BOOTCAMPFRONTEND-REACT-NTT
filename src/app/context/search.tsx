@@ -1,26 +1,41 @@
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState, ReactNode, FC } from "react";
 
 interface SearchContextType {
   searchTerm: string;
   setSearchTerm: (term: string) => void;
 }
 
-const SearchContext = createContext<SearchContextType | undefined>(undefined);
+const SearchAppStateContext = createContext<SearchContextType | undefined>(undefined);
+const SearchDispatchContext = createContext<((term: string) => void) | undefined>(undefined);
 
-export const SearchProvider = ({ children }: { children: ReactNode }) => {
+const GlobalSearchAppProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
 
+  const dispatch = (term: string) => setSearchTerm(term);
+
   return (
-    <SearchContext.Provider value={{ searchTerm, setSearchTerm }}>
-      {children}
-    </SearchContext.Provider>
+    <SearchAppStateContext.Provider value={{ searchTerm, setSearchTerm }}>
+      <SearchDispatchContext.Provider value={dispatch}>
+        {children}
+      </SearchDispatchContext.Provider>
+    </SearchAppStateContext.Provider>
   );
 };
 
-export const useSearch = () => {
-  const context = useContext(SearchContext);
+const useGlobalSearchAppState = (): SearchContextType => { //useSearch
+  const context = useContext(SearchAppStateContext);
   if (!context) {
-    throw new Error("useSearch must be used within a SearchProvider");
+    throw new Error("useGlobalSearchAppState must be used within SearchAppStateContext");
   }
   return context;
 };
+
+const useGlobalSearchAppDispatch = (): ((term: string) => void) => {
+  const context = useContext(SearchDispatchContext);
+  if (!context) {
+    throw new Error("useGlobalSearchAppDispatch must be used within SearchDispatchContext");
+  }
+  return context;
+};
+
+export { GlobalSearchAppProvider, useGlobalSearchAppState, useGlobalSearchAppDispatch };

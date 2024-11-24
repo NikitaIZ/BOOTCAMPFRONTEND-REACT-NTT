@@ -5,7 +5,7 @@ import { Products } from "../../domain/products";
 
 import { productsRequest } from "../../proxy/products-request";
 
-import { useSearch } from "../../context/search";
+import { useGlobalSearchAppState } from "../../context/search";
 import { useGlobalPaginationAppDispatch, useGlobalPaginationAppState } from "../../context/pagination";
 
 import ProductCard from "../../../utils/components/ProductCard/ProductCard";
@@ -17,7 +17,7 @@ import { PaginationAppActions } from "../../domain/app-pagination";
 const Category: React.FC = () => {
   const { categoryId } = useParams<{ categoryId: string }>();
 
-  const { searchTerm } = useSearch();
+  const { searchTerm } = useGlobalSearchAppState();
   const { currentPage } = useGlobalPaginationAppState();
   const dispatch = useGlobalPaginationAppDispatch();
 

@@ -36,7 +36,7 @@ const GlobalCartAppProvider: FC<PropsWithChildren> = ({ children }) => {
 const useGlobalCartAppState = (): CartAppState => {
   const context = useContext(CartAppStateContext);
   if (!context) {
-    throw new Error("useGlobalCartAppState debe usarse dentro de un CartAppStateContext");
+    throw new Error("useGlobalCartAppState must be used within CartAppStateContext");
   }
   return context;
 };
@@ -44,7 +44,7 @@ const useGlobalCartAppState = (): CartAppState => {
 const useGlobalCartAppDispatch = (): CartAppDispatch => {
   const context = useContext(CartAppDispatchContext);
   if (!context) {
-    throw new Error("useGlobalCartAppDispatch debe usarse dentro de un CartAppDispatchContext");
+    throw new Error("useGlobalCartAppDispatch must be used within CartAppDispatchContext");
   }
   return context;
 };

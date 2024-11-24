@@ -20,7 +20,7 @@ const GlobalClientAppProvider: FC<PropsWithChildren> = ({ children }) => {
 const useGlobalClientAppState = (): ClientAppState => {
   const context = useContext(ClientAppStateContext);
   if (!context) {
-    throw new Error("useGlobalClientAppState debe usarse dentro de un ClientAppStateContext");
+    throw new Error("useGlobalClientAppState must be used within ClientAppStateContext");
   }
   return context;
 };
@@ -28,7 +28,7 @@ const useGlobalClientAppState = (): ClientAppState => {
 const useGlobalClientAppDispatch = (): ClientAppDispatch => {
   const context = useContext(ClientAppDispatchContext);
   if (!context) {
-    throw new Error("useGlobalClientAppDispatch debe usarse dentro de un ClientAppDispatchContext");
+    throw new Error("useGlobalClientAppDispatch must be used within ClientAppDispatchContext");
   }
   return context;
 };
