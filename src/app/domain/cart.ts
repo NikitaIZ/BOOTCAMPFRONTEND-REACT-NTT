@@ -1,5 +1,5 @@
 import { AppCartActions } from "./app-cart";
-import { CartState, DispatchObject } from "../reducer/cart";
+import { CartState, DispatchObjectCart } from "../reducer/cart";
 
 export interface CartItem {
   id: number;
@@ -12,7 +12,7 @@ export interface CartItem {
 
 export interface CartContextType {
   state: CartState;
-  dispatch: React.Dispatch<DispatchObject<AppCartActions>>;
+  dispatch: React.Dispatch<DispatchObjectCart<AppCartActions>>;
   getCartQuantity: () => number;
   getCartPrice: () => number;
   showCartCounter: boolean;
