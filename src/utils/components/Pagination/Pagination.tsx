@@ -1,10 +1,10 @@
-import React from "react";
+import { FC } from "react";
 import { useGlobalPaginationAppState, useGlobalPaginationAppDispatch } from "../../../app/context/pagination"; // Usamos el nuevo hook para obtener el contexto
 
 import './Pagination.css'
 import { PaginationAppActions } from "../../../app/domain/app-pagination";
 
-const Pagination: React.FC = () => {
+const Pagination: FC = () => {
   const { currentPage, totalPages } = useGlobalPaginationAppState(); // Accedemos al estado
   const dispatch = useGlobalPaginationAppDispatch(); // Accedemos al dispatch
 

@@ -1,19 +1,15 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { FC, useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 import { ModuleRoutes } from "../../../app/routes";
-
 import { Categories } from "../../../app/domain/categories";
-
 import { categoriesRequest } from "../../../app/proxy/categories-request";
-
 import { useGlobalSearchAppState } from "../../../app/context/search";
-
 import superLogo from "../../.././../public/imgs/logotipo.jpg";
 
-import './Header.css'
+import './Header.css';
 
-const Header: React.FC = () => {
+const Header: FC = () => {
   const [categories, setCategories] = useState<Categories[] | null>(null);
 
   const getCategories = async () => {
@@ -29,19 +25,25 @@ const Header: React.FC = () => {
     }
   };
 
-  const { searchTerm, setSearchTerm } = useGlobalSearchAppState(); 
-  const [localSearchTerm, setLocalSearchTerm] = useState(searchTerm); 
+  const { searchTerm, setSearchTerm } = useGlobalSearchAppState();
+  const [localSearchTerm, setLocalSearchTerm] = useState(searchTerm);
+  const location = useLocation();
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setLocalSearchTerm(event.target.value);
   };
 
   useEffect(() => {
-    setSearchTerm(localSearchTerm); 
+    setLocalSearchTerm(""); 
+    setSearchTerm("");
+  }, [location, setSearchTerm]); 
+
+  useEffect(() => {
+    setSearchTerm(localSearchTerm);
   }, [localSearchTerm, setSearchTerm]);
 
   useEffect(() => {
-    getCategories();
+    getCategories(); 
   }, []);
 
   return (

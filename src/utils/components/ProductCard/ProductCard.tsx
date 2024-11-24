@@ -1,3 +1,5 @@
+import { FC } from "react";
+
 import { Products } from "../../../app/domain/products";
 import { useGlobalCartAppState, useGlobalCartAppDispatch } from "../../../app/context/cart";
 import { CartAppActions } from "../../../app/domain/app-cart";
@@ -8,7 +10,7 @@ interface ProductCardI {
   product: Products;
 }
 
-const ProductCard: React.FC<ProductCardI> = ({ product }) => {
+const ProductCard: FC<ProductCardI> = ({ product }) => {
   const { items } = useGlobalCartAppState();
   const dispatch = useGlobalCartAppDispatch();
 

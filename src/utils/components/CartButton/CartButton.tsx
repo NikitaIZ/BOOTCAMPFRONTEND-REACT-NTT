@@ -1,10 +1,15 @@
+import { FC } from "react";
 import { Link } from "react-router-dom";
-import { useGlobalCartAppState } from "../../../app/context/cart";
+
 import { ModuleRoutes } from "../../../app/routes";
-import './CartButton.css';
+
+import { useGlobalCartAppState } from "../../../app/context/cart";
+
 import cartIcon from "../../../assets/cart.svg";
 
-const CartButton: React.FC = () => {
+import './CartButton.css';
+
+const CartButton: FC = () => {
   const { getCartQuantity, items } = useGlobalCartAppState();
 
   const showCartCounter = items && items.length > 0;

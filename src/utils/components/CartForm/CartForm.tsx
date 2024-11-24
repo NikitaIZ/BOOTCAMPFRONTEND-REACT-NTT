@@ -24,8 +24,8 @@ const CartForm: FC<FormI> = ({ saveClient, clientSelected }) => {
 
     const { districts } = useDistricts("/json/districts.json");
 
-    const { items } = useGlobalCartAppState(); 
-    const cartAppDispatch = useGlobalCartAppDispatch(); 
+    const { items } = useGlobalCartAppState();
+    const cartAppDispatch = useGlobalCartAppDispatch();
 
     const { isValidEmail, isAlphabetic, isNumeric } = useValidation();
 
@@ -44,7 +44,7 @@ const CartForm: FC<FormI> = ({ saveClient, clientSelected }) => {
         products: []
     };
 
-    const [validation, setValidation] = useState<Omit<Client, "id">>({
+    const [validation, setValidation] = useState<Omit<Client, "id" | "products">>({
         names: "",
         lastnames: "",
         email: "",
@@ -52,27 +52,34 @@ const CartForm: FC<FormI> = ({ saveClient, clientSelected }) => {
         address: "",
         reference: "",
         phone: "",
-        password: "",
-        products: []
+        password: ""
     });
 
     const [client, setClient] = useState<Client>(initalClient);
-    const [isSendForm, setIsSendForm] = useState(false);
+    const [touched, setTouched] = useState<Partial<Record<keyof Client, boolean>>>({});
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const [cartError, setCartError] = useState<string>("");
 
     const handleChange = ({
         target,
     }: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-        const key = target.id;
+        const key = target.id as keyof Client;
         const value = target.value;
+
         setClient({
             ...client,
             [key]: value,
         });
+
+        if (!touched[key]) {
+            setTouched({
+                ...touched,
+                [key]: true,
+            });
+        }
     };
 
-    const checkValidation = () => {
+    const validateForm = () => {
         const errors = { ...validation };
 
         errors.names = client.names === "" ? "Names are required" : !isAlphabetic(client.names) ? "Only letters are allowed" : "";
@@ -83,46 +90,74 @@ const CartForm: FC<FormI> = ({ saveClient, clientSelected }) => {
         errors.reference = client.reference === "" ? "Reference is required" : "";
         errors.phone = client.phone === "" ? "Phone is required" : !isNumeric(client.phone) ? "Only numbers are allowed" : "";
         errors.password = client.password === "" ? "Password is required" : "";
+
         setValidation(errors);
     };
 
     const addClient = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-
+    
         const cartProducts = mapperListProductsClient(items);
-
+    
         if (cartProducts.length === 0) {
             setCartError("You must have at least one product in your cart.");
             return;
         }
-
+    
         setCartError("");
-        setIsSendForm(true);
-        checkValidation();
-
-        if (
-            validation.names === "" &&
-            validation.lastnames === "" &&
-            validation.email === "" &&
-            validation.district === "" &&
-            validation.address === "" &&
-            validation.reference === "" &&
-            validation.phone === "" &&
-            validation.password === ""
-        ) {
-            saveClient({
-                ...client,
-                id: generateUniqueId(),
-                products: cartProducts,
-            });
-
-            setClient(initalClient);
-            setValidation(initalClient);
-            setIsSendForm(false);
-            setIsModalOpen(true);
+    
+    
+        setTouched({
+            names: true,
+            lastnames: true,
+            email: true,
+            district: true,
+            address: true,
+            reference: true,
+            phone: true,
+            password: true,
+        });
+    
+        const errors = {
+            names: client.names === "" ? "Names are required" : !isAlphabetic(client.names) ? "Only letters are allowed" : "",
+            lastnames: client.lastnames === "" ? "Lastnames are required" : !isAlphabetic(client.lastnames) ? "Only letters are allowed" : "",
+            email: client.email === "" ? "Email is required" : !isValidEmail(client.email) ? "Invalid email format" : "",
+            district: client.district === "" ? "Select a district" : "",
+            address: client.address === "" ? "Address is required" : "",
+            reference: client.reference === "" ? "Reference is required" : "",
+            phone: client.phone === "" ? "Phone is required" : !isNumeric(client.phone) ? "Only numbers are allowed" : "",
+            password: client.password === "" ? "Password is required" : "",
+        };
+    
+        setValidation(errors); 
+    
+        const hasErrors = Object.values(errors).some((error) => error !== "");
+    
+        if (hasErrors) {
+            return; 
         }
+    
+        saveClient({
+            ...client,
+            id: generateUniqueId(),
+            products: cartProducts,
+        });
+    
+        setClient(initalClient);
+        setTouched({});
+        setValidation({
+            names: "",
+            lastnames: "",
+            email: "",
+            district: "",
+            address: "",
+            reference: "",
+            phone: "",
+            password: ""
+        });
+        setIsModalOpen(true);
     };
-
+    
     const closeModal = () => {
         cartAppDispatch({ type: CartAppActions.CartDeleteAllProducts });
         setIsModalOpen(false);
@@ -130,9 +165,7 @@ const CartForm: FC<FormI> = ({ saveClient, clientSelected }) => {
     };
 
     useEffect(() => {
-        if (isSendForm) {
-            checkValidation();
-        }
+        validateForm();
     }, [client]);
 
     useEffect(() => {
@@ -149,49 +182,111 @@ const CartForm: FC<FormI> = ({ saveClient, clientSelected }) => {
                 <div className="form-group">
                     <div>
                         <label htmlFor="names">Names:</label>
-                        <input type="text" id="names" name="names" value={client.names} placeholder="John" onChange={handleChange} required />
-                        {validation.names && <span className="error-message">{validation.names}</span>}
+                        <input
+                            type="text"
+                            id="names"
+                            name="names"
+                            value={client.names}
+                            placeholder="John"
+                            onChange={handleChange}
+                            autoComplete="off"
+                        />
+                        {touched.names && validation.names && <span className="error-message">{validation.names}</span>}
                     </div>
                     <div>
                         <label htmlFor="lastnames">Last Names:</label>
-                        <input type="text" id="lastnames" name="lastnames" value={client.lastnames} placeholder="Doe" onChange={handleChange} required />
-                        {validation.lastnames && <span className="error-message">{validation.lastnames}</span>}
+                        <input
+                            type="text"
+                            id="lastnames"
+                            name="lastnames"
+                            value={client.lastnames}
+                            placeholder="Doe"
+                            onChange={handleChange}
+                            autoComplete="off"
+                        />
+                        {touched.lastnames && validation.lastnames && <span className="error-message">{validation.lastnames}</span>}
                     </div>
                     <div>
                         <label htmlFor="email">Email:</label>
-                        <input type="email" id="email" name="email" value={client.email} placeholder="john.doe@mail.com" onChange={handleChange} required />
-                        {validation.email && <span className="error-message">{validation.email}</span>}
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            value={client.email}
+                            placeholder="john.doe@mail.com"
+                            onChange={handleChange}
+                            autoComplete="off"
+                        />
+                        {touched.email && validation.email && <span className="error-message">{validation.email}</span>}
                     </div>
                     <div>
                         <label htmlFor="password">Password:</label>
-                        <input type="password" id="password" name="password" value={client.password} placeholder="" onChange={handleChange} required />
-                        {validation.password && <span className="error-message">{validation.password}</span>}
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            value={client.password}
+                            placeholder=""
+                            onChange={handleChange}
+                            autoComplete="off"
+                        />
+                        {touched.password && validation.password && <span className="error-message">{validation.password}</span>}
                     </div>
                     <div>
                         <label htmlFor="district">District:</label>
-                        <select id="district" name="district" value={client.district} onChange={handleChange} required>
+                        <select
+                            id="district"
+                            name="district"
+                            value={client.district}
+                            onChange={handleChange}
+                            autoComplete="off"
+                        >
                             {districts.map((district: string, index: number) => (
                                 <option key={index} value={district}>
                                     {district}
                                 </option>
                             ))}
                         </select>
-                        {validation.district && <span className="error-message">{validation.district}</span>}
+                        {touched.district && validation.district && <span className="error-message">{validation.district}</span>}
                     </div>
                     <div>
                         <label htmlFor="address">Address:</label>
-                        <input type="text" id="address" name="address" value={client.address} placeholder="123 Maple Street. Anytown, PA 17101" onChange={handleChange} required />
-                        {validation.address && <span className="error-message">{validation.address}</span>}
+                        <input
+                            type="text"
+                            id="address"
+                            name="address"
+                            value={client.address}
+                            placeholder="123 Maple Street. Anytown, PA 17101"
+                            onChange={handleChange}
+                            autoComplete="off"
+                        />
+                        {touched.address && validation.address && <span className="error-message">{validation.address}</span>}
                     </div>
                     <div>
                         <label htmlFor="reference">Reference:</label>
-                        <input type="text" id="reference" name="reference" value={client.reference} placeholder="Reference" onChange={handleChange} required />
-                        {validation.reference && <span className="error-message">{validation.reference}</span>}
+                        <input
+                            type="text"
+                            id="reference"
+                            name="reference"
+                            value={client.reference}
+                            placeholder="Reference"
+                            onChange={handleChange}
+                            autoComplete="off"
+                        />
+                        {touched.reference && validation.reference && <span className="error-message">{validation.reference}</span>}
                     </div>
                     <div>
                         <label htmlFor="phone">Phone:</label>
-                        <input type="tel" id="phone" name="phone" value={client.phone} placeholder="000000000" onChange={handleChange} required />
-                        {validation.phone && <span className="error-message">{validation.phone}</span>}
+                        <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            value={client.phone}
+                            placeholder="000000000"
+                            onChange={handleChange}
+                            autoComplete="off"
+                        />
+                        {touched.phone && validation.phone && <span className="error-message">{validation.phone}</span>}
                     </div>
                     <button type="submit" className="form-submit">Send</button>
                 </div>

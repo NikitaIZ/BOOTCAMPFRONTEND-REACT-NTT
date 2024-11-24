@@ -1,12 +1,15 @@
+import { FC } from "react";
+
 import { CartItem } from "../../../app/domain/cart";
-import { useGlobalCartAppState, useGlobalCartAppDispatch } from "../../../app/context/cart";
 import { CartAppActions } from "../../../app/domain/app-cart";
+
+import { useGlobalCartAppState, useGlobalCartAppDispatch } from "../../../app/context/cart";
 
 import trashIcon from "../../../assets/trash.svg";
 
 import "./CartTable.css";
 
-const CartTable: React.FC = () => {
+const CartTable: FC = () => {
     const { getCartQuantity, getCartPrice, items } = useGlobalCartAppState(); 
     const cartAppDispatc = useGlobalCartAppDispatch(); 
 

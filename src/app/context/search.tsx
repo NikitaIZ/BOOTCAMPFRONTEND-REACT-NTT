@@ -22,7 +22,7 @@ const GlobalSearchAppProvider: FC<{ children: ReactNode }> = ({ children }) => {
   );
 };
 
-const useGlobalSearchAppState = (): SearchContextType => { //useSearch
+const useGlobalSearchAppState = (): SearchContextType => { 
   const context = useContext(SearchAppStateContext);
   if (!context) {
     throw new Error("useGlobalSearchAppState must be used within SearchAppStateContext");
