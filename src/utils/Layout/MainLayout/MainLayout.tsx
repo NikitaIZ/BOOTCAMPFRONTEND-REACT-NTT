@@ -7,6 +7,8 @@ import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import CartButton from "../../components/CartButton/CartButton";
 
+import './MainLayout.css'
+
 interface MainLayoutI extends PropsWithChildren {}
 
 const MainLayout: React.FC<MainLayoutI> = ({ children }) => {

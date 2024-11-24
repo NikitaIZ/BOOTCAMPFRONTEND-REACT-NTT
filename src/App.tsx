@@ -5,8 +5,6 @@ import Init from "./app/pages/Init/Init";
 import Category from "./app/pages/Category/Category";
 import Cart from "./app/pages/Cart/Cart";
 
-import './App.css'
-
 const App: React.FC = () => {
   return (
     <Routes>

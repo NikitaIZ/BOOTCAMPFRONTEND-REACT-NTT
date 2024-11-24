@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import { useCart } from "../../../app/context/cart"; 
-import cartIcon from "../../../assets/cart.svg";
 import { ModuleRoutes } from "../../../app/routes";
+
+import './CartButton.css'
+
+import cartIcon from "../../../assets/cart.svg";
 
 const CartButton: React.FC = () => {
   const { getCartQuantity, showCartCounter } = useCart(); 

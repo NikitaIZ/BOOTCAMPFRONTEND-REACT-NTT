@@ -1,0 +1,30 @@
+footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    gap: 20px;
+    padding: 40px var(--main-spacing);
+    box-sizing: border-box;
+    grid-area: footer;
+    background: var(--color-background-footer);
+    width: 100%;
+}
+
+footer h3,
+footer p {
+    margin: 0;
+    color: var(--color-white);
+}
+
+.footer-social {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.social-icons {
+    display: flex;
+    gap: 10px;
+}

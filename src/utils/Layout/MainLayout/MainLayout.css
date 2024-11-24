@@ -1,0 +1,15 @@
+main {
+    grid-area: main;
+}
+
+.grip-container {
+    display: grid;
+    grid-template-areas:
+        "header header header"
+        "main main main"
+        "pagination pagination pagination"
+        "footer footer footer";
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto 1fr auto;
+    height: 100vh;
+}

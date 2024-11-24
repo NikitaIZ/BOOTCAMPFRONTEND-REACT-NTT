@@ -11,6 +11,8 @@ import { useSearch } from "../../../app/context/search";
 
 import superLogo from "../../.././../public/imgs/logotipo.jpg";
 
+import './Header.css'
+
 const Header: React.FC = () => {
   const [categories, setCategories] = useState<Categories[] | null>(null);
 

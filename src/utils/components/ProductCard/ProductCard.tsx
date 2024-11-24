@@ -2,6 +2,8 @@ import { Products } from "../../../app/domain/product";
 import { useCart } from "../../../app/context/cart";
 import { AppCartActions } from "../../../app/domain/app-cart";
 
+import './ProductCard.css'
+
 interface ProductCardI {
   product: Products;
 }

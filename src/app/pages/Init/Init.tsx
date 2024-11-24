@@ -11,6 +11,7 @@ import ProductCard from "../../../utils/components/ProductCard/ProductCard";
 
 import Pagination from "../../../utils/components/Pagination/Pagination";
 
+import './Init.css';
 
 const Init: React.FC = () => {
   const { searchTerm } = useSearch();

@@ -2,6 +2,8 @@ import React from "react";
 
 import { usePagination } from "../../../app/context/pagination";
 
+import './Pagination.css'
+
 const Pagination: React.FC = () => {
   const { currentPage, setCurrentPage, totalPages } = usePagination();
 

@@ -11,6 +11,7 @@ import { usePagination } from "../../context/pagination";
 import ProductCard from "../../../utils/components/ProductCard/ProductCard";
 import Pagination from "../../../utils/components/Pagination/Pagination";
 
+import './Category.css';
 
 const Category: React.FC = () => {
   const { categoryId } = useParams<{ categoryId: string }>();

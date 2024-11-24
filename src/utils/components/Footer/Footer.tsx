@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import facebookLogo from "../../../assets/facebook.svg";
 import instagramLogo from "../../../assets/instagram.svg";
 
+import './Footer.css'
+
 const Footer: React.FC = () => {
   return (
     <footer>

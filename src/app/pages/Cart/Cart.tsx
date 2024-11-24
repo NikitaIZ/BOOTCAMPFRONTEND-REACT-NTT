@@ -10,6 +10,8 @@ import { ClientAppActions } from "../../domain/app-client";
 import CartTable from "../../../utils/components/CartTable/CartTable";
 import CartForm from "../../../utils/components/CartForm/CartForm";
 
+import './Cart.css';
+
 const Cart: FC = () => {
     const { clients, clientSelected } = useGlobalClientAppState();
     const dispatchApp = useGlobalClientAppDispatch();

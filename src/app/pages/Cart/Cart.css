@@ -1,0 +1,9 @@
+.list-cart {
+    padding: var(--main-spacing);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.list-cart>div {
+    overflow: auto;
+}
