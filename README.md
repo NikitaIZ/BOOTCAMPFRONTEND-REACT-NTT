@@ -1,50 +1,55 @@
-# React + TypeScript + Vite
+<h1 align="center">
+  <img src="public/imgs/logotipo.jpg" alt="Super Market" width="140">
+  <br>
+  PROYECTO BOOTCAMP
+  <br>
+</h1>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<p align="center">
+<img src="https://img.shields.io/badge/stable-0.4.0-blue.svg">
+<img src="https://img.shields.io/badge/license-MIT-orange.svg">
+</p>
 
-Currently, two official plugins are available:
+Este es un proyecto para un bootcamp, en el cual se iran añadiendo las diferentes herramientas para el desarrollo web. 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Requirimientos
 
-## Expanding the ESLint configuration
+  - [Node.js  22.11](https://nodejs.org/en/)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Instalación
 
-- Configure the top-level `parserOptions` property like this:
+    cd BOOTCAMPFRONTEND-REACT-NTT
+    npm install
+    npm run dev
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Documentación
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### feature/diseños-y-estilos: 
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+Diseño de pagina principal para la tienda utilizando unicamente HTML y CSS3, en especial elementos como:
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+- Flexbox
+- Diseño responsive
+
+### feature/javascript:
+
+Implentacion del javascript en el proyecto, usando vite y la api de https://dummyjson.com/, se añádieron cambios a la pagina como:
+
+- Un buscador funcional
+- Se muestran las categorias de la propia api y al hacer click los productos cambian a la selecionada
+- Al hacer click a un producto aparece una notificacion numerica en el carrito que va incrementando
+- Un paginate para mejor carga de los productos
+- Las tarjetas muestras informacion del producto de la propia api como el nombre, description, precio, cantidad, descuento, etc
+- Al selecionar la maxima cantidad de productos esta se bloquea y ya no se puede incrementar el numero en el carrito
+
+### feature/typescript:
+
+Se convirtieron todos los archivos javascript de la rama anterior a typescript, ademas de usar webpack para una mejor configuracion y contruccion de los archivos typescript a javascript el cual cumple en hacer los mismos elementos de la rama anterior
+
+### feature/react-fundamentos:
+
+En esta fase del proyecto se paso toda la funcionalidad creada en la rama feature/javascript a React, para el tema de las rutas se uso react-router-dom, que ayudo a la facilidad de pasar la informacion sin perdela entre las paginas del proyecto.
+
+## Licencia
+
+BOOTCAMPFRONTEND-REACT-NTT es un software de código abierto licenciado bajo la [MIT license](https://github.com/NikitaIZ/BOOTCAMPFRONTEND-REACT-NTT/blob/feature/dise%C3%B1os-y-estilos/LICENSE.md).

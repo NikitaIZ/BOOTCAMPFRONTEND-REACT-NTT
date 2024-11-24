@@ -5,7 +5,6 @@ import { CartProvider } from "../../../app/context/cart";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import CartButton from "../../components/CartButton/CartButton";
-import Pagination from "../../components/Pagination/Pagination";
 
 interface MainLayoutI extends PropsWithChildren {}
 

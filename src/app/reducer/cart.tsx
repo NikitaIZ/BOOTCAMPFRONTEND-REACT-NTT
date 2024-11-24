@@ -56,7 +56,7 @@ export const cartReducer = (
             const existingItem = state.items.find((item) => item.id === productId);
 
             if (existingItem) {
-                // Si la cantidad es mayor que 1, solo se reduce
+
                 if (existingItem.quantity > 1) {
                     return {
                         ...state,
@@ -67,7 +67,6 @@ export const cartReducer = (
                         ),
                     };
                 } 
-                // Si la cantidad es 1, se elimina el producto del carrito
                 else {
                     return {
                         ...state,
