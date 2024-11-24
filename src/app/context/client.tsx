@@ -1,6 +1,6 @@
 import { createContext, FC, PropsWithChildren, useContext, useReducer } from "react";
-import { clientAppReducer, ClientAppState, clientInitialState } from "../reducer/client";
 import { ClientAppDispatch } from "../domain/app-client";
+import { clientAppReducer, ClientAppState, clientInitialState } from "../reducer/client";
 
 const ClientAppStateContext = createContext<ClientAppState | undefined>(undefined);
 const ClientAppDispatchContext = createContext<ClientAppDispatch | undefined>(undefined);
@@ -18,23 +18,19 @@ const GlobalClientAppProvider: FC<PropsWithChildren> = ({ children }) => {
 };
 
 const useGlobalClientAppState = (): ClientAppState => {
-  const context = useContext(ClientAppStateContext) as ClientAppState;
-
-  if (context) {
-    return context;
+  const context = useContext(ClientAppStateContext);
+  if (!context) {
+    throw new Error("useGlobalClientAppState debe usarse dentro de un ClientAppStateContext");
   }
-
-  throw new Error("useGlobalClientAppState not used within ClientAppStateContext");
+  return context;
 };
 
 const useGlobalClientAppDispatch = (): ClientAppDispatch => {
-  const context = useContext(ClientAppDispatchContext) as ClientAppDispatch;
-
-  if (context) {
-    return context;
+  const context = useContext(ClientAppDispatchContext);
+  if (!context) {
+    throw new Error("useGlobalClientAppDispatch debe usarse dentro de un ClientAppDispatchContext");
   }
-
-  throw new Error("useGlobalClientAppDispatch not used within ClientAppDispatchContext");
+  return context;
 };
 
 export { GlobalClientAppProvider, useGlobalClientAppState, useGlobalClientAppDispatch };

@@ -7,9 +7,6 @@ import cartIcon from "../../../assets/cart.svg";
 const CartButton: React.FC = () => {
   const { getCartQuantity, items } = useGlobalCartAppState();
 
-  console.log("BOTON")
-
-  console.log(items)
   const showCartCounter = items && items.length > 0;
 
   return (

@@ -6,51 +6,55 @@ import { Products } from "../../domain/products";
 import { productsRequest } from "../../proxy/products-request";
 
 import { useSearch } from "../../context/search";
-import { usePagination } from "../../context/pagination";
+import { useGlobalPaginationAppDispatch, useGlobalPaginationAppState } from "../../context/pagination";
 
 import ProductCard from "../../../utils/components/ProductCard/ProductCard";
 import Pagination from "../../../utils/components/Pagination/Pagination";
 
 import './Category.css';
+import { PaginationAppActions } from "../../domain/app-pagination";
 
 const Category: React.FC = () => {
   const { categoryId } = useParams<{ categoryId: string }>();
+
   const { searchTerm } = useSearch();
-  const { currentPage, setCurrentPage, setTotalPages } = usePagination(); 
+  const { currentPage } = useGlobalPaginationAppState();
+  const dispatch = useGlobalPaginationAppDispatch();
+
   const [products, setProducts] = useState<Products[] | null>(null);
 
-  const getProducts = async () => {
+  const updateProducts = async () => {
     try {
-      if (!categoryId) return; 
-      const data = await productsRequest.getProducts(searchTerm, currentPage, categoryId); 
+      const data = await productsRequest.getProducts(searchTerm, currentPage, categoryId);
       setProducts(data.products);
-      setTotalPages(data.totalPages); 
+      dispatch({ type: PaginationAppActions.PaginationTotal, payload: data.totalPages });
     } catch (error) {
       console.error("Error al obtener productos:", error);
     }
   };
 
   useEffect(() => {
-    setCurrentPage(1);
-  }, [searchTerm]);
+    dispatch({ type: PaginationAppActions.PaginationReset });
+  }, [searchTerm, categoryId, dispatch]);
 
   useEffect(() => {
-    getProducts();
+    updateProducts();
   }, [searchTerm, categoryId, currentPage]);
 
   return (
     <div>
       <div className="list-products">
-      {products?.length ? (
-        products.map((product) => (
-          <ProductCard
-            key={product.id}
-            product={product as Products}
-          />
-        ))
-      ) : (
-        <p>Loading Products...</p>
-      )}
+        {products ? (
+          products.length > 0 ? (
+            products.map((product) => (
+              <ProductCard key={product.id} product={product as Products} />
+            ))
+          ) : (
+            <p>No products found.</p>
+          )
+        ) : (
+          <p>Loading Products...</p>
+        )}
       </div>
       <Pagination />
     </div>

@@ -57,6 +57,7 @@ const Header: React.FC = () => {
             value={localSearchTerm}
             onChange={handleSearchChange}
             placeholder="Search products..."
+            autoComplete="off"
           />
         </div>
         <nav>

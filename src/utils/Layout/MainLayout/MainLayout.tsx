@@ -1,6 +1,6 @@
 import { PropsWithChildren } from "react";
 import { SearchProvider } from "../../../app/context/search";
-import { PaginationProvider } from "../../../app/context/pagination";
+import { GlobalPaginationAppProvider } from "../../../app/context/pagination";
 import { GlobalCartAppProvider } from "../../../app/context/cart";
 import { GlobalClientAppProvider } from "../../../app/context/client";
 import Header from "../../components/Header/Header";
@@ -14,7 +14,7 @@ interface MainLayoutI extends PropsWithChildren {}
 const MainLayout: React.FC<MainLayoutI> = ({ children }) => {
   return (
     <SearchProvider>
-      <PaginationProvider>
+      <GlobalPaginationAppProvider>
         <GlobalCartAppProvider>
           <GlobalClientAppProvider>
           <div className="grip-container">
@@ -25,7 +25,7 @@ const MainLayout: React.FC<MainLayoutI> = ({ children }) => {
           </div>
           </GlobalClientAppProvider>
         </GlobalCartAppProvider>
-      </PaginationProvider>
+      </GlobalPaginationAppProvider>
     </SearchProvider>
   );
 };

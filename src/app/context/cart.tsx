@@ -1,7 +1,7 @@
 import { createContext, FC, PropsWithChildren, useReducer, useContext, useEffect } from "react";
-import { cartAppReducer, cartInitialState, CartAppState } from "../reducer/cart";
 import { CartAppDispatch } from "../domain/app-cart";
 import { useLocalStorage } from "../hooks/useLocalStorage"; 
+import { cartAppReducer, cartInitialState, CartAppState } from "../reducer/cart";
 
 const CartAppStateContext = createContext<CartAppState | undefined>(undefined);
 const CartAppDispatchContext = createContext<CartAppDispatch | undefined>(undefined);
