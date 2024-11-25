@@ -1,7 +1,7 @@
 import { createContext, FC, PropsWithChildren, useReducer, useContext } from "react";
+import { Paginations } from "../domain/interfaces/paginations";
+import { PaginationAppDispatch } from "../domain/types/app-pagination";
 import { paginationAppReducer, paginationInitialState } from "../reducer/pagination";
-import { PaginationAppDispatch } from "../domain/app-pagination";
-import { Paginations } from "../domain/paginations";
 
 const PaginationAppStateContext = createContext<Paginations | undefined>(undefined);
 const PaginationAppDispatchContext = createContext<PaginationAppDispatch | undefined>(undefined);

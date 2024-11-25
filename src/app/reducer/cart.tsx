@@ -1,6 +1,6 @@
-import { CartAppActions } from "../domain/app-cart";
-import { Products } from "../domain/products";
-import { CartItem } from "../domain/cart";
+import { Products } from "../domain/interfaces/products";
+import { CartItem } from "../domain/interfaces/cart";
+import { CartAppActions } from "../domain/types/app-cart";
 
 export interface CartDispatchObject<A, T = unknown> {
     type: A;

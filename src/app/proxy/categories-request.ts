@@ -1,4 +1,4 @@
-import { Categories } from "../domain/categories";
+import { Categories } from "../domain/interfaces/categories";
 
 const categoriesApiUrl = "https://dummyjson.com/products/categories";
 

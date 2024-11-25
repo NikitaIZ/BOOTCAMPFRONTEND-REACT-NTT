@@ -1,4 +1,4 @@
-import { Products } from "../domain/products";
+import { Products } from "../domain/interfaces/products";
 import { mapperListProduct } from "../mappers/ListProducts";
 
 const productsApiUrl = "https://dummyjson.com/products";

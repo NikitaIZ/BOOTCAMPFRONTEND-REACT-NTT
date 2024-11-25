@@ -1,27 +1,28 @@
 import { FC } from "react";
-import { useGlobalPaginationAppState, useGlobalPaginationAppDispatch } from "../../../app/context/pagination"; // Usamos el nuevo hook para obtener el contexto
+import { useGlobalPaginationAppState, useGlobalPaginationAppDispatch } from "../../../app/context/pagination"; 
+
+import { PaginationAppActions } from "../../../app/domain/types/app-pagination";
 
 import './Pagination.css'
-import { PaginationAppActions } from "../../../app/domain/app-pagination";
 
 const Pagination: FC = () => {
-  const { currentPage, totalPages } = useGlobalPaginationAppState(); // Accedemos al estado
-  const dispatch = useGlobalPaginationAppDispatch(); // Accedemos al dispatch
+  const { currentPage, totalPages } = useGlobalPaginationAppState();
+  const dispatch = useGlobalPaginationAppDispatch();
 
   const handlePrevious = () => {
     if (currentPage > 1) {
-      dispatch({ type: PaginationAppActions.PaginationCurrent, payload: currentPage - 1 }); // Reducir la página actual
+      dispatch({ type: PaginationAppActions.PaginationCurrent, payload: currentPage - 1 });
     }
   };
 
   const handleNext = () => {
     if (currentPage < totalPages) {
-      dispatch({ type: PaginationAppActions.PaginationCurrent, payload: currentPage + 1 }); // Incrementar la página actual
+      dispatch({ type: PaginationAppActions.PaginationCurrent, payload: currentPage + 1 });
     }
   };
 
   const handlePageClick = (page: number) => {
-    dispatch({ type: PaginationAppActions.PaginationCurrent, payload: page }); // Establecer la página seleccionada
+    dispatch({ type: PaginationAppActions.PaginationCurrent, payload: page });
   };
 
   return (

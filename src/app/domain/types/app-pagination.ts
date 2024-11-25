@@ -1,5 +1,5 @@
 import { Dispatch } from "react";
-import { PaginationDispatchObject } from "../reducer/pagination";
+import { PaginationDispatchObject } from "../../reducer/pagination";
 
 export type PaginationAppDispatch = Dispatch<PaginationDispatchObject<PaginationAppActions>>;
 

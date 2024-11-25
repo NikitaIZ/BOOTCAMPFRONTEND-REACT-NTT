@@ -1,5 +1,5 @@
 import { Dispatch } from "react";
-import { CartDispatchObject } from "../reducer/cart";
+import { CartDispatchObject } from "../../reducer/cart";
 
 export type CartAppDispatch = Dispatch<CartDispatchObject<CartAppActions>>;
 

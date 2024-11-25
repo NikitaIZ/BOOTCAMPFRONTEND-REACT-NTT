@@ -1,5 +1,5 @@
-import { ClientAppActions } from "../domain/app-client";
-import { Client } from "../domain/client";
+import { Client } from "../domain/interfaces/client";
+import { ClientAppActions } from "../domain/types/app-client";
 
 export interface ClientDispatchObject<A, T = unknown> {
   type: A;

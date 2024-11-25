@@ -1,7 +1,7 @@
 import { FC } from "react";
 
-import { CartItem } from "../../../app/domain/cart";
-import { CartAppActions } from "../../../app/domain/app-cart";
+import { CartItem } from "../../../app/domain/interfaces/cart";
+import { CartAppActions } from "../../../app/domain/types/app-cart";
 
 import { useGlobalCartAppState, useGlobalCartAppDispatch } from "../../../app/context/cart";
 

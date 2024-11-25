@@ -4,8 +4,8 @@ import { useLocalStorage } from "../../hooks/useLocalStorage";
 
 import { useGlobalClientAppDispatch, useGlobalClientAppState } from "../../context/client";
 
-import { Client } from "../../domain/client";
-import { ClientAppActions } from "../../domain/app-client";
+import { Client } from "../../domain/interfaces/client";
+import { ClientAppActions } from "../../domain/types/app-client";
 
 import CartTable from "../../../utils/components/CartTable/CartTable";
 import CartForm from "../../../utils/components/CartForm/CartForm";

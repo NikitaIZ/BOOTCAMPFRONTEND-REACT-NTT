@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
-import { Products } from "../../domain/products";
+
+import { Products } from "../../domain/interfaces/products";
+import { PaginationAppActions } from "../../domain/types/app-pagination";
+
 import { productsRequest } from "../../proxy/products-request";
+
 import { useGlobalSearchAppState } from "../../context/search";
 import { useGlobalPaginationAppState, useGlobalPaginationAppDispatch } from "../../context/pagination";
 
@@ -8,7 +12,6 @@ import ProductCard from "../../../utils/components/ProductCard/ProductCard";
 import Pagination from "../../../utils/components/Pagination/Pagination";
 
 import './Init.css';
-import { PaginationAppActions } from "../../domain/app-pagination";
 
 const Init: React.FC = () => {
   const { searchTerm } = useGlobalSearchAppState();

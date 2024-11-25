@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import { Products } from "../../domain/products";
+import { Products } from "../../domain/interfaces/products";
+import { PaginationAppActions } from "../../domain/types/app-pagination";
 
 import { productsRequest } from "../../proxy/products-request";
 
@@ -12,7 +13,6 @@ import ProductCard from "../../../utils/components/ProductCard/ProductCard";
 import Pagination from "../../../utils/components/Pagination/Pagination";
 
 import './Category.css';
-import { PaginationAppActions } from "../../domain/app-pagination";
 
 const Category: React.FC = () => {
   const { categoryId } = useParams<{ categoryId: string }>();

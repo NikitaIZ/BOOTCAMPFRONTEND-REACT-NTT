@@ -2,9 +2,13 @@ import { FC, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 import { ModuleRoutes } from "../../../app/routes";
-import { Categories } from "../../../app/domain/categories";
+
+import { Categories } from "../../../app/domain/interfaces/categories";
+
 import { categoriesRequest } from "../../../app/proxy/categories-request";
+
 import { useGlobalSearchAppState } from "../../../app/context/search";
+
 import superLogo from "../../.././../public/imgs/logotipo.jpg";
 
 import './Header.css';

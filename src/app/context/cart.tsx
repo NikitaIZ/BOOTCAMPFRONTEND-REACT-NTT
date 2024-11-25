@@ -1,5 +1,5 @@
 import { createContext, FC, PropsWithChildren, useReducer, useContext, useEffect } from "react";
-import { CartAppDispatch } from "../domain/app-cart";
+import { CartAppDispatch } from "../domain/types/app-cart";
 import { useLocalStorage } from "../hooks/useLocalStorage"; 
 import { cartAppReducer, cartInitialState, CartAppState } from "../reducer/cart";
 

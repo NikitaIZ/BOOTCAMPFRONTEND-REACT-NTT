@@ -1,5 +1,5 @@
-import { CartItem } from "../domain/cart";
-import { ClientProduct } from "../domain/client";
+import { CartItem } from "../domain/interfaces/cart";
+import { ClientProduct } from "../domain/interfaces/client";
 
 export const mapperListProductsClient = (cart: CartItem[]): ClientProduct[] => {
     return cart.map(item => ({

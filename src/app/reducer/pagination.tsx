@@ -1,5 +1,5 @@
-import { PaginationAppActions } from "../domain/app-pagination";
-import { Paginations } from "../domain/paginations";
+import { Paginations } from "../domain/interfaces/paginations";
+import { PaginationAppActions } from "../domain/types/app-pagination";
 
 export interface PaginationDispatchObject<A, T = unknown> {
     type: A;

@@ -1,8 +1,8 @@
 import { ChangeEvent, FC, FormEvent, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { Client } from "../../../app/domain/client";
-import { CartAppActions } from "../../../app/domain/app-cart";
+import { Client } from "../../../app/domain/interfaces/client";
+import { CartAppActions } from "../../../app/domain/types/app-cart";
 
 import { useDistricts } from "../../../app/hooks/useDistricts";
 import { useValidation } from "../../../app/hooks/useValidation";
@@ -106,7 +106,6 @@ const CartForm: FC<FormI> = ({ saveClient, clientSelected }) => {
     
         setCartError("");
     
-    
         setTouched({
             names: true,
             lastnames: true,
@@ -136,13 +135,20 @@ const CartForm: FC<FormI> = ({ saveClient, clientSelected }) => {
         if (hasErrors) {
             return; 
         }
-    
-        saveClient({
+
+        const newClient = {
             ...client,
             id: generateUniqueId(),
             products: cartProducts,
-        });
+        };
     
+        console.log(newClient);
+    
+        saveClient(newClient);
+        setIsModalOpen(true);
+    };
+    
+    const closeModal = () => {
         setClient(initalClient);
         setTouched({});
         setValidation({
@@ -155,10 +161,6 @@ const CartForm: FC<FormI> = ({ saveClient, clientSelected }) => {
             phone: "",
             password: ""
         });
-        setIsModalOpen(true);
-    };
-    
-    const closeModal = () => {
         cartAppDispatch({ type: CartAppActions.CartDeleteAllProducts });
         setIsModalOpen(false);
         navigate("/");

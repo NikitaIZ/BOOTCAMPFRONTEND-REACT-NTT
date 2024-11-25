@@ -1,5 +1,5 @@
 import { Dispatch } from "react";
-import { ClientDispatchObject } from "../reducer/client";
+import { ClientDispatchObject } from "../../reducer/client";
 
 export type ClientAppDispatch = Dispatch<ClientDispatchObject<ClientAppActions>>;
 

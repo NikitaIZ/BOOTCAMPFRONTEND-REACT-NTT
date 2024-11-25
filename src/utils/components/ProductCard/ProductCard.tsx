@@ -1,8 +1,9 @@
 import { FC } from "react";
 
-import { Products } from "../../../app/domain/products";
+import { Products } from "../../../app/domain/interfaces/products";
+import { CartAppActions } from "../../../app/domain/types/app-cart";
+
 import { useGlobalCartAppState, useGlobalCartAppDispatch } from "../../../app/context/cart";
-import { CartAppActions } from "../../../app/domain/app-cart";
 
 import './ProductCard.css';
 

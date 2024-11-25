@@ -1,5 +1,5 @@
 import { createContext, FC, PropsWithChildren, useContext, useReducer } from "react";
-import { ClientAppDispatch } from "../domain/app-client";
+import { ClientAppDispatch } from "../domain/types/app-client";
 import { clientAppReducer, ClientAppState, clientInitialState } from "../reducer/client";
 
 const ClientAppStateContext = createContext<ClientAppState | undefined>(undefined);
