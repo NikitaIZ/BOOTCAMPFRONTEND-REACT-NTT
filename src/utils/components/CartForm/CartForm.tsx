@@ -290,7 +290,7 @@ const CartForm: FC<FormI> = ({ saveClient, clientSelected }) => {
                         />
                         {touched.phone && validation.phone && <span className="error-message">{validation.phone}</span>}
                     </div>
-                    <button type="submit" className="form-submit">Send</button>
+                    <button type="submit" className="form-submit">Buy</button>
                 </div>
             </form>
             {isModalOpen && (
