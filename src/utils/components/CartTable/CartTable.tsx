@@ -15,6 +15,7 @@ const CartTable: FC = () => {
 
     const handleAddToCart = (cart: CartItem) => {
         if (cart.stock > 0) {
+            //dispatch
             cartAppDispatc({
                 type: CartAppActions.CartAddProduct,
                 payload: cart,

@@ -11,14 +11,13 @@ import CartButton from "../../components/CartButton/CartButton";
 
 import './MainLayout.css'
 
-interface MainLayoutI extends PropsWithChildren { }
-
-const MainLayout: FC<MainLayoutI> = ({ children }) => {
+const MainLayout: FC<PropsWithChildren> = ({ children }) => {
   return (
     <GlobalSearchAppProvider>
       <GlobalPaginationAppProvider>
         <GlobalCartAppProvider>
           <GlobalClientAppProvider>
+            {/* grip o grid? */}
             <div className="grip-container">
               <CartButton />
               <Header />
