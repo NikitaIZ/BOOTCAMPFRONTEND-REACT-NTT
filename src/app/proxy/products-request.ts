@@ -29,6 +29,7 @@ const getProducts = async (
     const data = await response.json();
     const products: Products[] = mapperListProduct(data.products);
 
+    // toda est'a l'ogica podr'ia estar en el mapper
     const filteredProducts: Products[] = search
       ? products.filter((product) =>
           product.title.toLowerCase().includes(search.toLowerCase())

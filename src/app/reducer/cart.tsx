@@ -32,6 +32,7 @@ export const cartAppReducer = (
             const product = payload as Products;
             const existingItem = state.items.find((item) => item.id === product.id);
 
+            // dificil de leer usemos llaves para mejorar la legibilidad
             const updatedItems = existingItem
                 ? state.items.map((item) =>
                       item.id === product.id

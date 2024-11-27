@@ -22,6 +22,7 @@ interface FormI {
 const CartForm: FC<FormI> = ({ saveClient, clientSelected }) => {
     const navigate = useNavigate();
 
+    // el hook useDistricts deber'ia tener internamente el path del json y CartForm solo consumir
     const { districts } = useDistricts("/json/districts.json");
 
     const { items } = useGlobalCartAppState();
@@ -31,6 +32,7 @@ const CartForm: FC<FormI> = ({ saveClient, clientSelected }) => {
 
     const { generateUniqueId } = useGeneratorId();
 
+    // deber'ia estar fuera del componente
     const initalClient: Client = {
         id: "",
         names: "",
@@ -79,6 +81,7 @@ const CartForm: FC<FormI> = ({ saveClient, clientSelected }) => {
         }
     };
 
+    // dificil de leer
     const validateForm = () => {
         const errors = { ...validation };
 
@@ -89,6 +92,7 @@ const CartForm: FC<FormI> = ({ saveClient, clientSelected }) => {
         errors.address = client.address === "" ? "Address is required" : "";
         errors.reference = client.reference === "" ? "Reference is required" : "";
         errors.phone = client.phone === "" ? "Phone is required" : !isNumeric(client.phone) ? "Only numbers are allowed" : "";
+        // por qu'e usar password en un formulario de env'io?
         errors.password = client.password === "" ? "Password is required" : "";
 
         setValidation(errors);
@@ -117,6 +121,7 @@ const CartForm: FC<FormI> = ({ saveClient, clientSelected }) => {
             password: true,
         });
     
+        // c'ogido repetido
         const errors = {
             names: client.names === "" ? "Names are required" : !isAlphabetic(client.names) ? "Only letters are allowed" : "",
             lastnames: client.lastnames === "" ? "Lastnames are required" : !isAlphabetic(client.lastnames) ? "Only letters are allowed" : "",
