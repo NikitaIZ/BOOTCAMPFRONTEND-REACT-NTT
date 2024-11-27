@@ -11,6 +11,6 @@ export const mapperListProduct = (productsResponse: ProductsResponse[]): Product
     images: product.images,
     thumbnail: product.thumbnail,
     stock: product.stock,
-    tags: product.tags || [],
+    tags: product.tags,
   }));
 };

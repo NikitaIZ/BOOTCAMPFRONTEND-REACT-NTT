@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1732727477311" clover="3.2.0">
+  <project timestamp="1732727477311" name="All files">
+    <metrics statements="36" coveredstatements="36" conditionals="13" coveredconditionals="13" methods="5" coveredmethods="5" elements="54" coveredelements="54" complexity="0" loc="36" ncloc="36" packages="2" files="3" classes="3"/>
+    <package name="mappers">
+      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+      <file name="ListProducts.ts" path="C:\Users\Michelle Yalaupari\Documents\github\Bootcamp\BOOTCAMPFRONTEND-REACT-NTT\src\app\mappers\ListProducts.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
+      </file>
+    </package>
+    <package name="proxy">
+      <metrics statements="34" coveredstatements="34" conditionals="13" coveredconditionals="13" methods="3" coveredmethods="3"/>
+      <file name="categories-request.ts" path="C:\Users\Michelle Yalaupari\Documents\github\Bootcamp\BOOTCAMPFRONTEND-REACT-NTT\src\app\proxy\categories-request.ts">
+        <metrics statements="12" coveredstatements="12" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="4" type="stmt"/>
+        <line num="7" count="4" type="stmt"/>
+        <line num="9" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="16" count="3" type="cond" truecount="1" falsecount="0"/>
+        <line num="17" count="2" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+      </file>
+      <file name="products-request.ts" path="C:\Users\Michelle Yalaupari\Documents\github\Bootcamp\BOOTCAMPFRONTEND-REACT-NTT\src\app\proxy\products-request.ts">
+        <metrics statements="22" coveredstatements="22" conditionals="11" coveredconditionals="11" methods="2" coveredmethods="2"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="18" count="6" type="stmt"/>
+        <line num="19" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="23" count="6" type="stmt"/>
+        <line num="25" count="5" type="cond" truecount="1" falsecount="0"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="29" count="4" type="stmt"/>
+        <line num="30" count="4" type="stmt"/>
+        <line num="32" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="34" count="2" type="stmt"/>
+        <line num="38" count="4" type="stmt"/>
+        <line num="39" count="4" type="stmt"/>
+        <line num="41" count="4" type="stmt"/>
+        <line num="42" count="4" type="stmt"/>
+        <line num="44" count="4" type="stmt"/>
+        <line num="49" count="2" type="cond" truecount="3" falsecount="0"/>
+        <line num="50" count="1" type="stmt"/>
+        <line num="52" count="1" type="stmt"/>
+        <line num="56" count="1" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>

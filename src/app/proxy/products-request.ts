@@ -23,7 +23,7 @@ const getProducts = async (
     const response = await fetch(url);
 
     if (!response.ok) {
-      throw new Error("No se pudo obtener la lista de los productos");
+      throw new Error("Could not get list of products");
     }
 
     const data = await response.json();
@@ -45,9 +45,12 @@ const getProducts = async (
       products: filteredProducts.slice(startIndex, endIndex),
       totalPages,
     };
-  } catch (error) {
+  } catch (error: unknown) {
+    if (error instanceof Error && error.message === "Could not get list of products") {
+      throw error;
+    }
     throw new Error("Products network error");
-  }
+  }  
 };
 
 export const productsRequest = {
