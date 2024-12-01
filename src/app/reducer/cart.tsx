@@ -31,14 +31,14 @@ export const cartAppReducer = (
         case CartAppActions.CartAddProduct: {
             const product = payload as Products;
             const existingItem = state.items.find((item) => item.id === product.id);
+            let updatedItems = [];
 
-            const updatedItems = existingItem
-                ? state.items.map((item) =>
-                    item.id === product.id
-                        ? { ...item, quantity: item.quantity + 1 }
-                        : item
-                )
-                : [
+            if (existingItem) {
+                updatedItems = state.items.map((item) =>
+                    item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+                );
+            } else {
+                updatedItems = [
                     ...state.items,
                     {
                         id: product.id,
@@ -49,6 +49,7 @@ export const cartAppReducer = (
                         thumbnail: product.thumbnail,
                     },
                 ];
+            }
 
             return {
                 ...state,

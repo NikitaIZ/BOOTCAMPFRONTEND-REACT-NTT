@@ -43,7 +43,6 @@ describe("App Component", () => {
         });
     });
 
-    // Test para mostrar la pagina de Inicio y verificar que muestra los productos
     it("Should render the Init page", async () => {
         await renderComponent([ModuleRoutes.Init]);
 
