@@ -1,6 +1,6 @@
 import { Products } from "../domain/interfaces/products";
 import { mapperListProduct } from "../mappers/ListProducts";
-import { mapPaginatedProducts } from "../mappers/PaginatedProducts";
+import { mapperPaginatedProducts } from "../mappers/PaginatedProducts";
 
 const productsApiUrl = "https://dummyjson.com/products";
 
@@ -23,7 +23,7 @@ const getProducts = async (
         const data = await response.json();
         const products: Products[] = mapperListProduct(data.products);
 
-        return mapPaginatedProducts(products, search, page);
+        return mapperPaginatedProducts(products, search, page);
     } catch (error) {
         throw new Error("Products network error");
     }

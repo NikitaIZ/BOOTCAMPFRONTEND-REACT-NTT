@@ -2,7 +2,7 @@ main {
     grid-area: main;
 }
 
-.grip-container {
+.grid-container {
     display: grid;
     grid-template-areas:
         "header header header"

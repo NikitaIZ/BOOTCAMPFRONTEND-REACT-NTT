@@ -4,13 +4,13 @@ interface DistrictsResponse {
     districts: string[];
 }
 
-export const useDistricts = (jsonPath: string): { districts: string[]; } => {
+export const useDistricts = (): { districts: string[] } => {
     const [districts, setDistricts] = useState<string[]>([]);
 
     useEffect(() => {
         const fetchDistricts = async () => {
             try {
-                const response = await fetch(jsonPath);
+                const response = await fetch("/json/districts.json");
                 if (!response.ok) {
                     throw new Error(`Error al cargar distritos: ${response.statusText}`);
                 }
@@ -18,13 +18,14 @@ export const useDistricts = (jsonPath: string): { districts: string[]; } => {
                 setDistricts(data.districts);
             } catch (err: unknown) {
                 if (err instanceof Error) {
-                    setDistricts([]);
+                    console.error(err.message);
                 }
+                setDistricts([]);
             }
         };
 
         fetchDistricts();
-    }, [jsonPath]);
+    }, []); 
 
     return { districts };
 };

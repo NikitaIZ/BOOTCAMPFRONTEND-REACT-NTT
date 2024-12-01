@@ -7,7 +7,6 @@ export interface Client {
     address: string;
     reference: string;
     phone: string;
-    password: string;
     products: ClientProduct[];
 }
 

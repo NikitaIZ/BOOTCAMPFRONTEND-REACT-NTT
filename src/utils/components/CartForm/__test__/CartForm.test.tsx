@@ -45,16 +45,14 @@ describe('CartForm', () => {
         expect(screen.getByLabelText('Names:')).toBeInTheDocument();
         expect(screen.getByLabelText('Last Names:')).toBeInTheDocument();
         expect(screen.getByLabelText('Email:')).toBeInTheDocument();
-        expect(screen.getByLabelText('Password:')).toBeInTheDocument();
 
         fireEvent.change(screen.getByLabelText('Names:'), { target: { value: 'Xander' } });
         fireEvent.change(screen.getByLabelText('Last Names:'), { target: { value: 'Parodia de Link' } });
         fireEvent.change(screen.getByLabelText('Email:'), { target: { value: 'amantedecompras@example.com' } });
         fireEvent.change(screen.getByLabelText('Phone:'), { target: { value: '965478693' } });
-        fireEvent.change(screen.getByLabelText('Password:'), { target: { value: 'aypordios' } });
         fireEvent.change(screen.getByLabelText('District:'), { target: { value: 'Capitanazo' } });
         fireEvent.change(screen.getByLabelText('Address:'), { target: { value: '269 MTV' } });
-        fireEvent.change(screen.getByLabelText('Reference:'), { target: { value: '269 MTV' } });
+        fireEvent.change(screen.getByLabelText('Reference:'), { target: { value: 'Ay por dios' } });
 
         fireEvent.click(screen.getByText('Buy'));
 
@@ -63,10 +61,9 @@ describe('CartForm', () => {
                 names: "Xander",
                 lastnames: "Parodia de Link",
                 email: "amantedecompras@example.com",
-                password: "aypordios",
                 district: "Capitanazo",
                 address: "269 MTV",
-                reference: "269 MTV",
+                reference: "Ay por dios",
                 phone: "965478693",
                 products: [{
                     id: 1,

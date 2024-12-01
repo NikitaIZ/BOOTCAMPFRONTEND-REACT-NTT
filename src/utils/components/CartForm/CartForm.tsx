@@ -7,11 +7,11 @@ import { CartAppActions } from "../../../app/domain/types/app-cart";
 import { useDistricts } from "../../../app/hooks/useDistricts";
 import { useGeneratorId } from "../../../app/hooks/useGeneratorId";
 
-import useValidation from "../../../app/hooks/useValidation";
-
 import { mapperListProductsClient } from "../../../app/mappers/ListProductsClient";
 
 import { useGlobalCartAppState, useGlobalCartAppDispatch } from "../../../app/context/cart";
+
+import useValidation from "../../../app/hooks/useValidation";
 
 import "./CartForm.css";
 
@@ -19,10 +19,22 @@ interface FormI {
     saveClient: (data: Client) => void;
 }
 
+const initalClient: Client = {
+    id: "",
+    names: "",
+    lastnames: "",
+    email: "",
+    district: "",
+    address: "",
+    reference: "",
+    phone: "",
+    products: []
+};
+
 const CartForm: FC<FormI> = ({ saveClient }) => {
     const navigate = useNavigate();
 
-    const { districts } = useDistricts("/json/districts.json");
+    const { districts } = useDistricts();
 
     const { items } = useGlobalCartAppState();
     const cartAppDispatch = useGlobalCartAppDispatch();
@@ -31,19 +43,6 @@ const CartForm: FC<FormI> = ({ saveClient }) => {
 
     const { generateUniqueId } = useGeneratorId();
 
-    const initalClient: Client = {
-        id: "",
-        names: "",
-        lastnames: "",
-        email: "",
-        district: "",
-        address: "",
-        reference: "",
-        phone: "",
-        password: "",
-        products: []
-    };
-
     const [validation, setValidation] = useState<Omit<Client, "id" | "products">>({
         names: "",
         lastnames: "",
@@ -51,8 +50,7 @@ const CartForm: FC<FormI> = ({ saveClient }) => {
         district: "",
         address: "",
         reference: "",
-        phone: "",
-        password: ""
+        phone: ""
     });
 
     const [client, setClient] = useState<Client>(initalClient);
@@ -89,7 +87,6 @@ const CartForm: FC<FormI> = ({ saveClient }) => {
         errors.address = client.address === "" ? "Address is required" : "";
         errors.reference = client.reference === "" ? "Reference is required" : "";
         errors.phone = client.phone === "" ? "Phone is required" : !isNumeric(client.phone) ? "Only numbers are allowed" : "";
-        errors.password = client.password === "" ? "Password is required" : "";
 
         setValidation(errors);
     };
@@ -114,7 +111,6 @@ const CartForm: FC<FormI> = ({ saveClient }) => {
             address: true,
             reference: true,
             phone: true,
-            password: true,
         });
 
         validateForm();
@@ -148,7 +144,6 @@ const CartForm: FC<FormI> = ({ saveClient }) => {
             address: "",
             reference: "",
             phone: "",
-            password: ""
         });
         cartAppDispatch({ type: CartAppActions.CartDeleteAllProducts });
         setIsModalOpen(false);
@@ -203,19 +198,6 @@ const CartForm: FC<FormI> = ({ saveClient }) => {
                             autoComplete="off"
                         />
                         {touched.email && validation.email && <span className="error-message">{validation.email}</span>}
-                    </div>
-                    <div>
-                        <label htmlFor="password">Password:</label>
-                        <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            value={client.password}
-                            placeholder=""
-                            onChange={handleChange}
-                            autoComplete="off"
-                        />
-                        {touched.password && validation.password && <span className="error-message">{validation.password}</span>}
                     </div>
                     <div>
                         <label htmlFor="district">District:</label>

@@ -14,7 +14,6 @@ jest.mock("@/utils/components/CartForm/CartForm", () => jest.fn(({ saveClient })
         address: 'Estacion de policia',
         reference: 'Lo que solicia ser un museo',
         phone: '896635789',
-        password: 'Miprimerdia',
         products: [{
             id: 1,
             title: 'Pistola',
@@ -54,7 +53,6 @@ describe("Cart Component", () => {
                 address: 'Estacion de policia',
                 reference: 'Lo que solicia ser un museo',
                 phone: '896635789',
-                password: 'Miprimerdia',
                 products: [{
                     id: 1,
                     title: 'Pistola',

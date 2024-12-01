@@ -13,7 +13,6 @@ describe('clientAppReducer', () => {
             address: '123 Elm St',
             reference: 'Near the park',
             phone: '555-0101',
-            password: 'password1',
             products: [{
                 id: 101,
                 title: 'Laptop',
@@ -31,7 +30,6 @@ describe('clientAppReducer', () => {
             address: '456 Oak Ave',
             reference: 'Next to the library',
             phone: '555-0202',
-            password: 'password2',
             products: [{
                 id: 102,
                 title: 'Smartphone',

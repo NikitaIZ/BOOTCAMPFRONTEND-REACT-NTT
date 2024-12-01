@@ -19,7 +19,7 @@ const MainLayout: FC<MainLayoutI> = ({ children }) => {
       <GlobalPaginationAppProvider>
         <GlobalCartAppProvider>
           <GlobalClientAppProvider>
-            <div className="grip-container">
+            <div className="grid-container">
               <CartButton />
               <Header />
               <main>{children}</main>

@@ -71,15 +71,12 @@ describe("Products Request", () => {
             "Products network error"
         );
     });
-    
 
     it("should handle network error", async () => {
         global.fetch = jest.fn().mockRejectedValueOnce(new Error("Network error"));
 
-        try {
-            await productsRequest.getProducts();
-        } catch (error) {
-            expect(error).toEqual(new Error("Products network error"));
-        }
+        await expect(productsRequest.getProducts()).rejects.toThrow(
+            "Products network error"
+        );
     });
 });

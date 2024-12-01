@@ -15,24 +15,20 @@ describe('useDistricts hook', () => {
             json: async () => districtsResponseMock[0],
         });
 
-        const { result, waitForNextUpdate } = renderHook(() =>
-            useDistricts('/mock-path')
-        );
+        const { result, waitForNextUpdate } = renderHook(() => useDistricts());
 
         await waitForNextUpdate();
 
         expect(result.current.districts).toEqual(districtsResponseMock[0].districts);
     });
 
-    it('should handle error if jsonPath is incorrect', async () => {
+    it('should handle error when fetch response is not ok', async () => {
         (global.fetch as jest.Mock).mockResolvedValueOnce({
             ok: false,
             statusText: 'Not Found',
         });
 
-        const { result, waitForNextUpdate } = renderHook(() =>
-            useDistricts('/mock-path')
-        );
+        const { result, waitForNextUpdate } = renderHook(() => useDistricts());
 
         await waitForNextUpdate();
 
@@ -42,9 +38,7 @@ describe('useDistricts hook', () => {
     it('should handle fetch failure correctly', async () => {
         (global.fetch as jest.Mock).mockRejectedValueOnce(new Error('Failed to fetch'));
 
-        const { result, waitForNextUpdate } = renderHook(() =>
-            useDistricts('/mock-path')
-        );
+        const { result, waitForNextUpdate } = renderHook(() => useDistricts());
 
         await waitForNextUpdate();
 

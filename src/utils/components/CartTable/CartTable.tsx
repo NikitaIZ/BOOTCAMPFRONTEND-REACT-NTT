@@ -11,24 +11,24 @@ import "./CartTable.css";
 
 const CartTable: FC = () => {
     const { getCartQuantity, getCartPrice, items } = useGlobalCartAppState();
-    const cartAppDispatc = useGlobalCartAppDispatch();
+    const cartAppdispatch = useGlobalCartAppDispatch();
 
     const handleAddToCart = (cart: CartItem) => {
-        cartAppDispatc({
+        cartAppdispatch({
             type: CartAppActions.CartAddProduct,
             payload: cart,
         });
     };
 
     const handleRemoveFromCart = (id: number) => {
-        cartAppDispatc({
+        cartAppdispatch({
             type: CartAppActions.CartRemoveProduct,
             payload: id,
         });
     };
 
     const handleDeleteFromCart = (id: number) => {
-        cartAppDispatc({
+        cartAppdispatch({
             type: CartAppActions.CartDeleteProduct,
             payload: id,
         });
