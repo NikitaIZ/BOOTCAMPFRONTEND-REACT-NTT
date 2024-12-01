@@ -69,6 +69,13 @@ Continuando con el proyecto ahora usando react en esta rama se agregaron y cambi
 - En la misma pagina del carrito hay un formulario para comprar para que el cliente se registre (Si se registra el cliente se podra ver en *Console* los datos que se almacenaron, para mejor detalle se puede ver en *Application* ).
 - Nueva carpeta para los Hooks.
 
+
+### feature/pruebas-unitarias:
+
+En esta fase se crearon carpetas y archivos para testear el proyecto, sus hooks, mapper, pages, components, etc.
+
+Existe una carpeta coverage en la cual se puede visualizar el resultado de las pruebas en el archivo index.html dentro de la carpeta Icov-report.
+
 ## Licencia
 
 BOOTCAMPFRONTEND-REACT-NTT es un software de código abierto licenciado bajo la [MIT license](https://github.com/NikitaIZ/BOOTCAMPFRONTEND-REACT-NTT/blob/feature/dise%C3%B1os-y-estilos/LICENSE.md).
