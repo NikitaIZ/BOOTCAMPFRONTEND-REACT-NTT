@@ -6,7 +6,7 @@ export interface ClientDispatchObject<A, T = unknown> {
   payload?: T;
 }
 
-export interface ClientAppState  {
+export interface ClientAppState {
   clients: Client[];
   clientSelected: Client | null;
 }
@@ -37,6 +37,6 @@ export const clientAppReducer = (
         clientSelected: payload as Client,
       };
     default:
-      throw new Error("No hay actions disponible");
+      throw new Error(`Unhandled action type: ${type}`);
   }
 };

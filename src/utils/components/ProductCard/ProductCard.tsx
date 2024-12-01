@@ -23,14 +23,10 @@ const ProductCard: FC<ProductCardI> = ({ product }) => {
   const remainingStock = stock - quantityInCart;
 
   const handleAddToCart = () => {
-    if (remainingStock > 0) {
-      dispatch({
-        type: CartAppActions.CartAddProduct,
-        payload: product,
-      });
-    } else {
-      alert("No hay más stock disponible");
-    }
+    dispatch({
+      type: CartAppActions.CartAddProduct,
+      payload: product,
+    });
   };
 
   const handleRemoveFromCart = () => {

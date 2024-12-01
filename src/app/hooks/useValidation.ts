@@ -1,21 +1,19 @@
-import { useCallback } from 'react';
+export default () => {
 
-export const useValidation = () => {
-
-    const isValidEmail = useCallback((email: string): boolean => {
+    const isValidEmail = (email: string) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(email);
-    }, []);
+    };
 
-    const isAlphabetic = useCallback((text: string): boolean => {
+    const isAlphabetic = (text: string) => {
         const alphabetRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
         return alphabetRegex.test(text);
-    }, []);
+    };
 
-    const isNumeric = useCallback((text: string): boolean => {
+    const isNumeric = (text: string) => {
         const numericRegex = /^[0-9]+$/;
         return numericRegex.test(text);
-    }, []);
+    };
 
     return {
         isValidEmail,

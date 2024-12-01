@@ -16,7 +16,7 @@ export interface CartAppState {
 export const cartInitialState: CartAppState = {
     items: [],
     getCartQuantity: () => 0,
-    getCartPrice: () => 0, 
+    getCartPrice: () => 0,
 };
 
 const calculateCartQuantity = (items: CartItem[]) => items.reduce((total, item) => total + item.quantity, 0);
@@ -34,21 +34,21 @@ export const cartAppReducer = (
 
             const updatedItems = existingItem
                 ? state.items.map((item) =>
-                      item.id === product.id
-                          ? { ...item, quantity: item.quantity + 1 }
-                          : item
-                  )
+                    item.id === product.id
+                        ? { ...item, quantity: item.quantity + 1 }
+                        : item
+                )
                 : [
-                      ...state.items,
-                      {
-                          id: product.id,
-                          title: product.title,
-                          quantity: 1,
-                          price: product.price,
-                          stock: product.stock,
-                          thumbnail: product.thumbnail,
-                      },
-                  ];
+                    ...state.items,
+                    {
+                        id: product.id,
+                        title: product.title,
+                        quantity: 1,
+                        price: product.price,
+                        stock: product.stock,
+                        thumbnail: product.thumbnail,
+                    },
+                ];
 
             return {
                 ...state,
@@ -61,7 +61,7 @@ export const cartAppReducer = (
         case CartAppActions.CartRemoveProduct: {
             const productId = payload as number;
             const existingItem = state.items.find((item) => item.id === productId);
-        
+
             if (existingItem) {
                 if (existingItem.quantity > 1) {
                     const updatedItems = state.items.map((item) =>
@@ -69,7 +69,7 @@ export const cartAppReducer = (
                             ? { ...item, quantity: item.quantity - 1 }
                             : item
                     );
-        
+
                     return {
                         ...state,
                         items: updatedItems,
@@ -77,9 +77,9 @@ export const cartAppReducer = (
                         getCartPrice: () => calculateCartPrice(updatedItems),
                     };
                 }
-        
+
                 const updatedItems = state.items.filter((item) => item.id !== productId);
-        
+
                 return {
                     ...state,
                     items: updatedItems,
@@ -87,15 +87,19 @@ export const cartAppReducer = (
                     getCartPrice: () => calculateCartPrice(updatedItems),
                 };
             }
-        
+
             return state;
         }
-        
+
 
         case CartAppActions.CartDeleteProduct:
+            const updatedItems = state.items.filter((item) => item.id !== (payload as number));
+
             return {
                 ...state,
-                items: state.items.filter((item) => item.id !== (payload as number)),
+                items: updatedItems,
+                getCartQuantity: () => calculateCartQuantity(updatedItems),
+                getCartPrice: () => calculateCartPrice(updatedItems),
             };
 
         case CartAppActions.CartDeleteAllProducts:
@@ -105,6 +109,6 @@ export const cartAppReducer = (
             };
 
         default:
-            throw new Error("Acción desconocida en el cartReducer.");
+            throw new Error(`Unhandled action type: ${type}`);
     }
 };

@@ -10,18 +10,14 @@ import trashIcon from "../../../assets/trash.svg";
 import "./CartTable.css";
 
 const CartTable: FC = () => {
-    const { getCartQuantity, getCartPrice, items } = useGlobalCartAppState(); 
-    const cartAppDispatc = useGlobalCartAppDispatch(); 
+    const { getCartQuantity, getCartPrice, items } = useGlobalCartAppState();
+    const cartAppDispatc = useGlobalCartAppDispatch();
 
     const handleAddToCart = (cart: CartItem) => {
-        if (cart.stock > 0) {
-            cartAppDispatc({
-                type: CartAppActions.CartAddProduct,
-                payload: cart,
-            });
-        } else {
-            alert("No hay más stock disponible");
-        }
+        cartAppDispatc({
+            type: CartAppActions.CartAddProduct,
+            payload: cart,
+        });
     };
 
     const handleRemoveFromCart = (id: number) => {
@@ -76,7 +72,12 @@ const CartTable: FC = () => {
                                     </button>
                                 </div>
                             </div>
-                            <div>$ {calculateTotalProductPrice(product).toFixed(2)}</div>
+                            <div>
+                                {'$ ' + new Intl.NumberFormat('en-US', {
+                                    style: 'currency',
+                                    currency: 'USD',
+                                }).format(calculateTotalProductPrice(product)).slice(1)}
+                            </div>
                             <div>
                                 <button
                                     onClick={() => handleDeleteFromCart(product.id)}
@@ -91,7 +92,12 @@ const CartTable: FC = () => {
                         <div></div>
                         <div>Total</div>
                         <div>{getCartQuantity()}</div>
-                        <div>$ {getCartPrice().toFixed(2)}</div>
+                        <div>
+                            {'$ ' + new Intl.NumberFormat('en-US', {
+                                style: 'currency',
+                                currency: 'USD',
+                            }).format(getCartPrice()).slice(1)}
+                        </div>
                         <div></div>
                     </div>
                 </div>

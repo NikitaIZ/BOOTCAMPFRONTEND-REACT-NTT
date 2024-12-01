@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import { Products } from "../../domain/interfaces/products";
@@ -14,7 +14,7 @@ import Pagination from "../../../utils/components/Pagination/Pagination";
 
 import './Category.css';
 
-const Category: React.FC = () => {
+const Category: FC = () => {
   const { categoryId } = useParams<{ categoryId: string }>();
 
   const { searchTerm } = useGlobalSearchAppState();
@@ -24,13 +24,9 @@ const Category: React.FC = () => {
   const [products, setProducts] = useState<Products[] | null>(null);
 
   const updateProducts = async () => {
-    try {
-      const data = await productsRequest.getProducts(searchTerm, currentPage, categoryId);
-      setProducts(data.products);
-      dispatch({ type: PaginationAppActions.PaginationTotal, payload: data.totalPages });
-    } catch (error) {
-      console.error("Error al obtener productos:", error);
-    }
+    const data = await productsRequest.getProducts(searchTerm, currentPage, categoryId);
+    setProducts(data.products);
+    dispatch({ type: PaginationAppActions.PaginationTotal, payload: data.totalPages });
   };
 
   useEffect(() => {

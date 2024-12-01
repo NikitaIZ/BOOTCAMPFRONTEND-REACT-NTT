@@ -5,8 +5,9 @@ import { Client } from "../../../app/domain/interfaces/client";
 import { CartAppActions } from "../../../app/domain/types/app-cart";
 
 import { useDistricts } from "../../../app/hooks/useDistricts";
-import { useValidation } from "../../../app/hooks/useValidation";
 import { useGeneratorId } from "../../../app/hooks/useGeneratorId";
+
+import useValidation from "../../../app/hooks/useValidation";
 
 import { mapperListProductsClient } from "../../../app/mappers/ListProductsClient";
 
@@ -15,11 +16,10 @@ import { useGlobalCartAppState, useGlobalCartAppDispatch } from "../../../app/co
 import "./CartForm.css";
 
 interface FormI {
-    clientSelected: Client | null;
     saveClient: (data: Client) => void;
 }
 
-const CartForm: FC<FormI> = ({ saveClient, clientSelected }) => {
+const CartForm: FC<FormI> = ({ saveClient }) => {
     const navigate = useNavigate();
 
     const { districts } = useDistricts("/json/districts.json");
@@ -96,16 +96,16 @@ const CartForm: FC<FormI> = ({ saveClient, clientSelected }) => {
 
     const addClient = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-    
+
         const cartProducts = mapperListProductsClient(items);
-    
+
         if (cartProducts.length === 0) {
             setCartError("You must have at least one product in your cart.");
             return;
         }
-    
+
         setCartError("");
-    
+
         setTouched({
             names: true,
             lastnames: true,
@@ -116,24 +116,13 @@ const CartForm: FC<FormI> = ({ saveClient, clientSelected }) => {
             phone: true,
             password: true,
         });
-    
-        const errors = {
-            names: client.names === "" ? "Names are required" : !isAlphabetic(client.names) ? "Only letters are allowed" : "",
-            lastnames: client.lastnames === "" ? "Lastnames are required" : !isAlphabetic(client.lastnames) ? "Only letters are allowed" : "",
-            email: client.email === "" ? "Email is required" : !isValidEmail(client.email) ? "Invalid email format" : "",
-            district: client.district === "" ? "Select a district" : "",
-            address: client.address === "" ? "Address is required" : "",
-            reference: client.reference === "" ? "Reference is required" : "",
-            phone: client.phone === "" ? "Phone is required" : !isNumeric(client.phone) ? "Only numbers are allowed" : "",
-            password: client.password === "" ? "Password is required" : "",
-        };
-    
-        setValidation(errors); 
-    
-        const hasErrors = Object.values(errors).some((error) => error !== "");
-    
+
+        validateForm();
+
+        const hasErrors = Object.values(validation).some((error) => error !== "");
+
         if (hasErrors) {
-            return; 
+            return;
         }
 
         const newClient = {
@@ -141,13 +130,13 @@ const CartForm: FC<FormI> = ({ saveClient, clientSelected }) => {
             id: generateUniqueId(),
             products: cartProducts,
         };
-    
+
         console.log(newClient);
-    
+
         saveClient(newClient);
         setIsModalOpen(true);
     };
-    
+
     const closeModal = () => {
         setClient(initalClient);
         setTouched({});
@@ -168,13 +157,7 @@ const CartForm: FC<FormI> = ({ saveClient, clientSelected }) => {
 
     useEffect(() => {
         validateForm();
-    }, [client]);
-
-    useEffect(() => {
-        if (clientSelected) {
-            setClient(clientSelected as Client);
-        }
-    }, [clientSelected]);
+    }, [client, touched]);
 
     return (
         <div>
@@ -243,11 +226,13 @@ const CartForm: FC<FormI> = ({ saveClient, clientSelected }) => {
                             onChange={handleChange}
                             autoComplete="off"
                         >
-                            {districts.map((district: string, index: number) => (
-                                <option key={index} value={district}>
-                                    {district}
-                                </option>
-                            ))}
+                            {
+                                districts.map((district: string, index: number) => (
+                                    <option key={index} value={district}>
+                                        {district}
+                                    </option>
+                                ))
+                            }
                         </select>
                         {touched.district && validation.district && <span className="error-message">{validation.district}</span>}
                     </div>

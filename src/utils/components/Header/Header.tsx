@@ -1,4 +1,5 @@
-import { FC, useEffect, useState } from "react";
+import { ChangeEvent, FC, useEffect, useState } from "react";
+
 import { Link, useLocation } from "react-router-dom";
 
 import { ModuleRoutes } from "../../../app/routes";
@@ -9,7 +10,7 @@ import { categoriesRequest } from "../../../app/proxy/categories-request";
 
 import { useGlobalSearchAppState } from "../../../app/context/search";
 
-import superLogo from "../../.././../public/imgs/logotipo.jpg";
+import superLogo from "/public/imgs/logotipo.jpg";
 
 import './Header.css';
 
@@ -19,11 +20,7 @@ const Header: FC = () => {
   const getCategories = async () => {
     try {
       const data = await categoriesRequest.getCategories();
-      if (Array.isArray(data)) {
-        setCategories(data);
-      } else {
-        console.error("Unexpected data format:", data);
-      }
+      setCategories(data);
     } catch (error) {
       console.error("Failed to fetch categories:", error);
     }
@@ -33,7 +30,7 @@ const Header: FC = () => {
   const [localSearchTerm, setLocalSearchTerm] = useState(searchTerm);
   const location = useLocation();
 
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
     setLocalSearchTerm(event.target.value);
   };
 

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 
 import { Products } from "../../domain/interfaces/products";
 import { PaginationAppActions } from "../../domain/types/app-pagination";
@@ -13,7 +13,7 @@ import Pagination from "../../../utils/components/Pagination/Pagination";
 
 import './Init.css';
 
-const Init: React.FC = () => {
+const Init: FC = () => {
   const { searchTerm } = useGlobalSearchAppState();
   const { currentPage } = useGlobalPaginationAppState();
   const dispatch = useGlobalPaginationAppDispatch();
@@ -21,13 +21,9 @@ const Init: React.FC = () => {
   const [products, setProducts] = useState<Products[] | null>(null);
 
   const updateProducts = async () => {
-    try {
       const data = await productsRequest.getProducts(searchTerm, currentPage);
       setProducts(data.products);
       dispatch({ type: PaginationAppActions.PaginationTotal, payload: data.totalPages });
-    } catch (error) {
-      console.error("Error al obtener productos:", error);
-    }
   };
 
   useEffect(() => {
@@ -53,7 +49,6 @@ const Init: React.FC = () => {
           <p>Loading Products...</p>
         )}
       </div>
-      
       <Pagination />
     </div>
   );
