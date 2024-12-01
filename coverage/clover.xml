@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1733012340606" clover="3.2.0">
-  <project timestamp="1733012340606" name="All files">
-    <metrics statements="495" coveredstatements="495" conditionals="148" coveredconditionals="148" methods="117" coveredmethods="117" elements="760" coveredelements="760" complexity="0" loc="495" ncloc="495" packages="19" files="32" classes="32"/>
+<coverage generated="1733012839289" clover="3.2.0">
+  <project timestamp="1733012839289" name="All files">
+    <metrics statements="495" coveredstatements="495" conditionals="148" coveredconditionals="146" methods="118" coveredmethods="118" elements="761" coveredelements="759" complexity="0" loc="495" ncloc="495" packages="19" files="33" classes="33"/>
     <package name="src">
       <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
       <file name="App.tsx" path="C:\Users\Michelle Yalaupari\Documents\github\Bootcamp\BOOTCAMPFRONTEND-REACT-NTT\src\App.tsx">
@@ -206,7 +206,7 @@
       </file>
     </package>
     <package name="src.app.mappers">
-      <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>
+      <metrics statements="12" coveredstatements="12" conditionals="5" coveredconditionals="3" methods="6" coveredmethods="6"/>
       <file name="ListProducts.ts" path="C:\Users\Michelle Yalaupari\Documents\github\Bootcamp\BOOTCAMPFRONTEND-REACT-NTT\src\app\mappers\ListProducts.ts">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="3" count="2" type="stmt"/>
@@ -216,6 +216,17 @@
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="4" count="2" type="stmt"/>
         <line num="5" count="3" type="stmt"/>
+      </file>
+      <file name="PaginatedProducts.ts" path="C:\Users\Michelle Yalaupari\Documents\github\Bootcamp\BOOTCAMPFRONTEND-REACT-NTT\src\app\mappers\PaginatedProducts.ts">
+        <metrics statements="8" coveredstatements="8" conditionals="5" coveredconditionals="3" methods="2" coveredmethods="2"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="9" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="11" count="2" type="stmt"/>
+        <line num="15" count="4" type="stmt"/>
+        <line num="16" count="4" type="stmt"/>
+        <line num="18" count="4" type="stmt"/>
+        <line num="19" count="4" type="stmt"/>
+        <line num="21" count="4" type="stmt"/>
       </file>
     </package>
     <package name="src.app.pages.Cart">
@@ -304,7 +315,7 @@
       </file>
     </package>
     <package name="src.app.proxy">
-      <metrics statements="34" coveredstatements="34" conditionals="13" coveredconditionals="13" methods="3" coveredmethods="3"/>
+      <metrics statements="26" coveredstatements="26" conditionals="8" coveredconditionals="8" methods="2" coveredmethods="2"/>
       <file name="categories-request.ts" path="C:\Users\Michelle Yalaupari\Documents\github\Bootcamp\BOOTCAMPFRONTEND-REACT-NTT\src\app\proxy\categories-request.ts">
         <metrics statements="12" coveredstatements="12" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
         <line num="3" count="2" type="stmt"/>
@@ -321,29 +332,21 @@
         <line num="24" count="2" type="stmt"/>
       </file>
       <file name="products-request.ts" path="C:\Users\Michelle Yalaupari\Documents\github\Bootcamp\BOOTCAMPFRONTEND-REACT-NTT\src\app\proxy\products-request.ts">
-        <metrics statements="22" coveredstatements="22" conditionals="11" coveredconditionals="11" methods="2" coveredmethods="2"/>
+        <metrics statements="14" coveredstatements="14" conditionals="6" coveredconditionals="6" methods="1" coveredmethods="1"/>
         <line num="2" count="2" type="stmt"/>
-        <line num="4" count="2" type="stmt"/>
-        <line num="6" count="2" type="stmt"/>
-        <line num="13" count="2" type="stmt"/>
-        <line num="18" count="6" type="stmt"/>
-        <line num="19" count="6" type="cond" truecount="2" falsecount="0"/>
-        <line num="23" count="6" type="stmt"/>
-        <line num="25" count="5" type="cond" truecount="1" falsecount="0"/>
-        <line num="26" count="1" type="stmt"/>
-        <line num="29" count="4" type="stmt"/>
-        <line num="30" count="4" type="stmt"/>
-        <line num="32" count="4" type="cond" truecount="2" falsecount="0"/>
-        <line num="34" count="2" type="stmt"/>
-        <line num="38" count="4" type="stmt"/>
-        <line num="39" count="4" type="stmt"/>
-        <line num="41" count="4" type="stmt"/>
-        <line num="42" count="4" type="stmt"/>
-        <line num="44" count="4" type="stmt"/>
-        <line num="49" count="2" type="cond" truecount="3" falsecount="0"/>
-        <line num="50" count="1" type="stmt"/>
-        <line num="52" count="1" type="stmt"/>
-        <line num="56" count="2" type="stmt"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="5" count="2" type="stmt"/>
+        <line num="7" count="2" type="stmt"/>
+        <line num="12" count="6" type="stmt"/>
+        <line num="13" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="17" count="6" type="stmt"/>
+        <line num="19" count="5" type="cond" truecount="1" falsecount="0"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="23" count="4" type="stmt"/>
+        <line num="24" count="4" type="stmt"/>
+        <line num="26" count="4" type="stmt"/>
+        <line num="28" count="2" type="stmt"/>
+        <line num="32" count="2" type="stmt"/>
       </file>
     </package>
     <package name="src.app.reducer">
