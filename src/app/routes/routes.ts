@@ -2,5 +2,6 @@ export const enum ModuleRoutes {
     Init = "",
     Category = "category",
     Cart = "cart",
-    Login = "login"
+    Login = "login",
+    Recovery = "recovery",
 }

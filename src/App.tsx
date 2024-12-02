@@ -4,6 +4,7 @@ import Init from "./app/pages/Init/Init";
 import Category from "./app/pages/Category/Category";
 import Cart from "./app/pages/Cart/Cart";
 import Login from "./app/pages/Login/Login";
+import Recovery from "./app/pages/Recovery/Recovery";
 import ProtectedLogoutRoute from "./app/routes/Protected/LogoutRoute";
 import ProtectedLoginRoute from "./app/routes/Protected/LoginRoute";
 
@@ -12,6 +13,7 @@ const App: FC = () => {
         <Routes>
             <Route element={<ProtectedLoginRoute />}>
                 <Route path="/login" element={<Login />} />
+                <Route path="/login/recovery" element={<Recovery />} />
             </Route>
 
             <Route element={<ProtectedLogoutRoute />}>
