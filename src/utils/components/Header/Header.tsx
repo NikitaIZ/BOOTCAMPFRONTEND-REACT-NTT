@@ -47,8 +47,6 @@ const Header: FC = () => {
         getCategories();
     }, []);
 
-    const userName = user.isLoggedIn === true ? user.username : null;
-
     const handleLogout = () => {
         dispatch({
             type: UserAppActions.Userlogout,
@@ -92,7 +90,7 @@ const Header: FC = () => {
                 </nav>
                 <nav className="user-menu dropdown">
                     <div className="dropdown-toggle user-name-button">
-                        <span>Welcome:</span> {userName}
+                        <span>Welcome:</span> {user.username}
                     </div>
                     <div id="categories-menu" className="dropdown-menu" data-right="true">
                         <a href="" onClick={handleLogout} className="danger">Logout</a>

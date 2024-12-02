@@ -18,9 +18,9 @@ const App: FC = () => {
                 <Route path="/" element={<Init />} />
                 <Route path="/category/:categoryId" element={<Category />} />
                 <Route path="/cart" element={<Cart />} />
+                <Route path="*" element={<Navigate to="/" replace />} />
             </Route>
 
-            <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
     );
 };

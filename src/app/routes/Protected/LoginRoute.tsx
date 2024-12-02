@@ -5,7 +5,7 @@ import { useGlobalUserAppState } from "../../context/user";
 const ProtectedLoginRoute: FC = () => {
     const { user } = useGlobalUserAppState();
 
-    return user.isLoggedIn ? <Navigate to="/" replace /> : <Outlet />;
+    return user.isLoggedIn === false ? <Outlet /> : <Navigate to="/" replace />;
 };
 
 export default ProtectedLoginRoute;
