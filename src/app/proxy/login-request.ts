@@ -15,6 +15,7 @@ const authUser = async (credentials: LoginRequest): Promise<LoginResponse> => {
         }
 
         const data: LoginResponse = await response.json();
+
         return data;
     } catch (error: unknown) {
         if (error instanceof Error) {

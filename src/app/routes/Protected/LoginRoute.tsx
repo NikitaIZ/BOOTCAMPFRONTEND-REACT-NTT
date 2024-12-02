@@ -4,9 +4,8 @@ import { useGlobalUserAppState } from "../../context/user";
 
 const ProtectedLoginRoute: FC = () => {
     const { user } = useGlobalUserAppState();
-    const isLoggedIn = user.length > 0 && user[0].isLoggedIn;
 
-    return isLoggedIn ? <Navigate to="/" replace /> : <Outlet />;
+    return user.isLoggedIn ? <Navigate to="/" replace /> : <Outlet />;
 };
 
 export default ProtectedLoginRoute;

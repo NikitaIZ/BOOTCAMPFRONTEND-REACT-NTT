@@ -11,11 +11,10 @@ import "./index.css";
 
 const Root = () => {
     const { user } = useGlobalUserAppState();
-    const isLoggedIn = user.length > 0 && user[0].isLoggedIn;
 
     return (
         <BrowserRouter basename="/">
-            {isLoggedIn ? (
+            {user.isLoggedIn ? (
                 <MainLayout>
                     <App />
                 </MainLayout>

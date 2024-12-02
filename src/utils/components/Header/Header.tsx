@@ -5,8 +5,8 @@ import { Categories } from "../../../app/domain/interfaces/categories";
 import { categoriesRequest } from "../../../app/proxy/categories-request";
 import { useGlobalSearchAppState } from "../../../app/context/search";
 import { useGlobalUserAppState, useGlobalUserAppDispatch } from "../../../app/context/user";
-import superLogo from "/public/imgs/logotipo.jpg";
 import { UserAppActions } from "../../../app/domain/types/app-user";
+import superLogo from "/public/imgs/logotipo.jpg";
 import "./Header.css";
 
 const Header: FC = () => {
@@ -48,7 +48,7 @@ const Header: FC = () => {
         getCategories();
     }, []);
 
-    const userName = user.length > 0 ? user[0].username : null;
+    const userName = user.isLoggedIn === true ? user.username : null;
 
     const handleLogout = () => {
         dispatch({

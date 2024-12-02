@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { authRequest } from "../../../app/proxy/login-request";
 import { useGlobalUserAppDispatch } from "../../../app/context/user";
 import { UserAppActions } from "../../../app/domain/types/app-user";
+import { mapperUserData } from "../../../app/mappers/UserData";
 import iconUser from "../../../assets/user.svg";
 import iconLock from "../../../assets/lock.svg";
 import mailUser from "../../../assets/mail.svg";
@@ -17,7 +18,7 @@ const LoginCard: FC = () => {
     const [showModal, setShowModal] = useState<boolean>(false);
     const [email, setEmail] = useState<string>(""); 
     const [emailError, setEmailError] = useState<string | null>(null);
-    const [emailSent, setEmailSent] = useState<boolean>(false); 
+
     const { isValidEmail } = useValidation();
 
     const dispatch = useGlobalUserAppDispatch();
@@ -25,32 +26,34 @@ const LoginCard: FC = () => {
 
     const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
+    
         if (!username.trim() || !password.trim()) {
             setErrorMessage("Please fill out all fields.");
             return;
         }
-
+    
         try {
             const response = await authRequest.authUser({
                 username,
-                password,
-                expiresInMins: 30,
+                password
             });
-
+    
             setErrorMessage(null);
+    
+            const user = mapperUserData(response);
 
+            console.log(user)
+    
             dispatch({
                 type: UserAppActions.UserLogin,
-                payload: { isLoggedIn: true, username: response.username },
+                payload: user,
             });
-
-            navigate("/");
+    
+            navigate("/"); 
         } catch (err) {
             setErrorMessage("Invalid username or password. Please try again.");
         }
     };
-
     const handleEmailSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
@@ -65,7 +68,6 @@ const LoginCard: FC = () => {
         }
 
         setEmailError(null);
-        setEmailSent(true);
 
         Swal.fire({
             title: "Success!",
