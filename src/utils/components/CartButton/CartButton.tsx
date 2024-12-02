@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
 
-import { ModuleRoutes } from "../../../app/routes";
+import { ModuleRoutes } from "../../../app/routes/routes";
 
 import { useGlobalCartAppState } from "../../../app/context/cart";
 

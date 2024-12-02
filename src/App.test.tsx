@@ -1,6 +1,6 @@
 import { MemoryRouter } from "react-router-dom";
 import { render, RenderResult, act, screen } from "@testing-library/react";
-import { ModuleRoutes } from "@/app/routes";
+import { ModuleRoutes } from "@/app/routes/routes";
 import { GlobalSearchAppProvider } from "@/app/context/search";
 import { GlobalPaginationAppProvider } from "@/app/context/pagination";
 import { GlobalCartAppProvider } from "@/app/context/cart";

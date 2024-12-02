@@ -2,7 +2,7 @@ import { ChangeEvent, FC, useEffect, useState } from "react";
 
 import { Link, useLocation } from "react-router-dom";
 
-import { ModuleRoutes } from "../../../app/routes";
+import { ModuleRoutes } from "../../../app/routes/routes";
 
 import { Categories } from "../../../app/domain/interfaces/categories";
 

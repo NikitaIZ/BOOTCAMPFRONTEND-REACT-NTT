@@ -1,17 +1,35 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 
-//import MainLayout from "./utils/Layout/MainLayout/MainLayout.tsx";
+import { GlobalUserAppProvider, useGlobalUserAppState } from "./app/context/user"; 
 
-import App from './App.tsx'
+import MainLayout from "./utils/Layout/MainLayout/MainLayout";
+import App from "./App";
 
-import './index.css'
+import "./index.css";
 
-createRoot(document.getElementById('root')!).render(
-    <StrictMode>
+const Root = () => {
+    const { user } = useGlobalUserAppState();
+    const isLoggedIn = user.length > 0 && user[0].isLoggedIn;
+
+    return (
         <BrowserRouter basename="/">
+            {isLoggedIn ? (
+                <MainLayout>
+                    <App />
+                </MainLayout>
+            ) : (
                 <App />
+            )}
         </BrowserRouter>
-    </StrictMode>,
-)
+    );
+};
+
+createRoot(document.getElementById("root")!).render(
+    <StrictMode>
+        <GlobalUserAppProvider>
+            <Root />
+        </GlobalUserAppProvider>
+    </StrictMode>
+);
