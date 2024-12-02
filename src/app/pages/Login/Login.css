@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    --login-padding: 15px;
 }
 
 .login {
@@ -9,7 +10,6 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
-    padding: 15px;
-    background: #1abc9c;
+    padding: var(--login-padding);
     overflow: hidden;
 }

@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="public/imgs/logotipo.jpg" alt="Super Market" width="140">
+  <img src="public/imgs/logotipo.png" alt="Super Market" width="140">
   <br>
   PROYECTO BOOTCAMP
   <br>

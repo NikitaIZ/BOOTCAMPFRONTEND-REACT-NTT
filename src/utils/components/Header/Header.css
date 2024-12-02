@@ -28,7 +28,7 @@ header img {
     height: auto;
 }
 
-header>*>div {
+header > * > div {
     display: flex;
     align-items: center;
     min-height: 54px;
@@ -39,6 +39,7 @@ header nav {
     display: flex;
     align-items: center;
     margin-left: auto;
+    min-height: 40px;
     gap: 50px;
 }
 
@@ -102,6 +103,13 @@ header nav a {
     padding: 6px;
     z-index: calc(var(--cart-z-index) + 2);
     min-width: 200px;
+    max-height: 90vh;
+    overflow: auto;
+}
+
+.dropdown-menu[data-right="true"] {
+    left: initial;
+    right: 0;
 }
 
 .dropdown-menu a {
@@ -114,6 +122,11 @@ header nav a {
     transition: background-color 200ms;
 }
 
+.dropdown-menu a.danger {
+    color: var(--color-cart-counter);
+    font-weight: 500;
+}
+
 .dropdown-menu a:hover {
     background-color: var(--color-background);
 }
@@ -124,14 +137,16 @@ header nav a {
 
 .user-menu {
     position: relative;
+    margin: initial;
 }
 
 .user-name-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    color: #000;
+    font-weight: 500;
+}
+
+.user-name-button span {
+    color: var(--color-white);
+    opacity: 0.6;
 }
 
 .logout-menu {

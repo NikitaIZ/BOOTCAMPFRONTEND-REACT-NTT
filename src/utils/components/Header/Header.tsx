@@ -6,7 +6,7 @@ import { categoriesRequest } from "../../../app/proxy/categories-request";
 import { useGlobalSearchAppState } from "../../../app/context/search";
 import { useGlobalUserAppState, useGlobalUserAppDispatch } from "../../../app/context/user";
 import { UserAppActions } from "../../../app/domain/types/app-user";
-import superLogo from "/public/imgs/logotipo.jpg";
+import superLogo from "/public/imgs/logotipo.png";
 import "./Header.css";
 
 const Header: FC = () => {
@@ -56,7 +56,7 @@ const Header: FC = () => {
             payload: [], 
         });
         setShowLogoutMenu(false); 
-        navigate("/login"); 
+        navigate("/login");
     };
 
     return (
@@ -75,41 +75,31 @@ const Header: FC = () => {
                         autoComplete="off"
                     />
                 </div>
-                <nav>
-                    <div className="dropdown">
-                        <a href="#" className="dropdown-toggle">
-                            Categories
-                        </a>
-                        <div id="categories-menu" className="dropdown-menu">
-                            {categories && categories.length > 0 ? (
-                                categories.map((category) => (
-                                    <Link
-                                        key={category.slug}
-                                        to={`${ModuleRoutes.Category}/${category.slug}`}
-                                    >
-                                        {category.name}
-                                    </Link>
-                                ))
-                            ) : (
-                                <p>Loading categories...</p>
-                            )}
-                        </div>
+                <nav className="dropdown">
+                    <a href="#" className="dropdown-toggle">Categories</a>
+                    <div id="categories-menu" className="dropdown-menu">
+                        {categories && categories.length > 0 ? (
+                            categories.map((category) => (
+                                <Link
+                                    key={category.slug}
+                                    to={`${ModuleRoutes.Category}/${category.slug}`}
+                                >
+                                    {category.name}
+                                </Link>
+                            ))
+                        ) : (
+                            <p>Loading categories...</p>
+                        )}
                     </div>
                 </nav>
-
-                <div className="user-menu">
-                    <button
-                        onClick={() => setShowLogoutMenu((prev) => !prev)}
-                        className="user-name-button"
-                    >
-                        Welcome: {userName}
-                    </button>
-                    {showLogoutMenu && (
-                        <div className="logout-menu">
-                            <button onClick={handleLogout}>Logout</button>
-                        </div>
-                    )}
-                </div>
+                <nav className="user-menu dropdown">
+                    <div onClick={() => setShowLogoutMenu((prev) => !prev)} className="dropdown-toggle user-name-button">
+                        <span>Welcome:</span> {userName}
+                    </div>
+                    <div id="categories-menu" className="dropdown-menu" data-right="true">
+                        <a href="#" onClick={handleLogout} className="danger">Logout</a>
+                    </div>
+                </nav>
             </div>
         </header>
     );

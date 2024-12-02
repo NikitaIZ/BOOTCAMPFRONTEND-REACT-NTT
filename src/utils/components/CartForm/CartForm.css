@@ -45,10 +45,13 @@
     align-items: center;
     justify-content: center;
     background: rgba(0, 0, 0, 0.5);
+    padding: var(--login-padding);
     z-index: 1000;
   }
   
   .modal-content {
+    max-width: 400px;
+    width: 100%;
     background: white;
     padding: 2rem;
     border-radius: 10px;
