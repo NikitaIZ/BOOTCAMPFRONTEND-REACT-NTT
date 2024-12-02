@@ -8,7 +8,7 @@ export interface LoginResponse {
     lastName: string
     gender: string
     image: string
-    expiresIn: number;
+    expiresIn?: number;
 }
 
 export interface LoginRequest {

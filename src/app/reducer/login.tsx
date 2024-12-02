@@ -38,8 +38,9 @@ export const LoginAppReducer = (
                         [field]: value,
                     },
                 };
+            } else{
+                throw new Error(`Invalid payload for action: ${type}`);
             }
-            throw new Error(`Invalid payload for action: ${type}`);
         case LoginAppActions.LoginResetModal:
             return {
                 ...state,
