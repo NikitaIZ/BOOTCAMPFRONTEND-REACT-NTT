@@ -138,7 +138,7 @@
 <span class="cline-any cline-yes">26x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">26x</span>
-<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">26x</span>
@@ -151,71 +151,71 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">23x</span>
-<span class="cline-any cline-yes">22x</span>
+<span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-yes">20x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">17x</span>
-<span class="cline-any cline-yes">16x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { createContext, FC, PropsWithChildren, useReducer, useContext, useEffect } from "react";
 import { CartAppDispatch } from "../domain/types/app-cart";
-import { useLocalStorage } from "../hooks/useLocalStorage"; 
+import { useLocalStorage } from "../hooks/useLocalStorage";
 import { cartAppReducer, cartInitialState, CartAppState } from "../reducer/cart";
 &nbsp;
 const CartAppStateContext = createContext&lt;CartAppState | undefined&gt;(undefined);
 const CartAppDispatchContext = createContext&lt;CartAppDispatch | undefined&gt;(undefined);
 &nbsp;
 const GlobalCartAppProvider: FC&lt;PropsWithChildren&gt; = ({ children }) =&gt; {
-  const { storedValue, setStoredValue } = useLocalStorage&lt;CartAppState&gt;("cart", cartInitialState);
+    const { storedValue, setStoredValue } = useLocalStorage&lt;CartAppState&gt;("cart", cartInitialState);
 &nbsp;
-  const getCartQuantity = () =&gt; state.items.reduce((total, item) =&gt; total + item.quantity, 0);
-  const getCartPrice = () =&gt; state.items.reduce((total, item) =&gt; total + item.quantity * item.price, 0);
+    const getCartQuantity = () =&gt; state.items.reduce((total, item) =&gt; total + item.quantity, 0);
+    const getCartPrice = () =&gt; state.items.reduce((total, item) =&gt; total + item.quantity * item.price, 0);
 &nbsp;
-  const enhancedState: CartAppState = {
-    ...storedValue,
-    getCartQuantity,
-    getCartPrice,
-  };
+    const enhancedState: CartAppState = {
+        ...storedValue,
+        getCartQuantity,
+        getCartPrice,
+    };
 &nbsp;
-  const [state, dispatch] = useReducer(cartAppReducer, enhancedState);
+    const [state, dispatch] = useReducer(cartAppReducer, enhancedState);
 &nbsp;
-  useEffect(() =&gt; {
-    setStoredValue(state);
-  }, [state, setStoredValue]);
+    useEffect(() =&gt; {
+        setStoredValue(state);
+    }, [state, setStoredValue]);
 &nbsp;
-  return (
-    &lt;CartAppStateContext.Provider value={enhancedState}&gt;
-      &lt;CartAppDispatchContext.Provider value={dispatch}&gt;
-        {children}
-      &lt;/CartAppDispatchContext.Provider&gt;
-    &lt;/CartAppStateContext.Provider&gt;
-  );
+    return (
+        &lt;CartAppStateContext.Provider value={enhancedState}&gt;
+            &lt;CartAppDispatchContext.Provider value={dispatch}&gt;
+                {children}
+            &lt;/CartAppDispatchContext.Provider&gt;
+        &lt;/CartAppStateContext.Provider&gt;
+    );
 };
 &nbsp;
 const useGlobalCartAppState = (): CartAppState =&gt; {
-  const context = useContext(CartAppStateContext);
-  if (!context) {
-    throw new Error("useGlobalCartAppState must be used within CartAppStateContext");
-  }
-  return context;
+    const context = useContext(CartAppStateContext);
+    if (!context) {
+        throw new Error("useGlobalCartAppState must be used within CartAppStateContext");
+    }
+    return context;
 };
 &nbsp;
 const useGlobalCartAppDispatch = (): CartAppDispatch =&gt; {
-  const context = useContext(CartAppDispatchContext);
-  if (!context) {
-    throw new Error("useGlobalCartAppDispatch must be used within CartAppDispatchContext");
-  }
-  return context;
+    const context = useContext(CartAppDispatchContext);
+    if (!context) {
+        throw new Error("useGlobalCartAppDispatch must be used within CartAppDispatchContext");
+    }
+    return context;
 };
 &nbsp;
 export { GlobalCartAppProvider, useGlobalCartAppState, useGlobalCartAppDispatch };
@@ -226,7 +226,7 @@ export { GlobalCartAppProvider, useGlobalCartAppState, useGlobalCartAppDispatch 
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-12-01T01:14:55.145Z
+                at 2024-12-02T07:59:40.095Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
