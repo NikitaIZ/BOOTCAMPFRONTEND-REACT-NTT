@@ -34,7 +34,6 @@ describe('CartForm', () => {
         (useGlobalCartAppDispatch as jest.Mock).mockReturnValue(jest.fn());
     });
 
-    // Test para validar el formulario con datos validos
     it('Should render the form and submit it with valid data', async () => {
         render(
             <BrowserRouter>
@@ -86,7 +85,6 @@ describe('CartForm', () => {
         });
     });
 
-    // Test que valida si no hay productos saltara el mensaje de que debes tener minimo un producto en el carrito
     it('Should show an error if the cart is empty', async () => {
         (useGlobalCartAppState as jest.Mock).mockReturnValue({
             items: [],
@@ -103,7 +101,6 @@ describe('CartForm', () => {
         expect(screen.getByText('You must have at least one product in your cart.')).toBeInTheDocument();
     });
 
-    // Test cuando se rellena el formulario con datos invalidos
     it('Should show error messages when required fields are invalid', async () => {
         render(
             <BrowserRouter>
@@ -125,7 +122,6 @@ describe('CartForm', () => {
         });
     });
 
-    // Test cuando haces click en el formulario sin rellenar nada
     it('Should show error messages when required fields are empty', async () => {
         render(
             <BrowserRouter>

@@ -11,7 +11,6 @@ import "./Header.css";
 
 const Header: FC = () => {
     const [categories, setCategories] = useState<Categories[] | null>(null);
-    const [showLogoutMenu, setShowLogoutMenu] = useState<boolean>(false);
 
     const { user } = useGlobalUserAppState();
     const dispatch = useGlobalUserAppDispatch();
@@ -55,7 +54,6 @@ const Header: FC = () => {
             type: UserAppActions.Userlogout,
             payload: [], 
         });
-        setShowLogoutMenu(false); 
         navigate("/login");
     };
 
@@ -93,11 +91,11 @@ const Header: FC = () => {
                     </div>
                 </nav>
                 <nav className="user-menu dropdown">
-                    <div onClick={() => setShowLogoutMenu((prev) => !prev)} className="dropdown-toggle user-name-button">
+                    <div className="dropdown-toggle user-name-button">
                         <span>Welcome:</span> {userName}
                     </div>
                     <div id="categories-menu" className="dropdown-menu" data-right="true">
-                        <a href="#" onClick={handleLogout} className="danger">Logout</a>
+                        <a href="" onClick={handleLogout} className="danger">Logout</a>
                     </div>
                 </nav>
             </div>

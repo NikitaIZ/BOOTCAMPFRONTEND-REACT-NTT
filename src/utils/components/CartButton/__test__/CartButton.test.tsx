@@ -27,7 +27,6 @@ describe('CartButton', () => {
         (useGlobalCartAppState as jest.Mock).mockReturnValue(mockCartState);
     });
 
-    // Test para mostrar la notificación en el carrito y el numero en total
     it('Should render the cart icon and counter when there are items in the cart', () => {
         mockCartState.getCartQuantity = jest.fn().mockReturnValue(3);
         mockCartState.items = [{}, {}, {}];
@@ -38,7 +37,6 @@ describe('CartButton', () => {
         expect(screen.getByText('3')).toBeInTheDocument();
     });
 
-    // Test para verificar que en el caso este vacio el carrito no mostrar la notificacion
     it('Should not render the counter when there are no items in the cart', () => {
         mockCartState.getCartQuantity = jest.fn().mockReturnValue(0);
         mockCartState.items = [];

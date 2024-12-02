@@ -10,7 +10,6 @@ const renderComponent = async (): Promise<RenderResult> => {
 };
 
 describe("Footer component", () => {
-    // Test para mostrar el footer
     it("Should render footer", async () => {
         await renderComponent();
 

@@ -29,14 +29,12 @@ describe("MainLayout component", () => {
         cartButton = screen.getByRole("link", { name: "cart" });
     });
 
-    // Test para verificar que los componentes existen
     it("Should render Header, Footer and CartButton", () => {
         expect(screen.getByRole("banner")).toBeInTheDocument();
         expect(screen.getByRole("contentinfo")).toBeInTheDocument();
         expect(cartButton).toBeInTheDocument();
     });
 
-    // Test para la navegación al hacer clic en el CartButton
     it("Should send to Cart page when clicking the CartButton", () => {
         fireEvent.click(cartButton);
         expect(screen.getByText("Cart Page")).toBeInTheDocument();

@@ -39,7 +39,6 @@ describe('CartTable', () => {
         (useGlobalCartAppDispatch as jest.Mock).mockReturnValue(mockDispatch);
     });
 
-    // Test para verificar los productos cantidad y el precio total
     it('Should render cart items and total price', () => {
         render(<CartTable />);
 
@@ -53,7 +52,6 @@ describe('CartTable', () => {
         expect(screen.getByText('$ 2,600.00')).toBeInTheDocument();
     });
 
-    // Test para validar que se agrega una cantidad mas al producto al precionar el boton de +
     it('Should handle adding a product to the cart', () => {
         render(<CartTable />);
 
@@ -73,7 +71,6 @@ describe('CartTable', () => {
         });
     });
 
-    // Test para validar que se elimina una cantidad mas al producto al precionar el boton de -
     it('Should handle removing a product from the cart', () => {
         render(<CartTable />);
 
@@ -86,7 +83,6 @@ describe('CartTable', () => {
         });
     });
 
-    // Test para eliminar un producto del carrito
     it('Should handle deleting a product from the cart', () => {
         render(<CartTable />);
 
@@ -99,7 +95,6 @@ describe('CartTable', () => {
         });
     });
 
-    // Test en el caso no haya productos en el carrito
     it('Should show message when there are no products in the cart', () => {
         (useGlobalCartAppState as jest.Mock).mockReturnValue({
             items: [],

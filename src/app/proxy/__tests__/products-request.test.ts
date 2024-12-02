@@ -1,7 +1,7 @@
 import { productsResponseMock } from "@/app/proxy/__mocks__/products";
 import { productsRequest } from "../products-request";
 
-const mockFetch = (data: any, status = 200, ok = true): jest.Mock => {
+const mockFetch = (data: unknown, status = 200, ok = true): jest.Mock => {
     const fn = jest.fn().mockImplementationOnce(() => {
         const response = {
             ok,
