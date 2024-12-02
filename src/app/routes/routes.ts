@@ -3,5 +3,4 @@ export const enum ModuleRoutes {
     Category = "category",
     Cart = "cart",
     Login = "login",
-    Recovery = "recovery",
 }

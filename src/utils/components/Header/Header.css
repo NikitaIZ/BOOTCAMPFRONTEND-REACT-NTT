@@ -122,32 +122,34 @@ header nav a {
     display: block;
 }
 
-.login-button {
-    min-width: 90px;
-    max-width: 110px;
-    height: 40px;
-    color: var(--color-white);
-    padding: 5px 10px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
+.user-menu {
     position: relative;
-    display: inline-block;
-    outline: none;
-    border-radius: 5px;
+}
+
+.user-name-button {
+    background: none;
     border: none;
-    background: var(--color-header-secundary);
-    box-shadow: 0 5px var(--color-button-login);
+    cursor: pointer;
+    font-size: 16px;
+    color: #000;
 }
 
-.login-button:hover {
-    box-shadow: 0 3px var(--color-button-login);
-    top: 1px;
+.logout-menu {
+    position: absolute;
+    top: 30px;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 10px;
 }
 
-.login-button:active {
-    box-shadow: 0 0 var(--color-button-login);
-    top: 5px;
+.logout-menu button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #f00;
+    font-size: 14px;
 }
 
 @media screen and (max-width: 890px) {
