@@ -69,12 +69,28 @@ Continuando con el proyecto ahora usando react en esta rama se agregaron y cambi
 - En la misma pagina del carrito hay un formulario para comprar para que el cliente se registre (Si se registra el cliente se podra ver en *Console* los datos que se almacenaron, para mejor detalle se puede ver en *Application* ).
 - Nueva carpeta para los Hooks.
 
-
 ### feature/pruebas-unitarias:
 
 En esta fase se crearon carpetas y archivos para testear el proyecto, sus hooks, mapper, pages, components, etc.
 
 Existe una carpeta coverage en la cual se puede visualizar el resultado de las pruebas en el archivo index.html dentro de la carpeta Icov-report.
+
+### feature/proyecto-integrador:
+
+#### Novedades
+
+- Se creo una pagina de login.
+- Se validaron las rutas para visualizar ciertas paginas dependiendo si estas logeado o no.
+- Al ingresar estara el Username del usuario en el Header, asi como una opcion de salir al pasar el cursor por el nombre del usuario.
+- Se validaron estos cambios con varios archivos de test, tambien se actualizo el coverage.
+- En el caso de olvidar la contraseña saldra un modal que pedira un correo (pero esto es solo simulación).
+
+#### Login
+
+Como información para el login se utilizo segun la documentacion [Dummyjson Auth-Login](https://dummyjson.com/docs/auth#auth-login), asi que el usuario y contraseña por defecto son: 
+
+* Usuario : emilys
+* Contraseña : emilyspass
 
 ## Licencia
 
