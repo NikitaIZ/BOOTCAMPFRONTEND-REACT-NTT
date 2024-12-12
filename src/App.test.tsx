@@ -1,3 +1,4 @@
+// el app test tambien debe testear cada ruta que se agrega
 import { MemoryRouter } from "react-router-dom";
 import { render, RenderResult, act, screen } from "@testing-library/react";
 import { ModuleRoutes } from "@/app/routes";

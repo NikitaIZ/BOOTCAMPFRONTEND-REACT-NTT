@@ -1,5 +1,5 @@
 TN:
-SF:src\App.tsx
+SF:src/App.tsx
 FN:10,(anonymous_1)
 FNF:1
 FNH:1
@@ -18,7 +18,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:src\app\helper.ts
+SF:src/app/helper.ts
 FNF:0
 FNH:0
 DA:1,3
@@ -30,7 +30,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:src\app\routes.ts
+SF:src/app/routes.ts
 FN:1,(anonymous_0)
 FNF:1
 FNH:1
@@ -47,7 +47,7 @@ BRF:2
 BRH:2
 end_of_record
 TN:
-SF:src\app\context\cart.tsx
+SF:src/app/context/cart.tsx
 FN:9,(anonymous_0)
 FN:12,(anonymous_1)
 FN:12,(anonymous_2)
@@ -99,7 +99,7 @@ BRF:2
 BRH:2
 end_of_record
 TN:
-SF:src\app\context\client.tsx
+SF:src/app/context/client.tsx
 FN:8,(anonymous_0)
 FN:20,(anonymous_1)
 FN:28,(anonymous_2)
@@ -134,7 +134,7 @@ BRF:2
 BRH:2
 end_of_record
 TN:
-SF:src\app\context\pagination.tsx
+SF:src/app/context/pagination.tsx
 FN:9,(anonymous_0)
 FN:21,(anonymous_1)
 FN:29,(anonymous_2)
@@ -169,7 +169,7 @@ BRF:2
 BRH:2
 end_of_record
 TN:
-SF:src\app\context\search.tsx
+SF:src/app/context/search.tsx
 FN:11,(anonymous_0)
 FN:14,(anonymous_1)
 FN:25,(anonymous_2)
@@ -206,7 +206,7 @@ BRF:2
 BRH:2
 end_of_record
 TN:
-SF:src\app\domain\types\app-cart.ts
+SF:src/app/domain/types/app-cart.ts
 FN:6,(anonymous_0)
 FNF:1
 FNH:1
@@ -224,7 +224,7 @@ BRF:2
 BRH:2
 end_of_record
 TN:
-SF:src\app\domain\types\app-client.ts
+SF:src/app/domain/types/app-client.ts
 FN:6,(anonymous_0)
 FNF:1
 FNH:1
@@ -241,7 +241,7 @@ BRF:2
 BRH:2
 end_of_record
 TN:
-SF:src\app\domain\types\app-pagination.ts
+SF:src/app/domain/types/app-pagination.ts
 FN:6,(anonymous_0)
 FNF:1
 FNH:1
@@ -258,7 +258,7 @@ BRF:2
 BRH:2
 end_of_record
 TN:
-SF:src\app\hooks\useDistricts.ts
+SF:src/app/hooks/useDistricts.ts
 FN:7,(anonymous_0)
 FN:10,(anonymous_1)
 FN:11,(anonymous_2)
@@ -291,7 +291,7 @@ BRF:2
 BRH:2
 end_of_record
 TN:
-SF:src\app\hooks\useGeneratorId.ts
+SF:src/app/hooks/useGeneratorId.ts
 FN:3,(anonymous_0)
 FN:4,(anonymous_1)
 FNF:2
@@ -311,7 +311,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:src\app\hooks\useLocalStorage.ts
+SF:src/app/hooks/useLocalStorage.ts
 FN:3,(anonymous_0)
 FN:4,(anonymous_1)
 FN:9,(anonymous_2)
@@ -336,7 +336,7 @@ BRF:2
 BRH:2
 end_of_record
 TN:
-SF:src\app\hooks\useValidation.ts
+SF:src/app/hooks/useValidation.ts
 FN:2,(anonymous_0)
 FN:4,(anonymous_1)
 FN:8,(anonymous_2)
@@ -362,7 +362,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:src\app\mappers\ListProducts.ts
+SF:src/app/mappers/ListProducts.ts
 FN:3,(anonymous_0)
 FN:4,(anonymous_1)
 FNF:2
@@ -377,7 +377,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:src\app\mappers\ListProductsClient.ts
+SF:src/app/mappers/ListProductsClient.ts
 FN:4,(anonymous_0)
 FN:5,(anonymous_1)
 FNF:2
@@ -392,36 +392,36 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:src\app\mappers\PaginatedProducts.ts
+SF:src/app/mappers/PaginatedProducts.ts
 FN:3,(anonymous_0)
 FN:13,(anonymous_1)
 FNF:2
 FNH:2
-FNDA:8,(anonymous_0)
+FNDA:7,(anonymous_0)
 FNDA:2,(anonymous_1)
 DA:3,3
-DA:9,8
-DA:10,8
-DA:12,8
+DA:9,7
+DA:10,7
+DA:12,7
 DA:14,2
-DA:18,8
-DA:19,8
-DA:21,8
-DA:22,8
-DA:24,8
+DA:18,7
+DA:19,7
+DA:21,7
+DA:22,7
+DA:24,7
 LF:10
 LH:10
 BRDA:6,0,0,1
 BRDA:7,1,0,4
 BRDA:10,2,0,1
-BRDA:10,2,1,7
+BRDA:10,2,1,6
 BRDA:12,3,0,1
-BRDA:12,3,1,7
+BRDA:12,3,1,6
 BRF:6
 BRH:6
 end_of_record
 TN:
-SF:src\app\pages\Cart\Cart.tsx
+SF:src/app/pages/Cart/Cart.tsx
 FN:15,(anonymous_1)
 FN:21,(anonymous_2)
 FN:25,(anonymous_3)
@@ -453,7 +453,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:src\app\pages\Category\Category.tsx
+SF:src/app/pages/Category/Category.tsx
 FN:17,(anonymous_1)
 FN:26,(anonymous_2)
 FN:32,(anonymous_3)
@@ -502,7 +502,7 @@ BRF:4
 BRH:4
 end_of_record
 TN:
-SF:src\app\pages\Init\Init.tsx
+SF:src/app/pages/Init/Init.tsx
 FN:16,(anonymous_1)
 FN:23,(anonymous_2)
 FN:29,(anonymous_3)
@@ -549,7 +549,7 @@ BRF:4
 BRH:4
 end_of_record
 TN:
-SF:src\app\proxy\categories-request.ts
+SF:src/app/proxy/categories-request.ts
 FN:5,(anonymous_0)
 FNF:1
 FNH:1
@@ -574,7 +574,7 @@ BRF:2
 BRH:2
 end_of_record
 TN:
-SF:src\app\proxy\products-request.ts
+SF:src/app/proxy/products-request.ts
 FN:7,(anonymous_0)
 FNF:1
 FNH:1
@@ -605,7 +605,7 @@ BRF:6
 BRH:6
 end_of_record
 TN:
-SF:src\app\reducer\cart.tsx
+SF:src/app/reducer/cart.tsx
 FN:18,(anonymous_0)
 FN:19,(anonymous_1)
 FN:22,(anonymous_2)
@@ -707,7 +707,7 @@ BRF:13
 BRH:13
 end_of_record
 TN:
-SF:src\app\reducer\client.tsx
+SF:src/app/reducer/client.tsx
 FN:19,(anonymous_0)
 FNF:1
 FNH:1
@@ -730,7 +730,7 @@ BRF:4
 BRH:4
 end_of_record
 TN:
-SF:src\app\reducer\pagination.tsx
+SF:src/app/reducer/pagination.tsx
 FN:19,(anonymous_0)
 FNF:1
 FNH:1
@@ -753,7 +753,7 @@ BRF:4
 BRH:4
 end_of_record
 TN:
-SF:src\utils\Layout\MainLayout\MainLayout.tsx
+SF:src/utils/Layout/MainLayout/MainLayout.tsx
 FN:16,(anonymous_1)
 FNF:1
 FNH:1
@@ -775,7 +775,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:src\utils\components\CartButton\CartButton.tsx
+SF:src/utils/components/CartButton/CartButton.tsx
 FN:12,(anonymous_1)
 FNF:1
 FNH:1
@@ -800,7 +800,7 @@ BRF:4
 BRH:4
 end_of_record
 TN:
-SF:src\utils\components\CartForm\CartForm.tsx
+SF:src/utils/components/CartForm/CartForm.tsx
 FN:34,(anonymous_1)
 FN:61,(anonymous_2)
 FN:80,(anonymous_3)
@@ -941,7 +941,7 @@ BRF:50
 BRH:50
 end_of_record
 TN:
-SF:src\utils\components\CartTable\CartTable.tsx
+SF:src/utils/components/CartTable/CartTable.tsx
 FN:12,(anonymous_1)
 FN:16,(anonymous_2)
 FN:23,(anonymous_3)
@@ -990,7 +990,7 @@ BRF:2
 BRH:2
 end_of_record
 TN:
-SF:src\utils\components\Footer\Footer.tsx
+SF:src/utils/components/Footer/Footer.tsx
 FN:6,(anonymous_1)
 FNF:1
 FNH:1
@@ -1007,7 +1007,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:src\utils\components\Header\Header.tsx
+SF:src/utils/components/Header/Header.tsx
 FN:17,(anonymous_1)
 FN:20,(anonymous_2)
 FN:33,(anonymous_3)
@@ -1063,7 +1063,7 @@ BRF:4
 BRH:4
 end_of_record
 TN:
-SF:src\utils\components\Pagination\Pagination.tsx
+SF:src/utils/components/Pagination/Pagination.tsx
 FN:8,(anonymous_0)
 FN:12,(anonymous_1)
 FN:18,(anonymous_2)
@@ -1109,7 +1109,7 @@ BRF:4
 BRH:4
 end_of_record
 TN:
-SF:src\utils\components\ProductCard\ProductCard.tsx
+SF:src/utils/components/ProductCard/ProductCard.tsx
 FN:14,(anonymous_0)
 FN:20,(anonymous_1)
 FN:25,(anonymous_2)
