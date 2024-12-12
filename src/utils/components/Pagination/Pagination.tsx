@@ -6,6 +6,7 @@ import { PaginationAppActions } from "../../../app/domain/types/app-pagination";
 import './Pagination.css'
 
 const Pagination: FC = () => {
+  // tener un contexto para paginacion no veo que sea algo tan 'util, lo mejor ser'ia que sea un hook ya que es m'as reutilizable.
   const { currentPage, totalPages } = useGlobalPaginationAppState();
   const dispatch = useGlobalPaginationAppDispatch();
 
